@@ -4,9 +4,9 @@
 
 ## Demo
 
-http://kenju.github.io/instagram_css_filter
+http://kenju.github.io/instagram_js_filter
 
-<a href="http://kenju.github.io/instagram_css_filter"><img src="img/screen.png" alt=""></a>
+<a href="http://kenju.github.io/instagram_js_filter"><img src="img/screen.png" alt=""></a>
 
 ## Tech-background
 
