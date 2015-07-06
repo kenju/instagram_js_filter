@@ -1,0 +1,24 @@
+# OSX
+.DS-Store
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Linux
+
+.*
+!.gitignore
+*~
+
+# Compass
+.sass-cache/*
+
+# Grunt
+node_modules/
+build/
+dist/

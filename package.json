@@ -1,0 +1,24 @@
+{
+  "name": "instagram_js_filter",
+  "version": "1.0.0",
+  "description": "CSS3 filter for realizing Instagram filter effects",
+  "main": "filter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KENJU/instagram_js_filter.git"
+  },
+  "author": "Kenju Wagatsuma",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KENJU/instagram_js_filter/issues"
+  },
+  "homepage": "https://github.com/KENJU/instagram_js_filter",
+  "keywords": [
+    "JavaScript",
+    "Instagram",
+    "image-processing"
+  ]
+}

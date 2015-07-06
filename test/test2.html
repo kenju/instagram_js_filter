@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test</title>
+</head>
+<body>
+<script>
+/**
+ * At least two points are needed to interpolate something.
+ * @class Lagrange polynomial interpolation.
+ * The computed interpolation polynomial will be reffered to as L(x).
+ * @example
+ * var l = new Lagrange(0, 0, 1, 1);
+ * var index = l.addPoint(0.5, 0.8);
+ * console.log(l.valueOf(0.1));
+ *
+ * l.changePoint(index, 0.5, 0.1);
+ * console.log(l.valueOf(0.1));
+ *
+ * @see https://gist.github.com/dburner/8550030
+ * @see http://jsfiddle.net/maccesch/jgU3Y/
+ */
+var Lagrange = function(x1, y1, x2, y2) {
+	this.xs = [x1, x2];
+	this.ys = [y1, y2];
+	this.ws = [];
+	this._updateWeights();
+}
+/**
+ * Adds a new point to the polynomial. L(x) = y
+ * @return {Number} The index of the added point. Used for changing the point. See changePoint.
+ */
+Lagrange.prototype.addPoint = function(x, y) {
+	this.xs.push(x);
+	this.ys.push(y);
+	this._updateWeights();
+	return this.xs.length-1;
+}
+/**
+ * Changes a previously added point.
+ */
+Lagrange.prototype.changePoint = function(index, x, y) {
+	this.xs[index] = x;
+	this.ys[index] = y;
+	this._updateWeights();
+}
+/**
+ * Recalculate barycentric weights.
+ */
+Lagrange.prototype._updateWeights = function() {
+	var len = this.xs.length; // the number of points
+	var weight;
+	for (var j = 0; j < len; ++j) {
+		weight = 1;
+		for (var i = 0; i < len; ++i) {
+			if (i != j) {
+				weight *= this.xs[j] - this.xs[i];
+			}
+		}
+		this.ws[j] = 1/weight;
+	}
+}
+/**
+ * Calculate L(x)
+ */
+Lagrange.prototype.valueOf = function(x) {
+	var a = 0;
+	var b = 0;
+	var c = 0;
+	for (var j = 0; j < this.xs.length; ++j) {
+		if (x != this.xs[j]) {
+			a = this.ws[j] / (x - this.xs[j]);
+			b += a * this.ys[j];
+			c += a;
+		} else {
+			return this.ys[j];
+		}
+	}
+	return b / c;
+}
+
+/*=============================================*/
+
+function addControlPointWithMaps(curve, index, x, y){
+	if(index !== 0 && index !== 1){
+		curve.addPoint(x, y);
+	}
+}
+
+var lagrange_red 	= new Lagrange(0, 0, 1, 1);
+var lagrange_green 	= new Lagrange(0, 0, 1, 1);
+var lagrange_blue 	= new Lagrange(0, 0, 1, 1);
+
+window.onload = function() {
+	// global for debugging
+	red = [];
+	green = [];
+	blue = [];
+
+    addControlPointWithMaps(lagrange_red, 0,   0,  19);
+    addControlPointWithMaps(lagrange_red, 1,  30,  62);
+    addControlPointWithMaps(lagrange_red, 2,  82, 148);
+    addControlPointWithMaps(lagrange_red, 3, 128, 188);
+    addControlPointWithMaps(lagrange_red, 4, 145, 200);
+    addControlPointWithMaps(lagrange_red, 5, 255, 250);
+
+    addControlPointWithMaps(lagrange_green, 0,   0,   0);
+    addControlPointWithMaps(lagrange_green, 1,  48,  72);
+    addControlPointWithMaps(lagrange_green, 2, 115, 188);
+    addControlPointWithMaps(lagrange_green, 3, 160, 120);
+    addControlPointWithMaps(lagrange_green, 4, 233, 245);
+    addControlPointWithMaps(lagrange_green, 5, 255, 255);
+
+    addControlPointWithMaps(lagrange_blue, 0,   0,  25);
+    addControlPointWithMaps(lagrange_blue, 1,  35,  80);
+    addControlPointWithMaps(lagrange_blue, 2, 106, 175);
+    addControlPointWithMaps(lagrange_blue, 3, 151, 188);
+    addControlPointWithMaps(lagrange_blue, 4, 215, 215);
+    addControlPointWithMaps(lagrange_blue, 5, 240, 235);
+    addControlPointWithMaps(lagrange_blue, 6, 255, 245);
+
+    for (var i = 0; i <= 256; i++) {
+    	// red.push(lagrange_red.valueOf(i));
+    	// green.push(lagrange_green.valueOf(i));
+    	blue.push(lagrange_blue.valueOf(i));
+    	console.log(lagrange_blue.valueOf(i));
+    }
+}
+</script>
+</body>
+</html>

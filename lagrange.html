@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test</title>
+	<style>
+		#widget {
+		    position: absolute;
+		    top: 40px;
+		    left: 20px;
+		    width: 450px;
+		    height: 300px;
+		    background-color: #dcdcd4;
+		}
+
+		#add {
+		    position: absolute;
+		    left: 20px;
+		    top: 350px;
+		}
+
+		.point {
+		    position: absolute;
+		    margin: -3px;
+		    top: 7px;
+		    left: 7px;
+		    width: 6px;
+		    height: 6px;
+		    border-radius: 3px;
+		    background-color: red;
+		}
+
+		.point-wrapper {
+		    position: absolute;
+		    width: 14px;
+		    height: 14px;
+		}
+	</style>
+</head>
+<body>
+
+<div id="widget">
+    <canvas id="widget-canvas" width="450" height="300"></canvas>
+</div>
+<button id="add">Add Control Point</button>
+
+<script>
+/**
+ * At least two points are needed to interpolate something.
+ * @class Lagrange polynomial interpolation.
+ * The computed interpolation polynomial will be reffered to as L(x).
+ * @example
+ * var l = new Lagrange(0, 0, 1, 1);
+ * var index = l.addPoint(0.5, 0.8);
+ * console.log(l.valueOf(0.1));
+ *
+ * l.changePoint(index, 0.5, 0.1);
+ * console.log(l.valueOf(0.1));
+ *
+ * @see https://gist.github.com/dburner/8550030
+ * @see http://jsfiddle.net/maccesch/jgU3Y/
+ */
+var Lagrange = function(x1, y1, x2, y2) {
+	this.xs = [x1, x2];
+	this.ys = [y1, y2];
+	this.ws = [];
+	this._updateWeights();
+}
+/**
+ * Adds a new point to the polynomial. L(x) = y
+ * @return {Number} The index of the added point. Used for changing the point. See changePoint.
+ */
+Lagrange.prototype.addPoint = function(x, y) {
+	this.xs.push(x);
+	this.ys.push(y);
+	this._updateWeights();
+	return this.xs.length-1;
+}
+/**
+ * Changes a previously added point.
+ */
+Lagrange.prototype.changePoint = function(index, x, y) {
+	this.xs[index] = x;
+	this.ys[index] = y;
+	this._updateWeights();
+}
+/**
+ * Recalculate barycentric weights.
+ */
+Lagrange.prototype._updateWeights = function() {
+	var k = this.xs.length;
+	var w;
+	for (var j = 0; j < k; ++j) {
+		w = 1;
+		for (var i = 0; i < k; ++i) {
+			if (i != j) {
+				w *= this.xs[j] - this.xs[i];
+			}
+		}
+		this.ws[j] = 1/w;
+	}
+}
+/**
+ * Calculate L(x)
+ */
+Lagrange.prototype.valueOf = function(x) {
+	var a = 0;
+	var b = 0;
+	var c = 0;
+	for (var j = 0; j < this.xs.length; ++j) {
+		if (x != this.xs[j]) {
+			a = this.ws[j] / (x - this.xs[j]);
+			b += a * this.ys[j];
+			c += a;
+		} else {
+			return this.ys[j];
+		}
+	}
+	return b / c;
+}
+
+/*=============================================*/
+
+// class to enable dragging of the control points
+var Movable = function(target) {
+    this.onmove = function() {};
+
+    var self = this;
+    target.onmousedown = function(event) {
+        var initialXOffset = target.offsetLeft - event.pageX;
+        var initialYOffset = target.offsetTop - event.pageY;
+
+        document.onmousemove = function(event) {
+            var x = event.pageX + initialXOffset;
+            var y = event.pageY + initialYOffset;
+            target.style.left = x + 'px';
+            target.style.top = y + 'px';
+            self.onmove(x, y);
+        };
+
+        document.onmouseup = function() {
+            document.onmousemove = null;
+            document.onmouseup = null;
+        };
+
+        return false;
+    };
+};
+
+// renders the polynomial
+function drawCurve(ctx, curve, w, h) {
+    var incr = 5;
+    ctx.clearRect(0, 0, w, h);
+    ctx.beginPath();
+    ctx.moveTo(0, h - curve.valueOf(0) * h);
+    for (var x = incr; x <= w; x += incr) {
+        ctx.lineTo(x, h - curve.valueOf(x/w) * h);
+    }
+    ctx.stroke();
+}
+
+// creates the dom elements for a control point
+function createControlPointEl(x, y) {
+    var el = document.createElement('div');
+    el.setAttribute('class', 'point-wrapper');
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    var p = document.createElement('div');
+    p.setAttribute('class', 'point');
+    el.appendChild(p);
+    canvas.parentNode.appendChild(el);
+    return el;
+}
+
+// adds a new control point
+function addControlPoint(index) {
+    var w = parseInt(canvas.width);
+    var h = parseInt(canvas.height);
+    var x = Math.random() * w;
+    var y = Math.random() * h;
+    var el = createControlPointEl(x, y);
+    var movable = new Movable(el);
+
+    function getPointUpdateFunc(index) {
+        return function(x, y) {
+            var bias = 7;
+            lagrange.changePoint(index, (x + bias) / w,
+                                 1 - (y + bias) / h);
+            drawCurve(ctx, lagrange, w, h);
+        }
+    }
+
+    if (index !== 0 && index !== 1) {
+        index = lagrange.addPoint(0.5, 0.5);
+    }
+    getPointUpdateFunc(index)(x, y);
+    movable.onmove = getPointUpdateFunc(index);
+}
+
+
+var lagrange = new Lagrange(0, 0.5, 1, 0.5);
+var canvas, ctx;
+
+window.onload = function() {
+    canvas = document.getElementById('widget-canvas');
+    ctx = canvas.getContext('2d');
+    addControlPoint(0);
+    addControlPoint(1);
+    document.getElementById('add').onclick = addControlPoint;
+}
+</script>
+</body>
+</html>
