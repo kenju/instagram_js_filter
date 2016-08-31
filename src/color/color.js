@@ -1,5 +1,7 @@
 /**
  * color.js
+ *
+ * TODO: can be npm published
  */
 
 const clone = (obj) => {
@@ -30,7 +32,7 @@ const clone = (obj) => {
     if (obj instanceof Object) {
         copy = {};
         for (const attr in obj) {
-            if (obj.hasOwnProperty(attr)) copy[attr] = Worker.util.clone(obj[attr]);
+            if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
         }
         return copy;
     }
@@ -38,22 +40,21 @@ const clone = (obj) => {
     throw new Error("Unable to copy obj! Its type isn't supported.");
 };
 
-const getUnit8Array = (len) => {
+module.exports.getUnit8Array = (len) => {
     return new Uint8Array(len);
 };
 
-const identityLUT = () => {
-    const lut = Worker.util.getUnit8Array(256);
+module.exports.identityLUT = () => {
+    const lut = this.getUnit8Array(256);
     for (let i = 0; i < lut.length; i++) {
         lut[i] = i;
     }
     return lut;
 };
 
-// apply LUT(Look-Up-Table)
-const applyLUT = function (pix, lut) {
+module.exports.applyLUT = (pix, lut) => {
     let i;
-    const pix_result = Worker.util.clone(pix); // clone objects, and not shallow copy nor reference
+    const pix_result = clone(pix);
     const red = lut.red;
     const green = lut.green;
     const blue = lut.blue;
@@ -65,10 +66,11 @@ const applyLUT = function (pix, lut) {
         pix[i + 2] = blue[pix_result[i + 2]];
         pix[i + 3] = alpha[pix_result[i + 3]];
     }
+    return pix;
 };
 
 // http://axonflux.com/handy-rgb-to-hsl-and-rgb-to-hsv-color-model-c
-const rgb2hsl = function (r, g, b) {
+module.exports.rgb2hsl = (r, g, b) => {
     let max;
     let min;
     let h;
@@ -104,7 +106,7 @@ const rgb2hsl = function (r, g, b) {
     return [h, s, l];
 };
 
-const hsl2rgb = (h, s, v) => {
+module.exports.hsl2rgb = (h, s, v) => {
     let r;
     let g;
     let b;
@@ -123,7 +125,7 @@ const hsl2rgb = (h, s, v) => {
     return [r * 255, g * 255, b * 255];
 };
 
-const hue2rgb = (p, q, t) => {
+module.exports.hue2rgb = (p, q, t) => {
     switch (t) {
         case t < 0 :
             t += 1;
@@ -141,7 +143,7 @@ const hue2rgb = (p, q, t) => {
     }
 };
 
-const rgb2hsv = (r, g, b) => {
+module.exports.rgb2hsv = (r, g, b) => {
     let max;
     let min;
     let h;
@@ -178,7 +180,7 @@ const rgb2hsv = (r, g, b) => {
     return [h, s, v];
 };
 
-const hsv2rgb = (h, s, v) => {
+module.exports.hsv2rgb = (h, s, v) => {
     let r;
     let g;
     let b;

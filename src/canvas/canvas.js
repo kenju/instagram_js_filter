@@ -93,13 +93,13 @@ const filterWithType = (type, imageData) => {
             return filter.brighten(imageData, 50);
         case 'darken':
             return filter.darken(imageData, 50);
-        /*
          case 'threshold':
-         return filter.threshold(pix);
+         return filter.threshold(imageData);
          case 'negaposi':
-         return filter.negaposi(pix);
+         return filter.negaposi(imageData);
          case 'brightnessContrast':
-         return filter.brightnessContrast(pix, -0.08, 1.5);
+         return filter.brightnessContrast(imageData, -0.08, 1.5);
+        /*
          case 'huerotate':
          return filter.hueRotate(pix, 45);
          case 'saturate':
@@ -120,7 +120,6 @@ const filterWithType = (type, imageData) => {
         default:
             return filter.grayscale(imageData);
     }
-
 };
 
 const convert = (type, url) => {

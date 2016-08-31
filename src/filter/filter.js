@@ -1,3 +1,9 @@
+/**
+ * filter.js
+ */
+
+const color = require('../color/color');
+
 module.exports.enhance = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -126,7 +132,9 @@ module.exports.darken = (imageData, value) => {
     });
 };
 
-const threshold = function (pix) {
+module.exports.threshold = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     let red;
     let green;
     let blue;
@@ -135,9 +143,9 @@ const threshold = function (pix) {
     let threshold;
     const len = pix.length;
     for (let i = 0; i < len; i += 4) {
-        red = pix[i]; // red value of image data;
-        green = pix[i + 1]; // green value of image data
-        blue = pix[i + 2]; // blue value of image data;
+        red = pix[i];
+        green = pix[i + 1];
+        blue = pix[i + 2];
         // calculated from NTSC
         threshold = (red * .29 + green * .58 + blue * .11); // threshold
         value = (red + green + blue) * .33; // average
@@ -146,9 +154,15 @@ const threshold = function (pix) {
         pix[i + 1] = new_value;
         pix[i + 2] = new_value;
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const hueRotate = function (pix, deg) {
+module.exports.hueRotate = (imageData, deg) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     for (let i = 0, n = pix.length; i < n; i += 4) {
         let hsv;
         let rgb;
@@ -160,43 +174,57 @@ const hueRotate = function (pix, deg) {
         pix[i + 1] = rgb[1];
         pix[i + 2] = rgb[2];
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const saturate = function (pix, num) {
+module.exports.saturate = (imageData, num) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     for (let i = 0, n = pix.length; i < n; i += 4) {
         let hsv;
         let rgb;
-        // change from rgb to hsv
-        hsv = Worker.util.rgb2hsv(pix[i], pix[i + 1], pix[i + 2]); // return array
-        // change saturation
-        hsv[1] = hsv[1] * num / 100; // saturation is from 0 to 100
-        // convert from hsv to rgb
+        hsv = Worker.util.rgb2hsv(pix[i], pix[i + 1], pix[i + 2]);
+        //TODO: change saturation logic could be refactored
+        hsv[1] = hsv[1] * num / 100;
         rgb = Worker.util.hsv2rgb(hsv[0], hsv[1], hsv[2]);
         pix[i] = rgb[0];
         pix[i + 1] = rgb[1];
         pix[i + 2] = rgb[2];
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const brightnessContrast = function (pix, brightness, contrast) {
+module.exports.brightnessContrast = (imageData, brightness, contrast) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const contrastAdjust = -128 * contrast + 128;
     const brightnessAdjust = 255 * brightness;
     const adjust = contrastAdjust + brightnessAdjust;
-    const lut = Worker.util.getUnit8Array(256);
+    const lut = color.getUnit8Array(256);
     const len = lut.length;
     for (let i = 0; i < len; i++) {
         const c = i * contrast + adjust;
         lut[i] = c < 0 ? 0 : (c > 255 ? 255 : c);
     }
-    return Worker.util.applyLUT(
+    // FIXME: has side-effects
+    newImageData.data = color.applyLUT(
         pix,
         {
             red: lut,
             green: lut,
             blue: lut,
-            alpha: Worker.util.identityLUT()
+            alpha: color.identityLUT()
         }
     );
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
 const horizontalFlip = (pix, width, height) => {
