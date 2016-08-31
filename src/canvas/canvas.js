@@ -23,62 +23,60 @@ const saveCanvas = (canvas, filename) => {
 
 const filterWithType = (type, imageData) => {
     switch (type) {
-        /*
-         case 'lark':
-         return filter.lark(pix);
-         case 'reyes':
-         return filter.reyes(pix);
-         case 'juno':
-         return filter.juno(pix);
-         case 'slumber':
-         return filter.slumber(pix);
-         case 'crema':
-         return filter.crema(pix);
-         case 'ludwig':
-         return filter.ludwig(pix);
-         case 'aden':
-         return filter.aden(pix);
-         case 'perpetua':
-         return filter.perpetua(pix);
-         case 'amaro':
-         return filter.amaro(pix);
-         case 'mayfair':
-         return filter.mayfair(pix);
-         case 'rise':
-         return filter.rise(pix);
-         case 'hudson':
-         return filter.hudson(pix);
-         case 'valencia':
-         return filter.valencia(pix);
-         case 'xpro2':
-         return filter.xpro2(pix);
-         case 'sierra':
-         return filter.sierra(pix);
-         case 'willow':
-         return filter.willow(pix);
-         case 'lofi':
-         return filter.lofi(pix);
-         case 'earlybird':
-         return filter.earlybird(pix);
-         case 'brannan':
-         return filter.brannan(pix);
-         case 'inkwell':
-         return filter.inkwell(pix);
-         case 'hefe':
-         return filter.hefe(pix);
-         case 'nashville':
-         return filter.nashville(pix);
-         case 'sutro':
-         return filter.sutro(pix);
-         case 'toaster':
-         return filter.toaster(pix);
-         case 'walden':
-         return filter.walden(pix);
-         case 'nineteenSeventySeven':
-         return filter.nineteenSeventySeven(pix);
-         case 'kelvin':
-         return filter.kelvin(pix);
-         */
+        case 'lark':
+            return filter.lark(imageData);
+        case 'reyes':
+            return filter.reyes(imageData);
+        case 'juno':
+            return filter.juno(imageData);
+        case 'slumber':
+            return filter.slumber(imageData);
+        case 'crema':
+            return filter.crema(imageData);
+        case 'ludwig':
+            return filter.ludwig(imageData);
+        case 'aden':
+            return filter.aden(imageData);
+        case 'perpetua':
+            return filter.perpetua(imageData);
+        case 'amaro':
+            return filter.amaro(imageData);
+        case 'mayfair':
+            return filter.mayfair(imageData);
+        case 'rise':
+            return filter.rise(imageData);
+        case 'hudson':
+            return filter.hudson(imageData);
+        case 'valencia':
+            return filter.valencia(imageData);
+        case 'xpro2':
+            return filter.xpro2(imageData);
+        case 'sierra':
+            return filter.sierra(imageData);
+        case 'willow':
+            return filter.willow(imageData);
+        case 'lofi':
+            return filter.lofi(imageData);
+        case 'earlybird':
+            return filter.earlybird(imageData);
+        case 'brannan':
+            return filter.brannan(imageData);
+        case 'inkwell':
+            return filter.inkwell(imageData);
+        case 'hefe':
+            return filter.hefe(imageData);
+        case 'nashville':
+            return filter.nashville(imageData);
+        case 'sutro':
+            return filter.sutro(imageData);
+        case 'toaster':
+            return filter.toaster(imageData);
+        case 'walden':
+            return filter.walden(imageData);
+        case 'nineteenSeventySeven':
+            return filter.nineteenSeventySeven(imageData);
+        case 'kelvin':
+            return filter.kelvin(imageData);
         case 'enhance':
             return filter.enhance(imageData);
         case 'grayscale':
@@ -93,30 +91,28 @@ const filterWithType = (type, imageData) => {
             return filter.brighten(imageData, 50);
         case 'darken':
             return filter.darken(imageData, 50);
-         case 'threshold':
-         return filter.threshold(imageData);
-         case 'negaposi':
-         return filter.negaposi(imageData);
-         case 'brightnessContrast':
-         return filter.brightnessContrast(imageData, -0.08, 1.5);
-        /*
-         case 'huerotate':
-         return filter.hueRotate(pix, 45);
-         case 'saturate':
-         return filter.saturate(pix, 20);
-         case 'horizontalFlip':
-         return filter.horizontalFlip(pix, width, height);
-         case 'verticalFlip':
-         return filter.verticalFlip(pix, width, height);
-         case 'doubleFlip':
-         return filter.doubleFlip(pix);
-         case 'horizontalMirror':
-         return filter.horizontalMirror(pix, width, height);
-         case 'verticalMirror':
-         return filter.verticalMirror(pix, width, height);
-         case 'XYMirror':
-         return filter.XYMirror(pix);
-         */
+        case 'threshold':
+            return filter.threshold(imageData);
+        case 'negaposi':
+            return filter.negaposi(imageData);
+        case 'brightnessContrast':
+            return filter.brightnessContrast(imageData, -0.08, 1.5);
+        case 'huerotate':
+            return filter.hueRotate(imageData, 45);
+        case 'saturate':
+            return filter.saturate(imageData, 20);
+        case 'horizontalFlip':
+            return filter.horizontalFlip(imageData, width, height);
+        case 'verticalFlip':
+            return filter.verticalFlip(imageData, width, height);
+        case 'doubleFlip':
+            return filter.doubleFlip(imageData);
+        case 'horizontalMirror':
+            return filter.horizontalMirror(imageData, width, height);
+        case 'verticalMirror':
+            return filter.verticalMirror(imageData, width, height);
+        case 'XYMirror':
+            return filter.XYMirror(imageData);
         default:
             return filter.grayscale(imageData);
     }

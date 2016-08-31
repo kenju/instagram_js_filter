@@ -227,8 +227,10 @@ module.exports.brightnessContrast = (imageData, brightness, contrast) => {
     });
 };
 
-const horizontalFlip = (pix, width, height) => {
-    var pix_result = Worker.util.clone(pix); // clone objects, and not shallow copy nor reference
+module.exports.horizontalFlip = (imageData, width, height) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
+    var pix_result = color.clone(pix); 
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             let off = (i * width + j) * 4;
@@ -239,10 +241,16 @@ const horizontalFlip = (pix, width, height) => {
             pix[dstOff + 3] = pix_result[off + 3];
         }
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const verticalFlip = (pix, width, height) => {
-    var pix_result = Worker.util.clone(pix); // clone objects, and not shallow copy nor reference
+module.exports.verticalFlip = (imageData, width, height) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
+    var pix_result = color.clone(pix); 
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             let off = (i * width + j) * 4;
@@ -253,10 +261,16 @@ const verticalFlip = (pix, width, height) => {
             pix[dstOff + 3] = pix_result[off + 3];
         }
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const doubleFlip = (pix) => {
-    const pix_result = Worker.util.clone(pix); // clone objects, and not shallow copy nor reference
+module.exports.doubleFlip = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
+    var pix_result = color.clone(pix); 
     const len = pix.length;
     for (let i = 0; i < len; i += 4) {
         pix[i] = pix_result[len - i];
@@ -264,9 +278,15 @@ const doubleFlip = (pix) => {
         pix[i + 2] = pix_result[len - i + 2];
         pix[i + 3] = pix_result[len - i + 3];
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const horizontalMirror = (pix, width, height) => {
+module.exports.horizontalMirror = (imageData, width, height) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             const off = (i * width + j) * 4;
@@ -277,9 +297,15 @@ const horizontalMirror = (pix, width, height) => {
             pix[dstOff + 3] = pix[off + 3];
         }
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const verticalMirror = (pix, width, height) => {
+module.exports.verticalMirror = (imageData, width, height) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             const off = (i * width + j) * 4;
@@ -290,9 +316,15 @@ const verticalMirror = (pix, width, height) => {
             pix[dstOff + 3] = pix[off + 3];
         }
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const XYMirror = (pix) => {
+module.exports.XYMirror = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const len = pix.length;
     for (let i = 0; i < len; i += 4) {
         pix[i] = pix[len - i];
@@ -300,13 +332,18 @@ const XYMirror = (pix) => {
         pix[i + 2] = pix[len - i + 2];
         pix[i + 3] = pix[len - i + 3];
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const lark = (pix) => {
+module.exports.lark = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 0],
         [1, 30, 25],
@@ -332,19 +369,23 @@ const lark = (pix) => {
         [5, 240, 245],
         [6, 255, 245]
     ];
-
     lag_r.addMultiPoints(r);
     lag_g.addMultiPoints(g);
     lag_b.addMultiPoints(b);
-
     for (let i = 0, n = pix.length; i < n; i += 4) {
         pix[i] = lag_r.valueOf(pix[i]);
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const reyes = (pix) => {
+module.exports.reyes = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -384,9 +425,15 @@ const reyes = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const juno = (pix) => {
+module.exports.juno = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -426,9 +473,15 @@ const juno = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const slumber = (pix) => {
+module.exports.slumber = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -468,9 +521,15 @@ const slumber = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const crema = (pix) => {
+module.exports.crema = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -506,9 +565,15 @@ const crema = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const ludwig = (pix) => {
+module.exports.ludwig = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -544,9 +609,15 @@ const ludwig = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const aden = (pix) => {
+module.exports.aden = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -582,9 +653,15 @@ const aden = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const perpetua = (pix) => {
+module.exports.perpetua = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -620,9 +697,15 @@ const perpetua = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const amaro = (pix) => {
+module.exports.amaro = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -662,9 +745,15 @@ const amaro = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const mayfair = (pix) => {
+module.exports.mayfair = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -703,9 +792,15 @@ const mayfair = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const rise = (pix) => {
+module.exports.rise = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -746,9 +841,15 @@ const rise = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const hudson = (pix) => {
+module.exports.hudson = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -787,9 +888,15 @@ const hudson = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const valencia = (pix) => {
+module.exports.valencia = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -828,9 +935,15 @@ const valencia = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const xpro2 = (pix) => {
+module.exports.xpro2 = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -869,9 +982,15 @@ const xpro2 = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const sierra = (pix) => {
+module.exports.sierra = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -911,9 +1030,15 @@ const sierra = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const willow = (pix) => {
+module.exports.willow = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -947,9 +1072,15 @@ const willow = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const lofi = (pix) => {
+module.exports.lofi = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -991,9 +1122,15 @@ const lofi = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const earlybird = (pix) => {
+module.exports.earlybird = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -1034,9 +1171,15 @@ const earlybird = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const brannan = (pix) => {
+module.exports.brannan = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -1073,9 +1216,15 @@ const brannan = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const inkwell = (pix) => {
+module.exports.inkwell = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
         const val = pix[i] * .33 + pix[i + 1] * .58 + pix[i + 2] * .22;
@@ -1083,9 +1232,15 @@ const inkwell = (pix) => {
         pix[i + 1] = val;
         pix[i + 2] = val;
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-hefe = (pix) => {
+module.exports.hefe = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -1117,9 +1272,15 @@ hefe = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const nashville = (pix) => {
+module.exports.nashville = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -1156,9 +1317,15 @@ const nashville = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const sutro = (pix) => {
+module.exports.sutro = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -1193,9 +1360,15 @@ const sutro = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const toaster = (pix) => {
+module.exports.toaster = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -1230,9 +1403,15 @@ const toaster = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const walden = (pix) => {
+module.exports.walden = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -1268,9 +1447,15 @@ const walden = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const nineteenSeventySeven = (pix) => {
+module.exports.nineteenSeventySeven = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -1306,9 +1491,15 @@ const nineteenSeventySeven = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const kelvin = (pix) => {
+module.exports.kelvin = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -1343,4 +1534,8 @@ const kelvin = (pix) => {
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
