@@ -6,14 +6,25 @@ const enhance = (pix) => {
     }
 };
 
-const grayscale = (pix) => {
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        // calculated from NTSC
-        var grayscale = pix[i] * .29 + pix[i + 1] * .58 + pix[i + 2] * .11;
-        pix[i] = grayscale;
-        pix[i + 1] = grayscale;
-        pix[i + 2] = grayscale;
-    }
+module.exports.grayscale = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
+    return new Promise(resolve => {
+        const n = pix.length;
+        for (let i = 0; i < n; i += 4) {
+            const red = pix[i];
+            const green = pix[i + 1];
+            const blue = pix[i + 2];
+            const alpha = pix[i + 3];
+            // calculated from NTSC
+            var grayscale = red * .29 + green * .58 + blue * .11;
+            pix[i] = grayscale;
+            pix[i + 1] = grayscale;
+            pix[i + 2] = grayscale;
+        }
+        newImageData.data = pix;
+        resolve(newImageData);
+    });
 };
 
 const sepia = (pix) => {
@@ -302,7 +313,7 @@ const reyes = (pix) => {
     }
 };
 
-const juno = (pix)  => {
+const juno = (pix) => {
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
@@ -705,7 +716,7 @@ const hudson = (pix) => {
     }
 };
 
-const valencia = (pix) =>  {
+const valencia = (pix) => {
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
