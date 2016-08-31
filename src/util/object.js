@@ -2,7 +2,7 @@
  * object.js
  */
 
-module.export.clone = (obj) => {
+module.exports.clone = (obj) => {
     let copy;
 
     if (null == obj || "object" != typeof obj) {
