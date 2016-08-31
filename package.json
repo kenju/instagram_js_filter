@@ -1,8 +1,8 @@
 {
   "name": "instagram_js_filter",
   "version": "1.0.0",
-  "description": "CSS3 filter for realizing Instagram filter effects",
-  "main": "filter.js",
+  "description": "Filter for realizing Instagram filter effects",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
