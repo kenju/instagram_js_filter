@@ -22,3 +22,6 @@ Icon
 node_modules/
 build/
 dist/
+
+# Idea
+.idea
