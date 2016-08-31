@@ -1,265 +1,283 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Instagram JS Filter</title>
-	<link rel="shortcut icon" href="img/icon.png">
-
-	<link rel="stylesheet" href="stylesheets/style.css">
+    <title>Instagram JS Filter</title>
+    <link rel="shortcut icon" href="./img/icon.png">
+    <link rel="stylesheet" href="./stylesheets/style.css">
 </head>
 <body>
 <header class="header">
-	<div class="header-div">
-		<h1 class="header-div-h1"><span style="color:#FF5722;">Instagram</span> <br/>  JS<br/> Filter</h1>
-	</div>
-	<nav class="header-nav">
-		<ul class="header-nav-ul">
-			<li class="header-nav-li"><a href="#main_article_h2_original" class="header-nav-ul-a">Original</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_lark" class="header-nav-ul-a">Lark</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_reyes" class="header-nav-ul-a">Reyes</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_juno" class="header-nav-ul-a">Juno</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_slumber" class="header-nav-ul-a">Slumber</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_crema" class="header-nav-ul-a">Crema</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_ludwig" class="header-nav-ul-a">Ludwig</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_aden" class="header-nav-ul-a">Aden</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_perpetua" class="header-nav-ul-a">Perpetua</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_amaro" class="header-nav-ul-a">Amaro</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_mayfair" class="header-nav-ul-a">Mayfair</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_rise" class="header-nav-ul-a">Rise</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_hudson" class="header-nav-ul-a">Hudson</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_valencia" class="header-nav-ul-a">Valencia</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_xpro2" class="header-nav-ul-a">X Pro II</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_sierra" class="header-nav-ul-a">Sierra</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_willow" class="header-nav-ul-a">Willow</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_lofi" class="header-nav-ul-a">Lo-Fi</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_earlybird" class="header-nav-ul-a">Earlybird</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_brannan" class="header-nav-ul-a">Brannan</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_inkwell" class="header-nav-ul-a">Inkwell</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_hefe" class="header-nav-ul-a">Hefe</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_nashville" class="header-nav-ul-a">Nashville</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_sutro" class="header-nav-ul-a">Sutro</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_toaster" class="header-nav-ul-a">Toaster</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_walden" class="header-nav-ul-a">Walden</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_1977" class="header-nav-ul-a">1977</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_kelvin" class="header-nav-ul-a">Kelvin</a></li>
-			<hr>
-			<li class="header-nav-li"><a href="#main_article_h2_grayscale" class="header-nav-ul-a">Grayscale</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_sepia" class="header-nav-ul-a">Sepia</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_luminance" class="header-nav-ul-a">Luminance</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_brighten" class="header-nav-ul-a">Brighten</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_darken" class="header-nav-ul-a">Darken</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_opacity" class="header-nav-ul-a">Opacity</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_threshold" class="header-nav-ul-a">Threshold</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_negaposi" class="header-nav-ul-a">Nega-Posi</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_brightnessContrast" class="header-nav-ul-a">Brightness Contrast</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_huerotate" class="header-nav-ul-a">Hue-Rotate</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_saturate" class="header-nav-ul-a">Saturate</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_horizontalFlip" class="header-nav-ul-a">horizontalFlip</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_verticalFlip" class="header-nav-ul-a">verticalFlip</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_doubleFlip" class="header-nav-ul-a">doubleFlip</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_horizontalMirror" class="header-nav-ul-a">horizontalMirror</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_verticalMirror" class="header-nav-ul-a">verticalMirror</a></li>
-			<li class="header-nav-li"><a href="#main_article_h2_XYMirror" class="header-nav-ul-a">XYMirror</a></li>
-		</ul>
-	</nav>
+    <div class="header-div">
+        <h1 class="header-div-h1"><span style="color:#FF5722;">Instagram</span> <br/> JS<br/> Filter</h1>
+    </div>
+    <nav class="header-nav">
+        <ul class="header-nav-ul">
+            <li class="header-nav-li"><a href="#main_article_h2_original" class="header-nav-ul-a">Original</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_lark" class="header-nav-ul-a">Lark</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_reyes" class="header-nav-ul-a">Reyes</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_juno" class="header-nav-ul-a">Juno</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_slumber" class="header-nav-ul-a">Slumber</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_crema" class="header-nav-ul-a">Crema</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_ludwig" class="header-nav-ul-a">Ludwig</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_aden" class="header-nav-ul-a">Aden</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_perpetua" class="header-nav-ul-a">Perpetua</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_amaro" class="header-nav-ul-a">Amaro</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_mayfair" class="header-nav-ul-a">Mayfair</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_rise" class="header-nav-ul-a">Rise</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_hudson" class="header-nav-ul-a">Hudson</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_valencia" class="header-nav-ul-a">Valencia</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_xpro2" class="header-nav-ul-a">X Pro II</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_sierra" class="header-nav-ul-a">Sierra</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_willow" class="header-nav-ul-a">Willow</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_lofi" class="header-nav-ul-a">Lo-Fi</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_earlybird" class="header-nav-ul-a">Earlybird</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_brannan" class="header-nav-ul-a">Brannan</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_inkwell" class="header-nav-ul-a">Inkwell</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_hefe" class="header-nav-ul-a">Hefe</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_nashville" class="header-nav-ul-a">Nashville</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_sutro" class="header-nav-ul-a">Sutro</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_toaster" class="header-nav-ul-a">Toaster</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_walden" class="header-nav-ul-a">Walden</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_1977" class="header-nav-ul-a">1977</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_kelvin" class="header-nav-ul-a">Kelvin</a></li>
+            <hr>
+            <li class="header-nav-li"><a href="#main_article_h2_grayscale" class="header-nav-ul-a">Grayscale</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_sepia" class="header-nav-ul-a">Sepia</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_luminance" class="header-nav-ul-a">Luminance</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_brighten" class="header-nav-ul-a">Brighten</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_darken" class="header-nav-ul-a">Darken</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_opacity" class="header-nav-ul-a">Opacity</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_threshold" class="header-nav-ul-a">Threshold</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_negaposi" class="header-nav-ul-a">Nega-Posi</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_brightnessContrast" class="header-nav-ul-a">Brightness
+                Contrast</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_huerotate" class="header-nav-ul-a">Hue-Rotate</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_saturate" class="header-nav-ul-a">Saturate</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_horizontalFlip"
+                                         class="header-nav-ul-a">horizontalFlip</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_verticalFlip" class="header-nav-ul-a">verticalFlip</a>
+            </li>
+            <li class="header-nav-li"><a href="#main_article_h2_doubleFlip" class="header-nav-ul-a">doubleFlip</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_horizontalMirror" class="header-nav-ul-a">horizontalMirror</a>
+            </li>
+            <li class="header-nav-li"><a href="#main_article_h2_verticalMirror"
+                                         class="header-nav-ul-a">verticalMirror</a></li>
+            <li class="header-nav-li"><a href="#main_article_h2_XYMirror" class="header-nav-ul-a">XYMirror</a></li>
+        </ul>
+    </nav>
 </header>
 <main class="main">
-	<article class="main-article">
-		<h2 id="main_article_h2_original" class="main-article-h2">Original</h2>
-		<img class="main-article-img instagram-css-filter-lark" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_lark" class="main-article-h2">Lark</h2>
-		<img class="main-article-img instagram-css-filter-lark" data-effect="lark" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_reyes" class="main-article-h2">Reyes</h2>
-		<img class="main-article-img instagram-css-filter-reyes" data-effect="reyes" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_juno" class="main-article-h2">Juno</h2>
-		<img class="main-article-img instagram-css-filter-juno" data-effect="juno" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_slumber" class="main-article-h2">Slumber</h2>
-		<img class="main-article-img instagram-css-filter-slumber" data-effect="slumber" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_crema" class="main-article-h2">Crema</h2>
-		<img class="main-article-img instagram-css-filter-crema" data-effect="crema" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_ludwig" class="main-article-h2">Ludwig</h2>
-		<img class="main-article-img instagram-css-filter-ludwig" data-effect="ludwig" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_aden" class="main-article-h2">Aden</h2>
-		<img class="main-article-img instagram-css-filter-aden" data-effect="aden" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_perpetua" class="main-article-h2">Perpetua</h2>
-		<img class="main-article-img instagram-css-filter-parpetua" data-effect="perpetua" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_amaro" class="main-article-h2">Amaro</h2>
-		<img class="main-article-img instagram-css-filter-amaro" data-effect="amaro" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_mayfair" class="main-article-h2">Mayfair</h2>
-		<img class="main-article-img instagram-css-filter-mayfiar" data-effect="mayfair" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_rise" class="main-article-h2">Rise</h2>
-		<img class="main-article-img instagram-css-filter-rise" data-effect="rise" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_hudson" class="main-article-h2">Hudson</h2>
-		<img class="main-article-img instagram-css-filter-hudon" data-effect="hudson" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_valencia" class="main-article-h2">Valencia</h2>
-		<img class="main-article-img instagram-css-filter-valencia" data-effect="valencia" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_xpro2" class="main-article-h2">X-PRO2</h2>
-		<img class="main-article-img instagram-css-filter-xpro2" data-effect="xpro2" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_sierra" class="main-article-h2">Sierra</h2>
-		<img class="main-article-img instagram-css-filter-sierra" data-effect="sierra" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_willow" class="main-article-h2">Willow</h2>
-		<img class="main-article-img instagram-css-filter-willow" data-effect="willow" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_lofi" class="main-article-h2">Lo-Fi</h2>
-		<img class="main-article-img instagram-css-filter-lofi" data-effect="lofi" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_earlybird" class="main-article-h2">Earlybird</h2>
-		<img class="main-article-img instagram-css-filter-earlibird" data-effect="earlybird" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_brannan" class="main-article-h2">Brannan</h2>
-		<img class="main-article-img instagram-css-filter-brannan" data-effect="brannan" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_inkwell" class="main-article-h2">Inkwell</h2>
-		<img class="main-article-img instagram-css-filter-inkwell" data-effect="inkwell" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_hefe" class="main-article-h2">Hefe</h2>
-		<img class="main-article-img instagram-css-filter-xpro2" data-effect="hefe" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_nashville" class="main-article-h2">Nashville</h2>
-		<img class="main-article-img instagram-css-filter-nashville" data-effect="nashville" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_sutro" class="main-article-h2">Sutro</h2>
-		<img class="main-article-img instagram-css-filter-sutro" data-effect="sutro" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_toaster" class="main-article-h2">Toaster</h2>
-		<img class="main-article-img instagram-css-filter-toaster" data-effect="toaster" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_walden" class="main-article-h2">Walden</h2>
-		<img class="main-article-img instagram-css-filter-walden" data-effect="walden" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_1977" class="main-article-h2">1977</h2>
-		<img class="main-article-img instagram-css-filter-xpro2" data-effect="nineteenSeventySeven" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_kelvin" class="main-article-h2">Kelvin</h2>
-		<img class="main-article-img instagram-css-filter-kelvin" data-effect="kelvin" src="img/sample.jpg" alt="">
-	</article>
-	<hr>
-	<article class="main-article">
-		<h2 id="main_article_h2_grayscale" class="main-article-h2">Grayscale</h2>
-		<img class="main-article-img instagram-css-filter-grayscale" data-effect="grayscale" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_sepia" class="main-article-h2">Sepia</h2>
-		<img class="main-article-img instagram-css-filter-sepia" data-effect="sepia" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_luminance" class="main-article-h2">Luminance</h2>
-		<img class="main-article-img instagram-css-filter-luminance" data-effect="luminance" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_brighten" class="main-article-h2">Brighten</h2>
-		<img class="main-article-img instagram-css-filter-brighten" data-effect="brighten" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_darken" class="main-article-h2">Darken</h2>
-		<img class="main-article-img instagram-css-filter-darken" data-effect="darken" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_opacity" class="main-article-h2">Opacity</h2>
-		<img class="main-article-img instagram-css-filter-opacity" data-effect="opacity" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_threshold" class="main-article-h2">Threshold</h2>
-		<img class="main-article-img instagram-css-filter-threshold" data-effect="threshold" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_negaposi" class="main-article-h2">Nega-Posi</h2>
-		<img class="main-article-img instagram-css-filter-negaposi" data-effect="negaposi" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_brightnessContrast" class="main-article-h2">brightnessContrast</h2>
-		<img class="main-article-img instagram-css-filter-brightnessContrast" data-effect="brightnessContrast" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_huerotate" class="main-article-h2">Hue-Rotate</h2>
-		<img class="main-article-img instagram-css-filter-huerotate" data-effect="huerotate" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_saturate" class="main-article-h2">Saturate</h2>
-		<img class="main-article-img instagram-css-filter-saturate" data-effect="saturate" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_horizontalFlip" class="main-article-h2">HorizontalFlip</h2>
-		<img class="main-article-img instagram-css-filter-horizontalFlip" data-effect="horizontalFlip" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_verticalFlip" class="main-article-h2">VerticalFlip</h2>
-		<img class="main-article-img instagram-css-filter-verticalFlip" data-effect="verticalFlip" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_doubleFlip" class="main-article-h2">DoubleFlip</h2>
-		<img class="main-article-img instagram-css-filter-doubleFlip" data-effect="doubleFlip" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_horizontalMirror" class="main-article-h2">HorizontalMirror</h2>
-		<img class="main-article-img instagram-css-filter-horizontalMirror" data-effect="horizontalMirror" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_verticalMirror" class="main-article-h2">VerticalMirror</h2>
-		<img class="main-article-img instagram-css-filter-verticalMirror" data-effect="verticalMirror" src="img/sample.jpg" alt="">
-	</article>
-	<article class="main-article">
-		<h2 id="main_article_h2_XYMirror" class="main-article-h2">XYMirror</h2>
-		<img class="main-article-img instagram-css-filter-XYMirror" data-effect="XYMirror" src="img/sample.jpg" alt="">
-	</article>
+    <article class="main-article">
+        <h2 id="main_article_h2_original" class="main-article-h2">Original</h2>
+        <img class="main-article-img instagram-css-filter-lark" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_lark" class="main-article-h2">Lark</h2>
+        <img class="main-article-img instagram-css-filter-lark" data-effect="lark" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_reyes" class="main-article-h2">Reyes</h2>
+        <img class="main-article-img instagram-css-filter-reyes" data-effect="reyes" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_juno" class="main-article-h2">Juno</h2>
+        <img class="main-article-img instagram-css-filter-juno" data-effect="juno" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_slumber" class="main-article-h2">Slumber</h2>
+        <img class="main-article-img instagram-css-filter-slumber" data-effect="slumber" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_crema" class="main-article-h2">Crema</h2>
+        <img class="main-article-img instagram-css-filter-crema" data-effect="crema" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_ludwig" class="main-article-h2">Ludwig</h2>
+        <img class="main-article-img instagram-css-filter-ludwig" data-effect="ludwig" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_aden" class="main-article-h2">Aden</h2>
+        <img class="main-article-img instagram-css-filter-aden" data-effect="aden" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_perpetua" class="main-article-h2">Perpetua</h2>
+        <img class="main-article-img instagram-css-filter-parpetua" data-effect="perpetua" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_amaro" class="main-article-h2">Amaro</h2>
+        <img class="main-article-img instagram-css-filter-amaro" data-effect="amaro" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_mayfair" class="main-article-h2">Mayfair</h2>
+        <img class="main-article-img instagram-css-filter-mayfiar" data-effect="mayfair" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_rise" class="main-article-h2">Rise</h2>
+        <img class="main-article-img instagram-css-filter-rise" data-effect="rise" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_hudson" class="main-article-h2">Hudson</h2>
+        <img class="main-article-img instagram-css-filter-hudon" data-effect="hudson" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_valencia" class="main-article-h2">Valencia</h2>
+        <img class="main-article-img instagram-css-filter-valencia" data-effect="valencia" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_xpro2" class="main-article-h2">X-PRO2</h2>
+        <img class="main-article-img instagram-css-filter-xpro2" data-effect="xpro2" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_sierra" class="main-article-h2">Sierra</h2>
+        <img class="main-article-img instagram-css-filter-sierra" data-effect="sierra" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_willow" class="main-article-h2">Willow</h2>
+        <img class="main-article-img instagram-css-filter-willow" data-effect="willow" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_lofi" class="main-article-h2">Lo-Fi</h2>
+        <img class="main-article-img instagram-css-filter-lofi" data-effect="lofi" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_earlybird" class="main-article-h2">Earlybird</h2>
+        <img class="main-article-img instagram-css-filter-earlibird" data-effect="earlybird" src="img/sample.jpg"
+             alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_brannan" class="main-article-h2">Brannan</h2>
+        <img class="main-article-img instagram-css-filter-brannan" data-effect="brannan" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_inkwell" class="main-article-h2">Inkwell</h2>
+        <img class="main-article-img instagram-css-filter-inkwell" data-effect="inkwell" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_hefe" class="main-article-h2">Hefe</h2>
+        <img class="main-article-img instagram-css-filter-xpro2" data-effect="hefe" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_nashville" class="main-article-h2">Nashville</h2>
+        <img class="main-article-img instagram-css-filter-nashville" data-effect="nashville" src="img/sample.jpg"
+             alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_sutro" class="main-article-h2">Sutro</h2>
+        <img class="main-article-img instagram-css-filter-sutro" data-effect="sutro" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_toaster" class="main-article-h2">Toaster</h2>
+        <img class="main-article-img instagram-css-filter-toaster" data-effect="toaster" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_walden" class="main-article-h2">Walden</h2>
+        <img class="main-article-img instagram-css-filter-walden" data-effect="walden" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_1977" class="main-article-h2">1977</h2>
+        <img class="main-article-img instagram-css-filter-xpro2" data-effect="nineteenSeventySeven" src="img/sample.jpg"
+             alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_kelvin" class="main-article-h2">Kelvin</h2>
+        <img class="main-article-img instagram-css-filter-kelvin" data-effect="kelvin" src="img/sample.jpg" alt="">
+    </article>
+    <hr>
+    <article class="main-article">
+        <h2 id="main_article_h2_grayscale" class="main-article-h2">Grayscale</h2>
+        <img class="main-article-img instagram-css-filter-grayscale" data-effect="grayscale" src="img/sample.jpg"
+             alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_sepia" class="main-article-h2">Sepia</h2>
+        <img class="main-article-img instagram-css-filter-sepia" data-effect="sepia" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_luminance" class="main-article-h2">Luminance</h2>
+        <img class="main-article-img instagram-css-filter-luminance" data-effect="luminance" src="img/sample.jpg"
+             alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_brighten" class="main-article-h2">Brighten</h2>
+        <img class="main-article-img instagram-css-filter-brighten" data-effect="brighten" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_darken" class="main-article-h2">Darken</h2>
+        <img class="main-article-img instagram-css-filter-darken" data-effect="darken" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_opacity" class="main-article-h2">Opacity</h2>
+        <img class="main-article-img instagram-css-filter-opacity" data-effect="opacity" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_threshold" class="main-article-h2">Threshold</h2>
+        <img class="main-article-img instagram-css-filter-threshold" data-effect="threshold" src="img/sample.jpg"
+             alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_negaposi" class="main-article-h2">Nega-Posi</h2>
+        <img class="main-article-img instagram-css-filter-negaposi" data-effect="negaposi" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_brightnessContrast" class="main-article-h2">brightnessContrast</h2>
+        <img class="main-article-img instagram-css-filter-brightnessContrast" data-effect="brightnessContrast"
+             src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_huerotate" class="main-article-h2">Hue-Rotate</h2>
+        <img class="main-article-img instagram-css-filter-huerotate" data-effect="huerotate" src="img/sample.jpg"
+             alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_saturate" class="main-article-h2">Saturate</h2>
+        <img class="main-article-img instagram-css-filter-saturate" data-effect="saturate" src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_horizontalFlip" class="main-article-h2">HorizontalFlip</h2>
+        <img class="main-article-img instagram-css-filter-horizontalFlip" data-effect="horizontalFlip"
+             src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_verticalFlip" class="main-article-h2">VerticalFlip</h2>
+        <img class="main-article-img instagram-css-filter-verticalFlip" data-effect="verticalFlip" src="img/sample.jpg"
+             alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_doubleFlip" class="main-article-h2">DoubleFlip</h2>
+        <img class="main-article-img instagram-css-filter-doubleFlip" data-effect="doubleFlip" src="img/sample.jpg"
+             alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_horizontalMirror" class="main-article-h2">HorizontalMirror</h2>
+        <img class="main-article-img instagram-css-filter-horizontalMirror" data-effect="horizontalMirror"
+             src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_verticalMirror" class="main-article-h2">VerticalMirror</h2>
+        <img class="main-article-img instagram-css-filter-verticalMirror" data-effect="verticalMirror"
+             src="img/sample.jpg" alt="">
+    </article>
+    <article class="main-article">
+        <h2 id="main_article_h2_XYMirror" class="main-article-h2">XYMirror</h2>
+        <img class="main-article-img instagram-css-filter-XYMirror" data-effect="XYMirror" src="img/sample.jpg" alt="">
+    </article>
 </main>
 <footer class="footer">
-	<ul class="footer-ul">
-		<li class="footer-ul-li"><a href="https://github.com/KENJU/instagram_css_filter" class="footer-ul-li-a">Github</a></li>
-		<li class="footer-ul-li"><a href="https://KENJU.github.io/" class="footer-ul-li-a">About</a></li>
-	</ul>
-	<small class="footer-small">&copy; Copyright 2015 Kenju Wagatsuma</small>
+    <ul class="footer-ul">
+        <li class="footer-ul-li"><a href="https://github.com/KENJU/instagram_css_filter"
+                                    class="footer-ul-li-a">Github</a></li>
+        <li class="footer-ul-li"><a href="https://KENJU.github.io/" class="footer-ul-li-a">About</a></li>
+    </ul>
+    <small class="footer-small">&copy; Copyright 2016 Kenju Wagatsuma</small>
 </footer>
 <a target="_blank" href="https://github.com/KENJU/instagram_js_filter">
-	<img id="img_fork_me" src="img/forkme.png" alt="">
+    <img id="img_fork_me" src="img/forkme.png" alt="">
 </a>
 <a id="page-top" href="#">
-	<img src="img/arrow_up.png" alt="">
+    <img src="img/arrow_up.png" alt="">
 </a>
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="js/filter.js"></script>
-<script src="js/filter.canvas.js"></script>
+<script src="./js/filter.js"></script>
+<script src="./js/filter.canvas.js"></script>
 </body>
 </html>
