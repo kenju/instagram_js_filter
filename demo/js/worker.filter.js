@@ -1,33 +1,24 @@
 Worker.filter = {};
 
-/*=====================================
-basic effects
-=====================================*/
-
-// basic filter for enhancing photos
 Worker.filter.enhance = function(pix){
-  console.log('Basic enhancement');
   for (var i = 0, n = pix.length; i < n; i += 4){
     pix[i]    = pix[i]    * 1.24; // red
     pix[i+1]  = pix[i+1]  * 1.33; // green
     pix[i+2]  = pix[i+2]  * 1.21; // blue
-  };
+  }
 };
 
-// grayscale
 Worker.filter.grayscale = function(pix){
-  console.log('Grayscale enhancement');
   for (var i = 0, n = pix.length; i < n; i += 4){
     // calculated from NTSC
     var grayscale = pix[i] * .29 + pix[i+1] * .58 + pix[i+2] * .11;
     pix[i]    = grayscale;
     pix[i+1]  = grayscale;
     pix[i+2]  = grayscale;
-  };
+  }
 };
 
 Worker.filter.sepia = function(pix){
-  console.log('Sepia enhancement');
   for (var i = 0, n = pix.length; i < n; i += 4){
     pix[i]    = pix[i]    * 1.07;
     pix[i+1]  = pix[i+1]  * .74;
@@ -46,7 +37,6 @@ Worker.filter.luminance = function(pix){
 };
 
 Worker.filter.negaposi = function(pix){
-  console.log('Nega-Posi enhancement');
   for (var i = 0, n = pix.length; i < n; i += 4){
     pix[i]    = 255 - pix[i];
     pix[i+1]  = 255 - pix[i+1];
@@ -55,14 +45,12 @@ Worker.filter.negaposi = function(pix){
 };
 
 Worker.filter.opacity = function(pix, value){
-  console.log('Opacity enhancement');
   for (var i = 0, n = pix.length; i < n; i += 4){
     pix[i+3] = pix[i+3] * value;
   }
 };
 
 Worker.filter.brighten = function(pix, value){
-  console.log('Worker.filter.brighten');
   for (var i = 0, n = pix.length; i < n; i += 4){
     pix[i]    += value;
     pix[i+1]  += value;
@@ -71,7 +59,6 @@ Worker.filter.brighten = function(pix, value){
 };
 
 Worker.filter.darken = function(pix, value){
-  console.log('Worker.filter.darken');
   for (var i = 0, n = pix.length; i < n; i += 4){
     pix[i]    -= value;
     pix[i+1]  -= value;
@@ -80,7 +67,6 @@ Worker.filter.darken = function(pix, value){
 };
 
 Worker.filter.threshold = function(pix){
-  console.log('Threshold enhancement');
   var
     red,
     green,
@@ -102,7 +88,6 @@ Worker.filter.threshold = function(pix){
   }
 };
 Worker.filter.hueRotate = function(pix, deg){
-  console.log('Hue Rotate enhancement');
   for (var i = 0, n = pix.length; i < n; i += 4){
     var
       hsv,
@@ -116,9 +101,8 @@ Worker.filter.hueRotate = function(pix, deg){
     pix[i+1]  = rgb[1];
     pix[i+2]  = rgb[2];
   }
-}
+};
 Worker.filter.saturate = function(pix, num){
-  console.log('Saturate enhancement');
   for (var i = 0, n = pix.length; i < n; i += 4){
     var
       hsv,
