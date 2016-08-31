@@ -10,7 +10,6 @@ Icon
 .Trashes
 
 # Linux
-
 .*
 !.gitignore
 *~
@@ -18,10 +17,16 @@ Icon
 # Compass
 .sass-cache/*
 
-# Grunt
+# node
 node_modules/
+npm-debug.log
+
+# Grunt
 build/
 dist/
 
 # Idea
 .idea
+
+# doc
+doc/index.html
