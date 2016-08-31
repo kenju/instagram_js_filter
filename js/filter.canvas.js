@@ -23,5 +23,4 @@ Filter.canvas.renderCanvas = function(img, new_pixels){
   context = canvas.getContext("2d");
   context.putImageData(new_pixels, 0, 0);
   img.src = canvas.toDataURL();
-  return;
 };

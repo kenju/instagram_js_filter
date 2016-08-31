@@ -2,12 +2,63 @@
  * render.js
  */
 
+var types = [
+    'Original',
+    'Lark',
+    'Reyes',
+    'Juno',
+    'Slumber',
+    'Crema',
+    'Ludwig',
+    'Aden',
+    'Perpetua',
+    'Amaro',
+    'Mayfair',
+    'Rise',
+    'Hudson',
+    'Valencia',
+    'XProII',
+    'Sierra',
+    'Willow',
+    'Lo-Fi',
+    'Earlybird',
+    'Brannan',
+    'Inkwell',
+    'Hefe',
+    'Nashville',
+    'Sutro',
+    'Toaster',
+    'Walden',
+    '1977',
+    'Kelvin',
+    'Grayscale',
+    'Sepia',
+    'Luminance',
+    'Brighten',
+    'Darken',
+    'Opacity',
+    'Threshold',
+    'Nega-Posi',
+    'BrightnessContrast',
+    'Hue-Rotate',
+    'Saturate',
+    'horizontalFlip',
+    'verticalFlip',
+    'doubleFlip',
+    'horizontalMirror',
+    'verticalMirror',
+    'XYMirror'
+];
+
 var RootContent = React.createClass({
     render: function () {
         return (
             <div>
                 <Header/>
                 <Main/>
+                <Footer/>
+                <ForkMeImg/>
+                <ArrowUpImg/>
             </div>
         );
     }
@@ -40,105 +91,31 @@ var HeaderTitle = React.createClass({
     }
 });
 
-// TODO: could be refactored
 var HeaderLink = React.createClass({
     render: function () {
+        var rows = [];
+        types.forEach(function (type) {
+            rows.push(<HeaderLinkItem type={type} key={type}/>);
+        });
         return (
             <ul className="header-nav-ul">
-                <li className="header-nav-li"><a href="#main_article_h2_original"
-                                                 className="header-nav-ul-a">Original</a></li>
-                <li className="header-nav-li"><a href="#main_article_h2_lark" className="header-nav-ul-a">Lark</a></li>
-                <li className="header-nav-li"><a href="#main_article_h2_reyes" className="header-nav-ul-a">Reyes</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_juno" className="header-nav-ul-a">Juno</a></li>
-                <li className="header-nav-li"><a href="#main_article_h2_slumber" className="header-nav-ul-a">Slumber</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_crema" className="header-nav-ul-a">Crema</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_ludwig" className="header-nav-ul-a">Ludwig</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_aden" className="header-nav-ul-a">Aden</a></li>
-                <li className="header-nav-li"><a href="#main_article_h2_perpetua"
-                                                 className="header-nav-ul-a">Perpetua</a></li>
-                <li className="header-nav-li"><a href="#main_article_h2_amaro" className="header-nav-ul-a">Amaro</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_mayfair" className="header-nav-ul-a">Mayfair</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_rise" className="header-nav-ul-a">Rise</a></li>
-                <li className="header-nav-li"><a href="#main_article_h2_hudson" className="header-nav-ul-a">Hudson</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_valencia"
-                                                 className="header-nav-ul-a">Valencia</a></li>
-                <li className="header-nav-li"><a href="#main_article_h2_xpro2" className="header-nav-ul-a">X Pro II</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_sierra" className="header-nav-ul-a">Sierra</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_willow" className="header-nav-ul-a">Willow</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_lofi" className="header-nav-ul-a">Lo-Fi</a></li>
-                <li className="header-nav-li"><a href="#main_article_h2_earlybird"
-                                                 className="header-nav-ul-a">Earlybird</a></li>
-                <li className="header-nav-li"><a href="#main_article_h2_brannan" className="header-nav-ul-a">Brannan</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_inkwell" className="header-nav-ul-a">Inkwell</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_hefe" className="header-nav-ul-a">Hefe</a></li>
-                <li className="header-nav-li"><a href="#main_article_h2_nashville"
-                                                 className="header-nav-ul-a">Nashville</a></li>
-                <li className="header-nav-li"><a href="#main_article_h2_sutro" className="header-nav-ul-a">Sutro</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_toaster" className="header-nav-ul-a">Toaster</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_walden" className="header-nav-ul-a">Walden</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_1977" className="header-nav-ul-a">1977</a></li>
-                <li className="header-nav-li"><a href="#main_article_h2_kelvin" className="header-nav-ul-a">Kelvin</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_grayscale"
-                                                 className="header-nav-ul-a">Grayscale</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_sepia" className="header-nav-ul-a">Sepia</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_luminance"
-                                                 className="header-nav-ul-a">Luminance</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_brighten"
-                                                 className="header-nav-ul-a">Brighten</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_darken"
-                                                 className="header-nav-ul-a">Darken</a></li>
-                <li className="header-nav-li"><a href="#main_article_h2_opacity"
-                                                 className="header-nav-ul-a">Opacity</a></li>
-                <li className="header-nav-li"><a href="#main_article_h2_threshold"
-                                                 className="header-nav-ul-a">Threshold</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_negaposi"
-                                                 className="header-nav-ul-a">Nega-Posi</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_brightnessContrast"
-                                                 className="header-nav-ul-a">Brightness
-                    Contrast</a></li>
-                <li className="header-nav-li"><a href="#main_article_h2_huerotate" className="header-nav-ul-a">Hue-Rotate</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_saturate"
-                                                 className="header-nav-ul-a">Saturate</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_horizontalFlip"
-                                                 className="header-nav-ul-a">horizontalFlip</a></li>
-                <li className="header-nav-li"><a href="#main_article_h2_verticalFlip" className="header-nav-ul-a">verticalFlip</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_doubleFlip" className="header-nav-ul-a">doubleFlip</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_horizontalMirror"
-                                                 className="header-nav-ul-a">horizontalMirror</a>
-                </li>
-                <li className="header-nav-li"><a href="#main_article_h2_verticalMirror"
-                                                 className="header-nav-ul-a">verticalMirror</a></li>
-                <li className="header-nav-li"><a href="#main_article_h2_XYMirror"
-                                                 className="header-nav-ul-a">XYMirror</a>
-                </li>
+                {rows}
             </ul>
         );
+    }
+});
+
+var HeaderLinkItem = React.createClass({
+    render: function () {
+        var typeName = this.props.type;
+        return (
+            <li className="header-nav-li">
+                <a href={"#main_article_h2_" + typeName.toLowerCase()}
+                   className="header-nav-ul-a">
+                    {typeName}
+                </a>
+            </li>
+        )
     }
 });
 
@@ -154,29 +131,71 @@ var Main = React.createClass({
 
 var MainArticleList = React.createClass({
     render: function () {
+        var rows = [];
+        types.forEach(function (type) {
+            rows.push(<MainArticleItem type={type} key={type}/>);
+        });
         return (
             <article className="main-article">
-                <MainArticleItemHeader/>
-                <MainArticleItemImg/>
+                {rows}
             </article>
         );
     }
 });
 
-var MainArticleItemHeader = React.createClass({
+var MainArticleItem = React.createClass({
     render: function () {
+        var typeNameLowerCase = this.props.type.toLowerCase();
         return (
-            <h2 id="main_article_h2_original" className="main-article-h2">
-                Original
-            </h2>
-        );
+            <div>
+                <h2 id={"main_article_h2_"}
+                    className="main-article-h2">
+                    Original
+                </h2>
+                <img className={"main-article-img instagram-css-filter-"}
+                     data-effect={typeNameLowerCase}
+                     src={"img/sample.jpg"}/>
+            </div>
+        )
     }
 });
-var MainArticleItemImg = React.createClass({
+
+var Footer = React.createClass({
     render: function () {
         return (
-            <img className="main-article-img instagram-css-filter-lark" src={"img/sample.jpg"}/>
-        );
+            <footer className="footer">
+                <ul className="footer-ul">
+                    <li className="footer-ul-li">
+                        <a href="https://github.com/KENJU/instagram_css_filter"
+                           className="footer-ul-li-a">Github</a>
+                    </li>
+                    <li className="footer-ul-li">
+                        <a href="https://KENJU.github.io/" className="footer-ul-li-a">About</a>
+                    </li>
+                </ul>
+                <small className="footer-small">&copy; Copyright 2016 Kenju Wagatsuma</small>
+            </footer>
+        )
+    }
+});
+
+var ForkMeImg = React.createClass({
+    render: function () {
+        return (
+            <a target="_blank" href="https://github.com/KENJU/instagram_js_filter">
+                <img id="img_fork_me" src={"img/forkme.png"} alt=""/>
+            </a>
+        )
+    }
+});
+
+var ArrowUpImg = React.createClass({
+    render: function () {
+        return (
+            <a id="page-top" href="#">
+                <img src="img/arrow_up.png" alt=""/>
+            </a>
+        )
     }
 });
 
