@@ -6,13 +6,13 @@
 
 http://kenju.github.io/instagram_js_filter
 
-<a href="http://kenju.github.io/instagram_js_filter"><img src="img/screen.png" alt=""></a>
-
 ## Tech-background
 
-As for image-processing, `canvas` is used for generating filtered images. RGB + alpha valus of each pixels of an image is converted for the targeted effects.
+As for image-processing, `canvas` is used for generating filtered images. 
+RGB + alpha valus of each pixels of an image is converted for the targeted effects.
 
-Such image-processing requires high memory-usage and could block user-experience, therefore `Web Worker API` is used for realising multi-thread processing in the client side.
+Such image-processing requires high memory-usage and could block user-experience, 
+therefore `Web Worker API` is used for realising multi-thread processing in the client side.
 
 # Install
 
@@ -23,17 +23,13 @@ Downloads zipped files from [the Github repository](https://github.com/KENJU/ins
 ## Bower
 
 ```bash
-
 $ bower install instagram_js_filter
-
 ```
 
 ## NPM
 
 ```bash
-
 $ npm install instagram_js_filter
-
 ```
 
 
@@ -128,4 +124,5 @@ Firstly, add `data-effect="?"` attributes to `<img>` tags which you want to appl
 
 # License
 
-Created by and copyright Kenju Wagatsuma Released under the [MIT license](https://github.com/KENJU/instagram_css_filter/blob/master/LICENSE).
+Created by and copyright Kenju Wagatsuma Released 
+under the [MIT license](https://github.com/KENJU/instagram_css_filter/blob/master/LICENSE).
