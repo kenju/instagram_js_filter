@@ -150,7 +150,7 @@ var MainArticleItem = React.createClass({
             <div>
                 <h2 id={"main_article_h2_"}
                     className="main-article-h2">
-                    Original
+                    {typeNameLowerCase}
                 </h2>
                 <img className={"main-article-img instagram-css-filter-"}
                      data-effect={typeNameLowerCase}
@@ -166,14 +166,13 @@ var Footer = React.createClass({
             <footer className="footer">
                 <ul className="footer-ul">
                     <li className="footer-ul-li">
-                        <a href="https://github.com/KENJU/instagram_css_filter"
+                        <a href="https://github.com/KENJU/instagram_js_filter"
                            className="footer-ul-li-a">Github</a>
                     </li>
-                    <li className="footer-ul-li">
-                        <a href="https://KENJU.github.io/" className="footer-ul-li-a">About</a>
-                    </li>
                 </ul>
-                <small className="footer-small">&copy; Copyright 2016 Kenju Wagatsuma</small>
+                <small className="footer-small">&copy; Copyright 2016
+                    <a href="https://kenju.github.io/"> kenju</a>
+                </small>
             </footer>
         )
     }

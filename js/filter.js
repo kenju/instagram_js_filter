@@ -21,5 +21,4 @@ Filter.process = function (img) {
     Array.prototype.forEach.call(document.querySelectorAll('.main-article-img'), function (node) {
         Filter.process(node);
     });
-    Filter.smoothScroll();
 })();
