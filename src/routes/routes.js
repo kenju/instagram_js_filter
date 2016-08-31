@@ -2,6 +2,8 @@
  * routes.js
  */
 
+const canvas = require('../canvas/canvas');
+
 const sendErrorResponse = (req, res, error, statusCode) => {
     const errorMessage = {
         statusCode,
@@ -43,10 +45,18 @@ const configRoutes = (app) => {
     app.post('/:obj_type', (req, res) => {
         const objType = getObjType(req);
         const objMap = getObjMap(req);
-        sendResponse(200, res, {
-            type: objType,
-            data: objMap
-        });
+
+        canvas.convert('grayscale')
+            .then(result => {
+                sendResponse(200, res, {
+                    type: objType,
+                    data: objMap,
+                    result
+                });
+            })
+            .catch(err => {
+                sendErrorResponse(req, res, err, 500);
+            });
     });
 };
 
