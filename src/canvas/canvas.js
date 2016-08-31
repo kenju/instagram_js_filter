@@ -1,27 +1,27 @@
-Filter.canvas = {};
-
-Filter.canvas.getPixels = function(img) {
-  var canvas,
-      context
-  ;
-  canvas = Filter.canvas.getCanvas(img.width, img.height);
-  context = canvas.getContext('2d');
-  context.drawImage(img, 0, 0);
-  return context.getImageData(0, 0, canvas.width, canvas.height);
+const getPixels = (img) => {
+    const canvas = Filter.canvas.getCanvas(img.width, img.height);
+    const context = canvas.getContext('2d');
+    context.drawImage(img, 0, 0);
+    return context.getImageData(0, 0, canvas.width, canvas.height);
 };
 
-Filter.canvas.getCanvas = function(width, height) {
-  var canvas = document.createElement('canvas');
-  canvas.width = width;
-  canvas.height = height;
-  return canvas;
+const getCanvas = (width, height) => {
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    return canvas;
 };
 
-Filter.canvas.renderCanvas = function(img, new_pixels){
-  var canvas, context;
-  canvas  = Filter.canvas.getCanvas(img.width, img.height);
-  context = canvas.getContext("2d");
-  context.putImageData(new_pixels, 0, 0);
-  img.src = canvas.toDataURL();
-  return;
+const renderCanvas = (img, new_pixels) => {
+    const canvas = Filter.canvas.getCanvas(img.width, img.height);
+    const context = canvas.getContext("2d");
+    context.putImageData(new_pixels, 0, 0);
+    img.src = canvas.toDataURL();
+    return;
+};
+
+module.exports = {
+    getPixels,
+    getCanvas,
+    renderCanvas
 };

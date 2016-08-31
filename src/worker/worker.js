@@ -1,19 +1,15 @@
-Worker = {};
-
 // get message from worker in enhanshot.js
-onmessage = function(e){
+onmessage = (e) => {
   postMessage(Worker.process(e.data))
 };
 
 // apply filter based on effect name
-Worker.process = function(imgd){
-  var
-    effect  = imgd.effects, // effect name
-    pixraw  = imgd.pixels,  // context.getImageData()
-    pix     = pixraw.data,  // image data (pixels)
-    width   = pixraw.width,
-    height  = pixraw.height
-  ;
+process = (imgd) => {
+  const effect  = imgd.effects; // effect name
+  const pixraw  = imgd.pixels; // context.getImageData()
+  const pix     = pixraw.data;  // image data (pixels)
+  const width   = pixraw.width;
+  const height  = pixraw.height;
 
   importScripts(
     'worker.filter.js',
@@ -160,7 +156,6 @@ Worker.process = function(imgd){
   }
 
   imgd['pixels'].data = pix;
-
   return imgd;
 };
 

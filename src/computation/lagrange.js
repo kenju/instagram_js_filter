@@ -1,5 +1,3 @@
-Lagrange = {};
-
 /**
  * At least two points are needed to interpolate something.
  * @class Lagrange polynomial interpolation.
@@ -15,7 +13,7 @@ Lagrange = {};
  * @see https://gist.github.com/dburner/8550030
  * @see http://jsfiddle.net/maccesch/jgU3Y/
  */
-var Lagrange = function(x1, y1, x2, y2) {
+const Lagrange = function(x1, y1, x2, y2) {
   this.xs = [x1, x2];
   this.ys = [y1, y2];
   this.ws = [];
@@ -25,7 +23,7 @@ var Lagrange = function(x1, y1, x2, y2) {
  * Adds a new point to the polynomial. L(x) = y
  * @return {Number} The index of the added point. Used for changing the point. See changePoint.
  */
-Lagrange.prototype.addPoint = function(x, y) {
+const addPoint = function(x, y) {
   this.xs.push(x);
   this.ys.push(y);
   this._updateWeights();
@@ -34,7 +32,7 @@ Lagrange.prototype.addPoint = function(x, y) {
 /**
  * Recalculate barycentric weights.
  */
-Lagrange.prototype._updateWeights = function() {
+const _updateWeights = function() {
   var len = this.xs.length; // the number of points
   var weight;
   for (var j = 0; j < len; ++j) {
@@ -50,7 +48,7 @@ Lagrange.prototype._updateWeights = function() {
 /**
  * Calculate L(x)
  */
-Lagrange.prototype.valueOf = function(x) {
+const valueOf = function(x) {
   var a = 0;
   var b = 0;
   var c = 0;
@@ -66,7 +64,7 @@ Lagrange.prototype.valueOf = function(x) {
   return b / c;
 };
 
-Lagrange.prototype.addMultiPoints = function(arr){
+const addMultiPoints = function(arr){
   for(var i = 0, n = arr.length; i < n; i++){
     if(arr[i][0] !== 0 && arr[i][0] !== 1){
       this.addPoint(arr[i][1], arr[i][2]);
