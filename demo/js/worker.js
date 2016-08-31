@@ -1,11 +1,9 @@
 Worker = {};
 
-// get message from worker in enhanshot.js
 onmessage = function(e){
   postMessage(Worker.process(e.data))
 };
 
-// apply filter based on effect name
 Worker.process = function(imgd){
   var
     effect  = imgd.effects, // effect name
@@ -158,9 +156,7 @@ Worker.process = function(imgd){
       Worker.filter.enhance(pix);
       break;
   }
-
   imgd['pixels'].data = pix;
-
   return imgd;
 };
 

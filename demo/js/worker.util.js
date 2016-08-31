@@ -1,10 +1,5 @@
 Worker.util = {};
 
-/*==============================================
-Clone
-@see http://stackoverflow.com/questions/728360/most-elegant-way-to-clone-a-javascript-object
-==============================================*/
-
 Worker.util.clone = function(obj) {
     var copy;
 
@@ -39,11 +34,6 @@ Worker.util.clone = function(obj) {
     throw new Error("Unable to copy obj! Its type isn't supported.");
 };
 
-/*==============================================
-Look-Up-Table
-==============================================*/
-
-
 Worker.util.getUnit8Array = function(len) {
   return new Uint8Array(len);
 };
@@ -76,9 +66,6 @@ Worker.util.applyLUT = function(pix, lut) {
   }
 };
 
-/*==============================================
-Conversion between rgb & hsv
-==============================================*/
 // http://axonflux.com/handy-rgb-to-hsl-and-rgb-to-hsv-color-model-c
 Worker.util.rgb2hsl = function(r, g, b){
   var max, min, h, s, l, diff;
@@ -110,6 +97,7 @@ Worker.util.rgb2hsl = function(r, g, b){
   }
   return [h, s, l];
 };
+
 Worker.util.hsl2rgb = function(h, s, v){
   var r, g, b, q, p;
 
@@ -124,6 +112,7 @@ Worker.util.hsl2rgb = function(h, s, v){
   }
   return [r * 255, g * 255, b * 255];
 };
+
 Worker.util.hue2rgb = function(p, q, t){
   switch(t){
     case t < 0 :
@@ -171,9 +160,9 @@ Worker.util.rgb2hsv = function(r, g, b){
     }
     h /= 6;
   }
-
   return [h, s, v];
 };
+
 Worker.util.hsv2rgb = function(h, s, v){
   var r, g, b, i, f, p, q, t;
 
