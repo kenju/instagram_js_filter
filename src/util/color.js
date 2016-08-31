@@ -4,41 +4,7 @@
  * TODO: can be npm published
  */
 
-const clone = (obj) => {
-    let copy;
-
-    // Handle the 3 simple types, and null or undefined
-    if (null == obj || "object" != typeof obj) {
-        return obj;
-    }
-
-    // Handle Date
-    if (obj instanceof Date) {
-        copy = new Date();
-        copy.setTime(obj.getTime());
-        return copy;
-    }
-
-    // Handle Array
-    if (obj instanceof Array) {
-        copy = [];
-        for (let i = 0, len = obj.length; i < len; i++) {
-            copy[i] = clone(obj[i]);
-        }
-        return copy;
-    }
-
-    // Handle Object
-    if (obj instanceof Object) {
-        copy = {};
-        for (const attr in obj) {
-            if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
-        }
-        return copy;
-    }
-
-    throw new Error("Unable to copy obj! Its type isn't supported.");
-};
+const object = require('./object');
 
 module.exports.getUnit8Array = (len) => {
     return new Uint8Array(len);
@@ -54,7 +20,7 @@ module.exports.identityLUT = () => {
 
 module.exports.applyLUT = (pix, lut) => {
     let i;
-    const pix_result = clone(pix);
+    const pix_result = object.clone(pix);
     const red = lut.red;
     const green = lut.green;
     const blue = lut.blue;

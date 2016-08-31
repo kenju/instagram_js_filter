@@ -2,7 +2,8 @@
  * filter.js
  */
 
-const color = require('../color/color');
+const color = require('../util/color');
+const object = require('../util/object');
 
 module.exports.enhance = (imageData) => {
     const newImageData = imageData;
@@ -230,7 +231,7 @@ module.exports.brightnessContrast = (imageData, brightness, contrast) => {
 module.exports.horizontalFlip = (imageData, width, height) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    var pix_result = color.clone(pix); 
+    var pix_result = object.clone(pix);
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             let off = (i * width + j) * 4;
@@ -250,7 +251,7 @@ module.exports.horizontalFlip = (imageData, width, height) => {
 module.exports.verticalFlip = (imageData, width, height) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    var pix_result = color.clone(pix); 
+    var pix_result = object.clone(pix);
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             let off = (i * width + j) * 4;
@@ -270,7 +271,7 @@ module.exports.verticalFlip = (imageData, width, height) => {
 module.exports.doubleFlip = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    var pix_result = color.clone(pix); 
+    var pix_result = object.clone(pix);
     const len = pix.length;
     for (let i = 0; i < len; i += 4) {
         pix[i] = pix_result[len - i];
