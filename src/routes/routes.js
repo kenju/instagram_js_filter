@@ -2,6 +2,7 @@
  * routes.js
  */
 
+const winston = require('winston');
 const canvas = require('../canvas/canvas');
 
 const sendErrorResponse = (req, res, error, statusCode) => {
@@ -30,6 +31,7 @@ const getObjMap = (req) => {
 };
 
 const configRoutes = (app) => {
+    // TODO: validate
     app.all('/:obj_type/*?', (req, res, next) => {
         res.contentType('json');
         next();
@@ -38,23 +40,29 @@ const configRoutes = (app) => {
     app.get('/:obj_type', (req, res) => {
         const objType = getObjType(req);
         sendResponse(200, res, {
-            data: objType
+            endpoint: objType
         });
     });
 
     app.post('/:obj_type', (req, res) => {
         const objType = getObjType(req);
         const objMap = getObjMap(req);
-        // TODO: validate
         canvas.convert(objMap.type)
+            .then(convertedFilePath => {
+                const options = {
+                    dotfiles: 'deny',
+                    headers: {
+                        'x-instaimage-timestamp': Date.now(),
+                        'x-instaimage-sent': true
+                    }
+                };
+                return res.sendFile(convertedFilePath, options);
+            })
             .then(result => {
-                sendResponse(200, res, {
-                    endpoint: objType,
-                    data: objMap,
-                    result
-                });
+                winston.info(result);
             })
             .catch(err => {
+                // TODO: do not responsd err in production
                 sendErrorResponse(req, res, err, 500);
             });
     });

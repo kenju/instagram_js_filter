@@ -140,9 +140,7 @@ const convert = (type, url) => {
                     return saveCanvas(canvas, path.join('sample-node-processed-' + type + '.jpg'));
                 })
                 .then(savedPath => {
-                    resolve({
-                        result: savedPath + ' is saved.'
-                    });
+                    resolve(savedPath);
                 })
                 .catch(err => {
                     reject(err);

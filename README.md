@@ -2,6 +2,8 @@
 
 **Instagram JS Filter** is a JS libary for realising Instagram Filters on the web.
 
+> Instagram-Like Image Processing Web API
+
 ## Demo
 
 http://kenju.github.io/instagram_js_filter
