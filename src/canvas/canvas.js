@@ -113,7 +113,7 @@ const saveCanvas = (canvas, filename) => {
             if (error) {
                 reject(error);
             }
-            resolve(outPath + ' saved.');
+            resolve(outPath);
         })
     });
 };
@@ -139,8 +139,10 @@ const convert = (type, url) => {
                     context.putImageData(newImageData, 0, 0);
                     return saveCanvas(canvas, path.join('sample-node-processed-' + type + '.jpg'));
                 })
-                .then(result => {
-                    resolve(result);
+                .then(savedPath => {
+                    resolve({
+                        result: savedPath + ' is saved.'
+                    });
                 })
                 .catch(err => {
                     reject(err);

@@ -49,7 +49,7 @@ const configRoutes = (app) => {
         canvas.convert(objMap.type)
             .then(result => {
                 sendResponse(200, res, {
-                    type: objType,
+                    endpoint: objType,
                     data: objMap,
                     result
                 });
