@@ -27,3 +27,6 @@ dist/
 
 # Idea
 .idea
+
+# doc
+doc/index.html
