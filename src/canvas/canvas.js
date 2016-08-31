@@ -79,19 +79,21 @@ const filterWithType = (type, imageData) => {
          case 'kelvin':
          return filter.kelvin(pix);
          */
+        case 'enhance':
+            return filter.enhance(imageData);
         case 'grayscale':
             return filter.grayscale(imageData);
+        case 'sepia':
+            return filter.sepia(imageData);
+        case 'luminance':
+            return filter.luminance(imageData);
+        case 'opacity':
+            return filter.opacity(imageData, 0.5);
+        case 'brighten':
+            return filter.brighten(imageData, 50);
+        case 'darken':
+            return filter.darken(imageData, 50);
         /*
-         case 'sepia':
-         return filter.sepia(pix);
-         case 'luminance':
-         return filter.luminance(pix);
-         case 'brighten':
-         return filter.brighten(pix, 50);
-         case 'darken':
-         return filter.darken(pix, 50);
-         case 'opacity':
-         return filter.opacity(pix, 0.5);
          case 'threshold':
          return filter.threshold(pix);
          case 'negaposi':
@@ -140,7 +142,7 @@ const convert = (type, url) => {
             filterWithType(type, imageData)
                 .then(newImageData => {
                     context.putImageData(newImageData, 0, 0);
-                    return saveCanvas(canvas, 'sample-node-processed.jpg');
+                    return saveCanvas(canvas, path.join('sample-node-processed-' + type + '.jpg'));
                 })
                 .then(result => {
                     resolve(result);

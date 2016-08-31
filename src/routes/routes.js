@@ -45,8 +45,8 @@ const configRoutes = (app) => {
     app.post('/:obj_type', (req, res) => {
         const objType = getObjType(req);
         const objMap = getObjMap(req);
-
-        canvas.convert('grayscale')
+        // TODO: validate
+        canvas.convert(objMap.type)
             .then(result => {
                 sendResponse(200, res, {
                     type: objType,

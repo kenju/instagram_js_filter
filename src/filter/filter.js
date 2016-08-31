@@ -1,84 +1,129 @@
-const enhance = (pix) => {
-    for (let i = 0, n = pix.length; i < n; i += 4) {
+module.exports.enhance = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
+    const n = pix.length;
+    for (let i = 0; i < n; i += 4) {
         pix[i] = pix[i] * 1.24; // red
         pix[i + 1] = pix[i + 1] * 1.33; // green
         pix[i + 2] = pix[i + 2] * 1.21; // blue
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
 module.exports.grayscale = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
+    const n = pix.length;
+    for (let i = 0; i < n; i += 4) {
+        const red = pix[i];
+        const green = pix[i + 1];
+        const blue = pix[i + 2];
+        const alpha = pix[i + 3];
+        // calculated from NTSC
+        var grayscale = red * .29 + green * .58 + blue * .11;
+        pix[i] = grayscale;
+        pix[i + 1] = grayscale;
+        pix[i + 2] = grayscale;
+    }
+    newImageData.data = pix;
     return new Promise(resolve => {
-        const n = pix.length;
-        for (let i = 0; i < n; i += 4) {
-            const red = pix[i];
-            const green = pix[i + 1];
-            const blue = pix[i + 2];
-            const alpha = pix[i + 3];
-            // calculated from NTSC
-            var grayscale = red * .29 + green * .58 + blue * .11;
-            pix[i] = grayscale;
-            pix[i + 1] = grayscale;
-            pix[i + 2] = grayscale;
-        }
-        newImageData.data = pix;
         resolve(newImageData);
     });
 };
 
-const sepia = (pix) => {
+module.exports.sepia = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
         pix[i] = pix[i] * 1.07;
         pix[i + 1] = pix[i + 1] * .74;
         pix[i + 2] = pix[i + 2] * .43;
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-//@see http://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color
-const luminance = (pix) => {
+module.exports.luminance = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
+        /*
+         * @see http://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color
+         */
         var luminance = pix[i] * 0.2126 + pix[i + 1] * 0.7152 + pix[i + 2] * 0.0722;
         pix[i] = luminance;
         pix[i + 1] = luminance;
         pix[i + 2] = luminance;
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const negaposi = (pix) => {
+module.exports.negaposi = (imageData) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
         pix[i] = 255 - pix[i];
         pix[i + 1] = 255 - pix[i + 1];
         pix[i + 2] = 255 - pix[i + 2];
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const opacity = (pix, value) => {
+module.exports.opacity = (imageData, value) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
         pix[i + 3] = pix[i + 3] * value;
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const brighten = (pix, value) => {
+module.exports.brighten = (imageData, value) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
         pix[i] += value;
         pix[i + 1] += value;
         pix[i + 2] += value;
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
-const darken = (pix, value) => {
+module.exports.darken = (imageData, value) => {
+    const newImageData = imageData;
+    const pix = imageData.data;
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
         pix[i] -= value;
         pix[i + 1] -= value;
         pix[i + 2] -= value;
     }
+    newImageData.data = pix;
+    return new Promise(resolve => {
+        resolve(newImageData);
+    });
 };
 
 const threshold = function (pix) {
