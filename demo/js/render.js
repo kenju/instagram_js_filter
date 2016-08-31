@@ -148,14 +148,55 @@ var MainArticleItem = React.createClass({
         var typeNameLowerCase = this.props.type.toLowerCase();
         return (
             <div>
-                <h2 id={"main_article_h2_"}
-                    className="main-article-h2">
-                    {typeNameLowerCase}
-                </h2>
-                <img className={"main-article-img instagram-css-filter-"}
-                     data-effect={typeNameLowerCase}
-                     src={"img/sample.jpg"}/>
+                <MainArticleItemHeader type={typeNameLowerCase}/>
+                <MainArticleItemImage type={typeNameLowerCase}/>
             </div>
+        )
+    }
+});
+
+var MainArticleItemHeader = React.createClass({
+    render: function () {
+        return (
+            <h2 id={"main_article_h2_"}
+                className="main-article-h2">
+                {this.props.type}
+            </h2>
+        )
+    }
+});
+
+var MainArticleItemImage = React.createClass({
+    loadImageFile: function () {
+        const typeName = this.props.type;
+        $.ajax({
+            url: 'http://localhost:3030/process',
+            dataType: 'json',
+            type: 'POST',
+            data: {
+                type: typeName
+            },
+            success: function (data) {
+                // TODO
+                this.setState({data: data})
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error(err.toString());
+            }.bind(this)
+        });
+    },
+    getInitialState: function () {
+        return {data: []}
+    },
+    componentDidMount: function () {
+        this.loadImageFile();
+    },
+    render: function () {
+        const typeName = this.props.type;
+        return (
+            <img className={"main-article-img instagram-css-filter-"}
+                 data-effect={typeName}
+                 src={"img/sample.jpg"}/>
         )
     }
 });
