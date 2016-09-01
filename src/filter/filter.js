@@ -2,7 +2,9 @@
  * filter.js
  */
 
-const color = require('../color/color');
+const Lagrange = require('../computation/lagrange');
+const color = require('../util/color');
+const object = require('../util/object');
 
 module.exports.enhance = (imageData) => {
     const newImageData = imageData;
@@ -167,9 +169,9 @@ module.exports.hueRotate = (imageData, deg) => {
         let hsv;
         let rgb;
         // change from rgb to hsv
-        hsv = Worker.util.rgb2hsv(pix[i], pix[i + 1], pix[i + 2]);
+        hsv = color.rgb2hsv(pix[i], pix[i + 1], pix[i + 2]);
         hsv[0] = hsv[0] * deg / 360; // hue is from 0 to 360
-        rgb = Worker.util.hsv2rgb(hsv[0], hsv[1], hsv[2]);
+        rgb = color.hsv2rgb(hsv[0], hsv[1], hsv[2]);
         pix[i] = rgb[0];
         pix[i + 1] = rgb[1];
         pix[i + 2] = rgb[2];
@@ -186,10 +188,10 @@ module.exports.saturate = (imageData, num) => {
     for (let i = 0, n = pix.length; i < n; i += 4) {
         let hsv;
         let rgb;
-        hsv = Worker.util.rgb2hsv(pix[i], pix[i + 1], pix[i + 2]);
+        hsv = color.rgb2hsv(pix[i], pix[i + 1], pix[i + 2]);
         //TODO: change saturation logic could be refactored
         hsv[1] = hsv[1] * num / 100;
-        rgb = Worker.util.hsv2rgb(hsv[0], hsv[1], hsv[2]);
+        rgb = color.hsv2rgb(hsv[0], hsv[1], hsv[2]);
         pix[i] = rgb[0];
         pix[i + 1] = rgb[1];
         pix[i + 2] = rgb[2];
@@ -230,7 +232,7 @@ module.exports.brightnessContrast = (imageData, brightness, contrast) => {
 module.exports.horizontalFlip = (imageData, width, height) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    var pix_result = color.clone(pix); 
+    var pix_result = object.clone(pix);
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             let off = (i * width + j) * 4;
@@ -250,7 +252,7 @@ module.exports.horizontalFlip = (imageData, width, height) => {
 module.exports.verticalFlip = (imageData, width, height) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    var pix_result = color.clone(pix); 
+    var pix_result = object.clone(pix);
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             let off = (i * width + j) * 4;
@@ -270,7 +272,7 @@ module.exports.verticalFlip = (imageData, width, height) => {
 module.exports.doubleFlip = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    var pix_result = color.clone(pix); 
+    var pix_result = object.clone(pix);
     const len = pix.length;
     for (let i = 0; i < len; i += 4) {
         pix[i] = pix_result[len - i];

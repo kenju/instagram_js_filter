@@ -7,20 +7,6 @@ const Canvas = require('canvas');
 const Image = Canvas.Image;
 const filter = require('../filter/filter');
 
-const saveCanvas = (canvas, filename) => {
-    const canvasBase64 = canvas.toDataURL().split(',')[1];
-    const buffer = new Buffer(canvasBase64, 'base64');
-    const outPath = path.join(__dirname + '/../../dist/img/' + filename);
-    return new Promise((resolve, reject) => {
-        fs.writeFile(outPath, buffer, error => {
-            if (error) {
-                reject(error);
-            }
-            resolve(outPath + ' saved.');
-        })
-    });
-};
-
 const filterWithType = (type, imageData) => {
     switch (type) {
         case 'lark':
@@ -118,6 +104,24 @@ const filterWithType = (type, imageData) => {
     }
 };
 
+const getBase64 = (canvas) => {
+    return canvas.toDataURL().split(',')[1];
+};
+
+const saveCanvas = (canvas, filename) => {
+    const canvasBase64 = getBase64(canvas);
+    const buffer = new Buffer(canvasBase64, 'base64');
+    const outPath = path.join(__dirname + '/../../dist/img/' + filename);
+    return new Promise((resolve, reject) => {
+        fs.writeFile(outPath, buffer, error => {
+            if (error) {
+                reject(error);
+            }
+            resolve(outPath);
+        })
+    });
+};
+
 const convert = (type, url) => {
     return new Promise((resolve, reject) => {
         const imagePath = url ? url : path.join(__dirname + '/../../demo/img/sample.jpg');
@@ -132,15 +136,15 @@ const convert = (type, url) => {
             const canvas = new Canvas(image.width, image.height);
             const context = canvas.getContext('2d');
             context.drawImage(image, 0, 0, image.width, image.height);
-
             const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+
             filterWithType(type, imageData)
                 .then(newImageData => {
                     context.putImageData(newImageData, 0, 0);
-                    return saveCanvas(canvas, path.join('sample-node-processed-' + type + '.jpg'));
+                    return getBase64(canvas);
                 })
-                .then(result => {
-                    resolve(result);
+                .then(savedPath => {
+                    resolve(savedPath);
                 })
                 .catch(err => {
                     reject(err);
