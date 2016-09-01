@@ -62,6 +62,16 @@ The following table describes the properties of the `options` object.
 |:---------|:-----------|:--------------|:------------|
 | out      | String     | 'base64'      | An output of `filter()`.|
 
+##### `out`
+
+Supported values:
+
+* 'base64'
+* 'jpg'
+* 'jpeg'
+* 'png'
+* 'gif'
+
 ## B. Client-side
 
 ### Downloads JS files
