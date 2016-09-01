@@ -104,8 +104,12 @@ const filterWithType = (type, imageData) => {
     }
 };
 
+const getBase64 = (canvas) => {
+    return canvas.toDataURL().split(',')[1];
+};
+
 const saveCanvas = (canvas, filename) => {
-    const canvasBase64 = canvas.toDataURL().split(',')[1];
+    const canvasBase64 = getBase64(canvas);
     const buffer = new Buffer(canvasBase64, 'base64');
     const outPath = path.join(__dirname + '/../../dist/img/' + filename);
     return new Promise((resolve, reject) => {
@@ -137,7 +141,7 @@ const convert = (type, url) => {
             filterWithType(type, imageData)
                 .then(newImageData => {
                     context.putImageData(newImageData, 0, 0);
-                    return saveCanvas(canvas, path.join('sample-node-processed-' + type + '.jpg'));
+                    return getBase64(canvas);
                 })
                 .then(savedPath => {
                     resolve(savedPath);

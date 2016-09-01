@@ -22,6 +22,17 @@ const sendResponse = (status, res, data) => {
         .json(data);
 };
 
+const sendFile = (res, convertedFilePath) => {
+    const options = {
+        dotfiles: 'deny',
+        headers: {
+            'x-instaimage-timestamp': Date.now(),
+            'x-instaimage-sent': true
+        }
+    };
+    return res.sendFile(convertedFilePath, options);
+};
+
 const getObjType = (req) => {
     return req.params.obj_type;
 };
@@ -48,15 +59,13 @@ const configRoutes = (app) => {
         const objType = getObjType(req);
         const objMap = getObjMap(req);
         canvas.convert(objMap.type)
-            .then(convertedFilePath => {
-                const options = {
-                    dotfiles: 'deny',
-                    headers: {
-                        'x-instaimage-timestamp': Date.now(),
-                        'x-instaimage-sent': true
+            .then(base64 => {
+                sendResponse(200, res, {
+                    endpoint: objType,
+                    result: {
+                        base64
                     }
-                };
-                return res.sendFile(convertedFilePath, options);
+                });
             })
             .then(result => {
                 winston.info(result);
