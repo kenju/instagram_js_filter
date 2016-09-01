@@ -14,9 +14,7 @@ module.exports.enhance = (imageData) => {
         pix[i + 2] = pix[i + 2] * 1.21; // blue
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.grayscale = (imageData) => {
     const newImageData = imageData;
@@ -32,9 +30,7 @@ module.exports.grayscale = (imageData) => {
         pix[i + 2] = grayscale;
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.sepia = (imageData) => {
     const newImageData = imageData;
@@ -46,9 +42,7 @@ module.exports.sepia = (imageData) => {
         pix[i + 2] = pix[i + 2] * .43;
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.luminance = (imageData) => {
     const newImageData = imageData;
@@ -64,9 +58,7 @@ module.exports.luminance = (imageData) => {
         pix[i + 2] = luminance;
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.negaposi = (imageData) => {
     const newImageData = imageData;
@@ -78,9 +70,7 @@ module.exports.negaposi = (imageData) => {
         pix[i + 2] = 255 - pix[i + 2];
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.opacity = (imageData, value) => {
     const newImageData = imageData;
@@ -90,9 +80,7 @@ module.exports.opacity = (imageData, value) => {
         pix[i + 3] = pix[i + 3] * value;
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.brighten = (imageData, value) => {
     const newImageData = imageData;
@@ -104,9 +92,7 @@ module.exports.brighten = (imageData, value) => {
         pix[i + 2] += value;
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.darken = (imageData, value) => {
     const newImageData = imageData;
@@ -118,9 +104,7 @@ module.exports.darken = (imageData, value) => {
         pix[i + 2] -= value;
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.threshold = (imageData) => {
     const newImageData = imageData;
@@ -137,9 +121,7 @@ module.exports.threshold = (imageData) => {
         pix[i + 2] = new_value;
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.hueRotate = (imageData, deg) => {
     const newImageData = imageData;
@@ -154,9 +136,7 @@ module.exports.hueRotate = (imageData, deg) => {
         pix[i + 2] = rgb[2];
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.saturate = (imageData, num) => {
     const newImageData = imageData;
@@ -170,9 +150,7 @@ module.exports.saturate = (imageData, num) => {
         pix[i + 2] = rgb[2];
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.brightnessContrast = (imageData, brightness, contrast) => {
     const newImageData = imageData;
@@ -196,9 +174,7 @@ module.exports.brightnessContrast = (imageData, brightness, contrast) => {
             alpha: color.identityLUT()
         }
     );
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.horizontalFlip = (imageData) => {
     const newImageData = imageData;
@@ -217,9 +193,7 @@ module.exports.horizontalFlip = (imageData) => {
         }
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.verticalFlip = (imageData) => {
     const newImageData = imageData;
@@ -238,9 +212,7 @@ module.exports.verticalFlip = (imageData) => {
         }
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.doubleFlip = (imageData) => {
     const newImageData = imageData;
@@ -254,9 +226,7 @@ module.exports.doubleFlip = (imageData) => {
         pix[i + 3] = pix_result[len - i + 3];
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.horizontalMirror = (imageData) => {
     const newImageData = imageData;
@@ -274,9 +244,7 @@ module.exports.horizontalMirror = (imageData) => {
         }
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.verticalMirror = (imageData) => {
     const newImageData = imageData;
@@ -294,9 +262,7 @@ module.exports.verticalMirror = (imageData) => {
         }
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.XYMirror = (imageData) => {
     const newImageData = imageData;
@@ -309,9 +275,7 @@ module.exports.XYMirror = (imageData) => {
         pix[i + 3] = pix[len - i + 3];
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.lark = (imageData) => {
     const newImageData = imageData;
@@ -353,9 +317,7 @@ module.exports.lark = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.reyes = (imageData) => {
     const newImageData = imageData;
@@ -397,9 +359,7 @@ module.exports.reyes = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.juno = (imageData) => {
     const newImageData = imageData;
@@ -441,9 +401,7 @@ module.exports.juno = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.slumber = (imageData) => {
     const newImageData = imageData;
@@ -485,9 +443,7 @@ module.exports.slumber = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.crema = (imageData) => {
     const newImageData = imageData;
@@ -525,9 +481,7 @@ module.exports.crema = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.ludwig = (imageData) => {
     const newImageData = imageData;
@@ -565,9 +519,7 @@ module.exports.ludwig = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.aden = (imageData) => {
     const newImageData = imageData;
@@ -605,9 +557,7 @@ module.exports.aden = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.perpetua = (imageData) => {
     const newImageData = imageData;
@@ -645,9 +595,7 @@ module.exports.perpetua = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.amaro = (imageData) => {
     const newImageData = imageData;
@@ -689,9 +637,7 @@ module.exports.amaro = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.mayfair = (imageData) => {
     const newImageData = imageData;
@@ -732,9 +678,7 @@ module.exports.mayfair = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.rise = (imageData) => {
     const newImageData = imageData;
@@ -777,9 +721,7 @@ module.exports.rise = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.hudson = (imageData) => {
     const newImageData = imageData;
@@ -822,9 +764,7 @@ module.exports.hudson = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.valencia = (imageData) => {
     const newImageData = imageData;
@@ -867,9 +807,7 @@ module.exports.valencia = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.xpro2 = (imageData) => {
     const newImageData = imageData;
@@ -912,9 +850,7 @@ module.exports.xpro2 = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.sierra = (imageData) => {
     const newImageData = imageData;
@@ -958,9 +894,7 @@ module.exports.sierra = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.willow = (imageData) => {
     const newImageData = imageData;
@@ -998,9 +932,7 @@ module.exports.willow = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.lofi = (imageData) => {
     const newImageData = imageData;
@@ -1044,9 +976,7 @@ module.exports.lofi = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.earlybird = (imageData) => {
     const newImageData = imageData;
@@ -1089,9 +1019,7 @@ module.exports.earlybird = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.brannan = (imageData) => {
     const newImageData = imageData;
@@ -1130,9 +1058,7 @@ module.exports.brannan = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.inkwell = (imageData) => {
     const newImageData = imageData;
@@ -1145,9 +1071,7 @@ module.exports.inkwell = (imageData) => {
         pix[i + 2] = val;
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.hefe = (imageData) => {
     const newImageData = imageData;
@@ -1183,9 +1107,7 @@ module.exports.hefe = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.nashville = (imageData) => {
     const newImageData = imageData;
@@ -1226,9 +1148,7 @@ module.exports.nashville = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.sutro = (imageData) => {
     const newImageData = imageData;
@@ -1267,9 +1187,7 @@ module.exports.sutro = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.toaster = (imageData) => {
     const newImageData = imageData;
@@ -1308,9 +1226,7 @@ module.exports.toaster = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.walden = (imageData) => {
     const newImageData = imageData;
@@ -1350,9 +1266,7 @@ module.exports.walden = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.nineteenSeventySeven = (imageData) => {
     const newImageData = imageData;
@@ -1392,9 +1306,7 @@ module.exports.nineteenSeventySeven = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
 module.exports.kelvin = (imageData) => {
     const newImageData = imageData;
@@ -1433,7 +1345,5 @@ module.exports.kelvin = (imageData) => {
         pix[i + 2] = lag_g.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
-    return new Promise(resolve => {
-        resolve(newImageData);
-    });
+    return newImageData;
 };
