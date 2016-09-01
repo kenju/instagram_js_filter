@@ -7,22 +7,8 @@ const Canvas = require('canvas');
 const Image = Canvas.Image;
 const filter = require('../filter/filter');
 
-const saveCanvas = (canvas, filename) => {
-    const canvasBase64 = canvas.toDataURL().split(',')[1];
-    const buffer = new Buffer(canvasBase64, 'base64');
-    const outPath = path.join(__dirname + '/../../dist/img/' + filename);
-    return new Promise((resolve, reject) => {
-        fs.writeFile(outPath, buffer, error => {
-            if (error) {
-                reject(error);
-            }
-            resolve(outPath + ' saved.');
-        })
-    });
-};
-
 const filterWithType = (type, imageData) => {
-    switch (type) {
+    switch (type.toLowerCase()) {
         case 'lark':
             return filter.lark(imageData);
         case 'reyes':
@@ -73,7 +59,8 @@ const filterWithType = (type, imageData) => {
             return filter.toaster(imageData);
         case 'walden':
             return filter.walden(imageData);
-        case 'nineteenSeventySeven':
+        case 'nineteenseventyseven':
+        case '1977':
             return filter.nineteenSeventySeven(imageData);
         case 'kelvin':
             return filter.kelvin(imageData);
@@ -95,27 +82,45 @@ const filterWithType = (type, imageData) => {
             return filter.threshold(imageData);
         case 'negaposi':
             return filter.negaposi(imageData);
-        case 'brightnessContrast':
+        case 'brightnesscontrast':
             return filter.brightnessContrast(imageData, -0.08, 1.5);
         case 'huerotate':
             return filter.hueRotate(imageData, 45);
         case 'saturate':
             return filter.saturate(imageData, 20);
-        case 'horizontalFlip':
-            return filter.horizontalFlip(imageData, width, height);
-        case 'verticalFlip':
-            return filter.verticalFlip(imageData, width, height);
-        case 'doubleFlip':
+        case 'horizontalflip':
+            return filter.horizontalFlip(imageData);
+        case 'verticalflip':
+            return filter.verticalFlip(imageData);
+        case 'doubleflip':
             return filter.doubleFlip(imageData);
-        case 'horizontalMirror':
-            return filter.horizontalMirror(imageData, width, height);
-        case 'verticalMirror':
-            return filter.verticalMirror(imageData, width, height);
-        case 'XYMirror':
+        case 'horizontalmirror':
+            return filter.horizontalMirror(imageData);
+        case 'verticalmirror':
+            return filter.verticalMirror(imageData);
+        case 'xymirror':
             return filter.XYMirror(imageData);
         default:
             return filter.grayscale(imageData);
     }
+};
+
+const getBase64 = (canvas) => {
+    return canvas.toDataURL().split(',')[1];
+};
+
+const saveCanvas = (canvas, filename) => {
+    const canvasBase64 = getBase64(canvas);
+    const buffer = new Buffer(canvasBase64, 'base64');
+    const outPath = path.join(__dirname + '/../../dist/img/' + filename);
+    return new Promise((resolve, reject) => {
+        fs.writeFile(outPath, buffer, error => {
+            if (error) {
+                reject(error);
+            }
+            resolve(outPath);
+        })
+    });
 };
 
 const convert = (type, url) => {
@@ -132,15 +137,15 @@ const convert = (type, url) => {
             const canvas = new Canvas(image.width, image.height);
             const context = canvas.getContext('2d');
             context.drawImage(image, 0, 0, image.width, image.height);
-
             const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+
             filterWithType(type, imageData)
                 .then(newImageData => {
                     context.putImageData(newImageData, 0, 0);
-                    return saveCanvas(canvas, path.join('sample-node-processed-' + type + '.jpg'));
+                    return getBase64(canvas);
                 })
-                .then(result => {
-                    resolve(result);
+                .then(savedPath => {
+                    resolve(savedPath);
                 })
                 .catch(err => {
                     reject(err);

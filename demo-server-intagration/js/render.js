@@ -168,12 +168,36 @@ var MainArticleItemHeader = React.createClass({
 });
 
 var MainArticleItemImage = React.createClass({
+    loadImageFile: function () {
+        const typeName = this.props.type;
+        $.ajax({
+            url: 'http://localhost:3030/process',
+            dataType: 'json',
+            type: 'POST',
+            data: {
+                type: typeName
+            },
+            success: function (data) {
+                this.setState({base64: data.result.base64})
+            }.bind(this),
+            error: function (xhr, status, err) {
+                // TODO
+                console.error(err.toString());
+            }.bind(this)
+        });
+    },
+    getInitialState: function () {
+        return {base64: ''}
+    },
+    componentDidMount: function () {
+        this.loadImageFile();
+    },
     render: function () {
         const typeName = this.props.type;
         return (
             <img className={"main-article-img instagram-css-filter-"}
                  data-effect={typeName}
-                 src={"img/sample.jpg"}/>
+                 src={'data:image/png;base64,' + this.state.base64}/>
         )
     }
 });

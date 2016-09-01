@@ -7,6 +7,7 @@ const winston = require('winston');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
+const corser = require('corser');
 
 const routes = require('../routes/routes');
 
@@ -20,6 +21,7 @@ const setupServer = (app) => {
         // TODO:
         app.use(morgan('dev'));
         app.use(helmet());
+        app.use(corser.create());
         resolve(app);
     });
 };
