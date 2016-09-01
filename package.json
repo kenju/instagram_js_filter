@@ -1,8 +1,8 @@
 {
   "name": "instagram_js_filter",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Filter for realizing Instagram filter effects",
-  "main": "index.js",
+  "main": "src/filter/filter.js",
   "scripts": {
     "start": "node src/index.js",
     "lint": "eslint .",

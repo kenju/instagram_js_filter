@@ -1,11 +1,9 @@
 /**
  * filter.js
  */
-
 const Lagrange = require('../computation/lagrange');
 const color = require('../util/color');
 const object = require('../util/object');
-
 module.exports.enhance = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -20,7 +18,6 @@ module.exports.enhance = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.grayscale = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -39,7 +36,6 @@ module.exports.grayscale = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.sepia = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -54,7 +50,6 @@ module.exports.sepia = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.luminance = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -73,7 +68,6 @@ module.exports.luminance = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.negaposi = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -88,7 +82,6 @@ module.exports.negaposi = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.opacity = (imageData, value) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -101,7 +94,6 @@ module.exports.opacity = (imageData, value) => {
         resolve(newImageData);
     });
 };
-
 module.exports.brighten = (imageData, value) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -116,7 +108,6 @@ module.exports.brighten = (imageData, value) => {
         resolve(newImageData);
     });
 };
-
 module.exports.darken = (imageData, value) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -131,7 +122,6 @@ module.exports.darken = (imageData, value) => {
         resolve(newImageData);
     });
 };
-
 module.exports.threshold = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -151,7 +141,6 @@ module.exports.threshold = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.hueRotate = (imageData, deg) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -169,7 +158,6 @@ module.exports.hueRotate = (imageData, deg) => {
         resolve(newImageData);
     });
 };
-
 module.exports.saturate = (imageData, num) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -186,7 +174,6 @@ module.exports.saturate = (imageData, num) => {
         resolve(newImageData);
     });
 };
-
 module.exports.brightnessContrast = (imageData, brightness, contrast) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -213,7 +200,6 @@ module.exports.brightnessContrast = (imageData, brightness, contrast) => {
         resolve(newImageData);
     });
 };
-
 module.exports.horizontalFlip = (imageData) => {
     const newImageData = imageData;
     const width = imageData.width;
@@ -235,7 +221,6 @@ module.exports.horizontalFlip = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.verticalFlip = (imageData) => {
     const newImageData = imageData;
     const width = imageData.width;
@@ -257,7 +242,6 @@ module.exports.verticalFlip = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.doubleFlip = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -274,7 +258,6 @@ module.exports.doubleFlip = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.horizontalMirror = (imageData) => {
     const newImageData = imageData;
     const width = imageData.width;
@@ -295,7 +278,6 @@ module.exports.horizontalMirror = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.verticalMirror = (imageData) => {
     const newImageData = imageData;
     const width = imageData.width;
@@ -316,7 +298,6 @@ module.exports.verticalMirror = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.XYMirror = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -332,7 +313,6 @@ module.exports.XYMirror = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.lark = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -377,7 +357,6 @@ module.exports.lark = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.reyes = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -422,7 +401,6 @@ module.exports.reyes = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.juno = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -467,7 +445,6 @@ module.exports.juno = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.slumber = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -512,7 +489,6 @@ module.exports.slumber = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.crema = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -553,7 +529,6 @@ module.exports.crema = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.ludwig = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -594,14 +569,12 @@ module.exports.ludwig = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.aden = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 20],
         [1, 50, 65],
@@ -623,11 +596,9 @@ module.exports.aden = (imageData) => {
         [3, 180, 185],
         [4, 255, 235]
     ];
-
     lag_r.addMultiPoints(r);
     lag_g.addMultiPoints(g);
     lag_b.addMultiPoints(b);
-
     for (let i = 0, n = pix.length; i < n; i += 4) {
         pix[i] = lag_r.valueOf(pix[i]);
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
@@ -638,14 +609,12 @@ module.exports.aden = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.perpetua = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 35],
         [1, 50, 65],
@@ -667,11 +636,9 @@ module.exports.perpetua = (imageData) => {
         [3, 180, 185],
         [4, 255, 255]
     ];
-
     lag_r.addMultiPoints(r);
     lag_g.addMultiPoints(g);
     lag_b.addMultiPoints(b);
-
     for (let i = 0, n = pix.length; i < n; i += 4) {
         pix[i] = lag_r.valueOf(pix[i]);
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
@@ -682,14 +649,12 @@ module.exports.perpetua = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.amaro = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 19],
         [1, 30, 62],
@@ -715,11 +680,9 @@ module.exports.amaro = (imageData) => {
         [5, 240, 235],
         [6, 255, 245]
     ];
-
     lag_r.addMultiPoints(r);
     lag_g.addMultiPoints(g);
     lag_b.addMultiPoints(b);
-
     for (let i = 0, n = pix.length; i < n; i += 4) {
         pix[i] = lag_r.valueOf(pix[i]);
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
@@ -730,14 +693,12 @@ module.exports.amaro = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.mayfair = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 30],
         [1, 85, 110],
@@ -762,11 +723,9 @@ module.exports.mayfair = (imageData) => {
         [5, 235, 230],
         [6, 255, 225]
     ];
-
     lag_r.addMultiPoints(r);
     lag_g.addMultiPoints(g);
     lag_b.addMultiPoints(b);
-
     for (let i = 0, n = pix.length; i < n; i += 4) {
         pix[i] = lag_r.valueOf(pix[i]);
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
@@ -777,14 +736,12 @@ module.exports.mayfair = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.rise = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 25],
         [1, 30, 70],
@@ -811,11 +768,9 @@ module.exports.rise = (imageData) => {
         [5, 220, 214],
         [6, 255, 255]
     ];
-
     lag_r.addMultiPoints(r);
     lag_g.addMultiPoints(g);
     lag_b.addMultiPoints(b);
-
     for (let i = 0, n = pix.length; i < n; i += 4) {
         pix[i] = lag_r.valueOf(pix[i]);
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
@@ -826,14 +781,12 @@ module.exports.rise = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.hudson = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 35],
         [1, 42, 68],
@@ -873,14 +826,12 @@ module.exports.hudson = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.valencia = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 20],
         [1, 50, 80],
@@ -920,14 +871,12 @@ module.exports.valencia = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.xpro2 = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 0],
         [1, 42, 28],
@@ -967,14 +916,12 @@ module.exports.xpro2 = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.sierra = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 10],
         [1, 48, 88],
@@ -1015,14 +962,12 @@ module.exports.sierra = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.willow = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 30],
         [1, 68, 105],
@@ -1057,14 +1002,12 @@ module.exports.willow = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.lofi = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 0],
         [1, 40, 20],
@@ -1092,11 +1035,9 @@ module.exports.lofi = (imageData) => {
         [5, 190, 220],
         [6, 255, 255]
     ];
-
     lag_r.addMultiPoints(r);
     lag_g.addMultiPoints(g);
     lag_b.addMultiPoints(b);
-
     for (let i = 0, n = pix.length; i < n; i += 4) {
         pix[i] = lag_r.valueOf(pix[i]);
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
@@ -1107,14 +1048,12 @@ module.exports.lofi = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.earlybird = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 25],
         [1, 45, 80],
@@ -1141,11 +1080,9 @@ module.exports.earlybird = (imageData) => {
         [5, 212, 195],
         [6, 255, 210]
     ];
-
     lag_r.addMultiPoints(r);
     lag_g.addMultiPoints(g);
     lag_b.addMultiPoints(b);
-
     for (let i = 0, n = pix.length; i < n; i += 4) {
         pix[i] = lag_r.valueOf(pix[i]);
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
@@ -1156,14 +1093,12 @@ module.exports.earlybird = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.brannan = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 35],
         [1, 40, 50],
@@ -1186,11 +1121,9 @@ module.exports.brannan = (imageData) => {
         [4, 225, 230],
         [5, 255, 232]
     ];
-
     lag_r.addMultiPoints(r);
     lag_g.addMultiPoints(g);
     lag_b.addMultiPoints(b);
-
     for (let i = 0, n = pix.length; i < n; i += 4) {
         pix[i] = lag_r.valueOf(pix[i]);
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
@@ -1201,7 +1134,6 @@ module.exports.brannan = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.inkwell = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
@@ -1217,14 +1149,12 @@ module.exports.inkwell = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.hefe = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 0],
         [1, 60, 55],
@@ -1257,14 +1187,12 @@ module.exports.hefe = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.nashville = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 0],
         [1, 30, 5],
@@ -1302,14 +1230,12 @@ module.exports.nashville = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.sutro = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 0],
         [1, 40, 35],
@@ -1345,14 +1271,12 @@ module.exports.sutro = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.toaster = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 120],
         [1, 50, 160],
@@ -1388,14 +1312,12 @@ module.exports.toaster = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.walden = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 12],
         [1, 40, 44],
@@ -1432,14 +1354,12 @@ module.exports.walden = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.nineteenSeventySeven = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 75],
         [1, 75, 125],
@@ -1476,14 +1396,12 @@ module.exports.nineteenSeventySeven = (imageData) => {
         resolve(newImageData);
     });
 };
-
 module.exports.kelvin = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 0],
         [1, 60, 102],
