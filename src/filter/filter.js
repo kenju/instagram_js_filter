@@ -29,9 +29,7 @@ module.exports.grayscale = (imageData) => {
         const red = pix[i];
         const green = pix[i + 1];
         const blue = pix[i + 2];
-        const alpha = pix[i + 3];
-        // calculated from NTSC
-        var grayscale = red * .29 + green * .58 + blue * .11;
+        var grayscale = color.convertNTSC(red, green, blue);
         pix[i] = grayscale;
         pix[i + 1] = grayscale;
         pix[i + 2] = grayscale;
@@ -62,10 +60,10 @@ module.exports.luminance = (imageData) => {
     const pix = imageData.data;
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
-        /*
-         * @see http://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color
-         */
-        var luminance = pix[i] * 0.2126 + pix[i + 1] * 0.7152 + pix[i + 2] * 0.0722;
+        const red = pix[i];
+        const green = pix[i + 1];
+        const blue = pix[i + 2];
+        var luminance = color.convertLuminanceLinearRGB(red, green, blue);
         pix[i] = luminance;
         pix[i + 1] = luminance;
         pix[i + 2] = luminance;
@@ -137,21 +135,13 @@ module.exports.darken = (imageData, value) => {
 module.exports.threshold = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    let red;
-    let green;
-    let blue;
-    let value;
-    let new_value;
-    let threshold;
     const len = pix.length;
     for (let i = 0; i < len; i += 4) {
-        red = pix[i];
-        green = pix[i + 1];
-        blue = pix[i + 2];
-        // calculated from NTSC
-        threshold = (red * .29 + green * .58 + blue * .11); // threshold
-        value = (red + green + blue) * .33; // average
-        new_value = (threshold >= value) ? 255 : 0; // black or white
+        const red = pix[i];
+        const green = pix[i + 1];
+        const blue = pix[i + 2];
+        const threshold = color.convertNTSC(red, green, blue);
+        const new_value = color.blackOrWhite(red, green, blue, threshold);
         pix[i] = new_value;
         pix[i + 1] = new_value;
         pix[i + 2] = new_value;
@@ -165,13 +155,11 @@ module.exports.threshold = (imageData) => {
 module.exports.hueRotate = (imageData, deg) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        let hsv;
-        let rgb;
-        // change from rgb to hsv
-        hsv = color.rgb2hsv(pix[i], pix[i + 1], pix[i + 2]);
+    const n = pix.length;
+    for (let i = 0; i < n; i += 4) {
+        const hsv = color.rgb2hsv(pix[i], pix[i + 1], pix[i + 2]);
         hsv[0] = hsv[0] * deg / 360; // hue is from 0 to 360
-        rgb = color.hsv2rgb(hsv[0], hsv[1], hsv[2]);
+        const rgb = color.hsv2rgb(hsv[0], hsv[1], hsv[2]);
         pix[i] = rgb[0];
         pix[i + 1] = rgb[1];
         pix[i + 2] = rgb[2];
@@ -186,12 +174,9 @@ module.exports.saturate = (imageData, num) => {
     const newImageData = imageData;
     const pix = imageData.data;
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        let hsv;
-        let rgb;
-        hsv = color.rgb2hsv(pix[i], pix[i + 1], pix[i + 2]);
-        //TODO: change saturation logic could be refactored
+        const hsv = color.rgb2hsv(pix[i], pix[i + 1], pix[i + 2]);
         hsv[1] = hsv[1] * num / 100;
-        rgb = color.hsv2rgb(hsv[0], hsv[1], hsv[2]);
+        const rgb = color.hsv2rgb(hsv[0], hsv[1], hsv[2]);
         pix[i] = rgb[0];
         pix[i + 1] = rgb[1];
         pix[i + 2] = rgb[2];
@@ -234,7 +219,7 @@ module.exports.horizontalFlip = (imageData) => {
     const width = imageData.width;
     const height = imageData.height;
     const pix = imageData.data;
-    var pix_result = object.clone(pix);
+    const pix_result = object.clone(pix);
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             let off = (i * width + j) * 4;
@@ -399,7 +384,6 @@ module.exports.reyes = (imageData) => {
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 0],
         [1, 30, 35],
@@ -425,11 +409,9 @@ module.exports.reyes = (imageData) => {
         [5, 240, 245],
         [6, 255, 245]
     ];
-
     lag_r.addMultiPoints(r);
     lag_g.addMultiPoints(g);
     lag_b.addMultiPoints(b);
-
     for (let i = 0, n = pix.length; i < n; i += 4) {
         pix[i] = lag_r.valueOf(pix[i]);
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
@@ -447,7 +429,6 @@ module.exports.juno = (imageData) => {
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 0],
         [1, 30, 35],
@@ -473,11 +454,9 @@ module.exports.juno = (imageData) => {
         [5, 240, 245],
         [6, 255, 245]
     ];
-
     lag_r.addMultiPoints(r);
     lag_g.addMultiPoints(g);
     lag_b.addMultiPoints(b);
-
     for (let i = 0, n = pix.length; i < n; i += 4) {
         pix[i] = lag_r.valueOf(pix[i]);
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
@@ -495,7 +474,6 @@ module.exports.slumber = (imageData) => {
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 0],
         [1, 30, 25],
@@ -521,11 +499,9 @@ module.exports.slumber = (imageData) => {
         [5, 240, 245],
         [6, 255, 245]
     ];
-
     lag_r.addMultiPoints(r);
     lag_g.addMultiPoints(g);
     lag_b.addMultiPoints(b);
-
     for (let i = 0, n = pix.length; i < n; i += 4) {
         pix[i] = lag_r.valueOf(pix[i]);
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
@@ -543,7 +519,6 @@ module.exports.crema = (imageData) => {
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 0],
         [1, 30, 35],
@@ -565,11 +540,9 @@ module.exports.crema = (imageData) => {
         [3, 181, 170],
         [4, 255, 250]
     ];
-
     lag_r.addMultiPoints(r);
     lag_g.addMultiPoints(g);
     lag_b.addMultiPoints(b);
-
     for (let i = 0, n = pix.length; i < n; i += 4) {
         pix[i] = lag_r.valueOf(pix[i]);
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);
@@ -587,7 +560,6 @@ module.exports.ludwig = (imageData) => {
     const lag_r = new Lagrange(0, 0, 1, 1);
     const lag_g = new Lagrange(0, 0, 1, 1);
     const lag_b = new Lagrange(0, 0, 1, 1);
-
     const r = [
         [0, 0, 10],
         [1, 30, 45],
@@ -609,11 +581,9 @@ module.exports.ludwig = (imageData) => {
         [3, 181, 185],
         [4, 255, 250]
     ];
-
     lag_r.addMultiPoints(r);
     lag_g.addMultiPoints(g);
     lag_b.addMultiPoints(b);
-
     for (let i = 0, n = pix.length; i < n; i += 4) {
         pix[i] = lag_r.valueOf(pix[i]);
         pix[i + 1] = lag_b.valueOf(pix[i + 1]);

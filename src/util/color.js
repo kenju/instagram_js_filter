@@ -10,6 +10,19 @@ module.exports.getUnit8Array = (len) => {
     return new Uint8Array(len);
 };
 
+module.exports.convertNTSC = (red, green, blue) => {
+    return red * .29 + green * .58 + blue * .11;
+};
+
+module.exports.blackOrWhite = (red, green, blue, threshold) => {
+    const value = (red + green + blue) * .33;
+    return (threshold >= value) ? 255 : 0;
+};
+
+module.exports.convertLuminanceLinearRGB = (red, green, blue) => {
+    return red * 0.2126 + green * 0.7152 + blue * 0.0722;
+};
+
 module.exports.identityLUT = () => {
     const lut = this.getUnit8Array(256);
     for (let i = 0; i < lut.length; i++) {
