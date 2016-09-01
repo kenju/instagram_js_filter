@@ -33,6 +33,7 @@
     "eslint-plugin-jsx-a11y": "^1.5.3",
     "eslint-plugin-react": "^5.2.2",
     "mocha": "^2.5.3",
+    "request": "2.74.0",
     "should": "^10.0.0",
     "supertest": "^2.0.0"
   },
