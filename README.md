@@ -34,33 +34,33 @@ $ bower install instagram_js_filter
 
 Downloads zipped files from [the Github repository](https://github.com/KENJU/instagram_css_filter/tree/master/dist).
 
-# Usage
+# Documents
 
 ## A. Server-side
 
-This module required to get canvas ImageData as an argument.
-
 ```javascript
-const Canvas = require('canvas');
-const Image = Canvas.Image;
 const filter = require('instagram_js_filter');
 
-const image = new Image;
-image.src = data;
-const canvas = new Canvas(image.width, image.height);
-const context = canvas.getContext('2d');
-context.drawImage(image, 0, 0, image.width, image.height);
-const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-
-filter.grayscale(imageData)
-    .then(newImageData => {
-        context.putImageData(newImageData, 0, 0);
-        return canvas.toDataURL().split(',')[1];
-    })
-    .then(base64 => {
-        console.log(base64);
-    })
+const imagePath = path.join(__dirname + '/../demo/img/sample.jpg');
+fs.readFile(imagePath, (err, imageBuffer) => {
+    if (err) {
+        reject(err);
+    }
+    const options = {};
+    const base64 = app.filter(imageBuffer, 'horizontalflip', options);
+    console.log(base64);
+});
 ```
+
+### Methods
+
+#### `filter(Buffer, effects, [options])`
+
+The following table describes the properties of the `options` object.
+
+| Property | Type       | Default       | Description |
+|:---------|:-----------|:--------------|:------------|
+| out      | String     | 'base64'      | An output of `filter()`.|
 
 ## B. Client-side
 
@@ -89,7 +89,7 @@ Finally, add `data-effect="?"` attributes to `<img>` tags which you want to appl
 <img data-effect="lark" src="img/sample.jpg" alt="">
 ```
 
-## Available effects
+## Supported Effects
 
 - Instagram filters
 	- lark

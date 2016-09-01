@@ -103,6 +103,9 @@ const handleType = (type) => {
     }
 };
 
+// TODO: implement logic when base64 is passed
+// TODO: implement optionsArgs for some filter which use options
+// TODO: increase supported options
 module.exports.filter = (input, type, optionArgs) => {
     const options = !optionArgs ? optionArgs : {};
 
