@@ -167,30 +167,6 @@ var MainArticleItemHeader = React.createClass({
 });
 
 var MainArticleItemImage = React.createClass({
-    loadImageFile: function () {
-        const typeName = this.props.type;
-        $.ajax({
-            url: 'http://localhost:3030/process',
-            dataType: 'json',
-            type: 'POST',
-            data: {
-                type: typeName
-            },
-            success: function (data) {
-                // TODO
-                this.setState({data: data})
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(err.toString());
-            }.bind(this)
-        });
-    },
-    getInitialState: function () {
-        return {data: []}
-    },
-    componentDidMount: function () {
-        this.loadImageFile();
-    },
     render: function () {
         const typeName = this.props.type;
         return (
