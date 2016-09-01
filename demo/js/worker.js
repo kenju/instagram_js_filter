@@ -125,7 +125,7 @@ Worker.process = function(imgd){
     case 'negaposi':
       Worker.filter.negaposi(pix);
       break;
-    case 'brightnessContrast':
+    case 'brightnesscontrast':
       Worker.filter.brightnessContrast(pix, -0.08, 1.5);
       break;
     case 'huerotate':
@@ -134,22 +134,22 @@ Worker.process = function(imgd){
     case 'saturate':
       Worker.filter.saturate(pix, 20);
       break;
-    case 'horizontalFlip':
+    case 'horizontalflip':
       Worker.filter.horizontalFlip(pix, width, height);
       break;
-    case 'verticalFlip':
+    case 'verticalflip':
       Worker.filter.verticalFlip(pix, width, height);
       break;
-    case 'doubleFlip':
+    case 'doubleflip':
       Worker.filter.doubleFlip(pix);
       break;
-    case 'horizontalMirror':
+    case 'horizontalmirror':
       Worker.filter.horizontalMirror(pix, width, height);
       break;
-    case 'verticalMirror':
+    case 'verticalmirror':
       Worker.filter.verticalMirror(pix, width, height);
       break;
-    case 'XYMirror':
+    case 'xymirror':
       Worker.filter.XYMirror(pix);
       break;
     default:

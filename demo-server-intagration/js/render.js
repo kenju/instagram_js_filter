@@ -157,10 +157,11 @@ var MainArticleItem = React.createClass({
 
 var MainArticleItemHeader = React.createClass({
     render: function () {
+        const typeName = this.props.type;
         return (
-            <h2 id={"main_article_h2_"}
+            <h2 id={"main_article_h2_" + typeName}
                 className="main-article-h2">
-                {this.props.type}
+                {typeName}
             </h2>
         )
     }
