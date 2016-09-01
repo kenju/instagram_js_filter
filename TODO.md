@@ -4,6 +4,7 @@
 * [ ] resizing image
 * [ ] scaling image
 * [ ] fix eslint errors
+* [ ] improve performance with multi threading
 * [ ] improve security in express
     * [ ] validate scheme
     * [ ] max access counts

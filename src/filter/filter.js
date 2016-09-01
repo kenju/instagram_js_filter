@@ -229,8 +229,10 @@ module.exports.brightnessContrast = (imageData, brightness, contrast) => {
     });
 };
 
-module.exports.horizontalFlip = (imageData, width, height) => {
+module.exports.horizontalFlip = (imageData) => {
     const newImageData = imageData;
+    const width = imageData.width;
+    const height = imageData.height;
     const pix = imageData.data;
     var pix_result = object.clone(pix);
     for (let i = 0; i < height; i++) {
@@ -249,8 +251,10 @@ module.exports.horizontalFlip = (imageData, width, height) => {
     });
 };
 
-module.exports.verticalFlip = (imageData, width, height) => {
+module.exports.verticalFlip = (imageData) => {
     const newImageData = imageData;
+    const width = imageData.width;
+    const height = imageData.height;
     const pix = imageData.data;
     var pix_result = object.clone(pix);
     for (let i = 0; i < height; i++) {
@@ -286,8 +290,10 @@ module.exports.doubleFlip = (imageData) => {
     });
 };
 
-module.exports.horizontalMirror = (imageData, width, height) => {
+module.exports.horizontalMirror = (imageData) => {
     const newImageData = imageData;
+    const width = imageData.width;
+    const height = imageData.height;
     const pix = imageData.data;
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
@@ -305,8 +311,10 @@ module.exports.horizontalMirror = (imageData, width, height) => {
     });
 };
 
-module.exports.verticalMirror = (imageData, width, height) => {
+module.exports.verticalMirror = (imageData) => {
     const newImageData = imageData;
+    const width = imageData.width;
+    const height = imageData.height;
     const pix = imageData.data;
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {

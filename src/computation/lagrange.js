@@ -1,5 +1,3 @@
-Lagrange = {};
-
 /**
  * At least two points are needed to interpolate something.
  * @class Lagrange polynomial interpolation.
