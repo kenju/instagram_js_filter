@@ -62,7 +62,8 @@ module.exports.rgb2hsl = (red, green, blue) => {
     const l = (max + min) / 2;
 
     if (max === min) {
-        h = s = 0; //achromatic
+        // achromatic
+        h = s = 0;
     } else {
         diff = max - min;
         s = l > 0.5 ? diff / (2 - max - min) : diff / (max + min);
@@ -74,7 +75,9 @@ module.exports.rgb2hsl = (red, green, blue) => {
                 h = (b - r) / diff + 2;
                 break;
             case b:
-                h = (r - g ) / diff + 4;
+                h = (r - g) / diff + 4;
+                break;
+            default:
                 break;
         }
         h /= 6;
@@ -90,7 +93,8 @@ module.exports.hsl2rgb = (h, s, l) => {
     let p;
 
     if (s === 0) {
-        r = g = b = l; //achromatic
+        // achromatic
+        r = g = b = l;
     } else {
         q = l < 0.5 ? l * (1 + s) : l + s - l * s;
         p = 2 * l - q;
@@ -102,21 +106,24 @@ module.exports.hsl2rgb = (h, s, l) => {
 };
 
 module.exports.hue2rgb = (p, q, t) => {
-    switch (t) {
-        case t < 0 :
-            t += 1;
+    let threshold = t;
+    switch (threshold) {
+        case threshold < 0 :
+            threshold += 1;
             break;
-        case t > 1 :
-            t -= 1;
+        case threshold > 1 :
+            threshold -= 1;
             break;
-        case t < 1 / 6 :
-            return p + (q - p) * 6 * t;
-        case t < 1 / 2 :
+        case threshold < 1 / 6 :
+            return p + (q - p) * 6 * threshold;
+        case threshold < 1 / 2 :
             return q;
-        case t < 2 / 3 :
-            return p + (q - p) * (2 / 3 - t) * 6;
+        case threshold < 2 / 3 :
+            return p + (q - p) * (2 / 3 - threshold) * 6;
+        default:
             return p;
     }
+    return p;
 };
 
 module.exports.rgb2hsv = (red, green, blue) => {
@@ -133,7 +140,8 @@ module.exports.rgb2hsv = (red, green, blue) => {
     const s = max === 0 ? 0 : diff / max;
 
     if (max === min) {
-        h = 0; //achromatic
+        // achromatic
+        h = 0;
     } else {
         switch (max) {
             case r:
@@ -145,6 +153,8 @@ module.exports.rgb2hsv = (red, green, blue) => {
             case b:
                 h = (r - g) / diff + 4;
                 break;
+            default:
+                break;
         }
         h /= 6;
     }
@@ -155,36 +165,45 @@ module.exports.hsv2rgb = (h, s, v) => {
     let r;
     let g;
     let b;
-    let i;
-    let f;
-    let p;
-    let q;
-    let t;
 
-    i = Math.floor(h * 6); // iterator
-    f = h * 6 - i;
-    p = v * (1 - s);
-    q = v * (1 - f * s);
-    t = v * (1 - (1 - f) * s);
+    const i = Math.floor(h * 6); // iterator
+    const f = h * 6 - i;
+    const p = v * (1 - s);
+    const q = v * (1 - f * s);
+    const t = v * (1 - (1 - f) * s);
 
     switch (i % 6) {
         case 0:
-            r = v, g = t, b = p;
+            r = v;
+            g = t;
+            b = p;
             break;
         case 1:
-            r = q, g = v, b = p;
+            r = q;
+            g = v;
+            b = p;
             break;
         case 2:
-            r = p, g = v, b = t;
+            r = p;
+            g = v;
+            b = t;
             break;
         case 3:
-            r = p, g = q, b = v;
+            r = p;
+            g = q;
+            b = v;
             break;
         case 4:
-            r = t, g = p, b = v;
+            r = t;
+            g = p;
+            b = v;
             break;
         case 5:
-            r = v, g = p, b = q;
+            r = v;
+            g = p;
+            b = q;
+            break;
+        default:
             break;
     }
     return [r * 255, g * 255, b * 255];
