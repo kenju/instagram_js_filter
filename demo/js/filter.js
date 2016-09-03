@@ -1,4 +1,4 @@
-Filter = {};
+adapter = {};
 Filter.process = function (img) {
     var pixels;
     var worker;

@@ -1,5 +1,5 @@
 /**
- * index.spec.js
+ * adapter.spec.js
  */
 
 const fs = require('fs');

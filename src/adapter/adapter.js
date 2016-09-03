@@ -1,11 +1,10 @@
 /**
- * index.js
+ * adapter.js
  */
 
-const canvas = require('./../canvas/canvas');
 const effects = require('./../effects/effects');
 
-const handleType = (type) => {
+module.exports.handleType = (type) => {
     switch (type.toLowerCase()) {
         case 'lark':
             return effects.lark;
@@ -102,28 +101,3 @@ const handleType = (type) => {
             throw new Error(type + 'is not supported');
     }
 };
-
-// TODO: implement logic when base64 is passed
-// TODO: implement optionsArgs for some effects which use options
-// TODO: increase supported options
-module.exports.filter = (input, type, optionArgs) => {
-    const options = !optionArgs ? optionArgs : {};
-
-    let imageData = input;
-    let convertResult = {};
-    if (Buffer.isBuffer(input)) {
-        convertResult = canvas.convert(input);
-        imageData = convertResult.imageData;
-    }
-
-    const func = handleType(type);
-    const newImageData = func.apply(this, [imageData, options]);
-
-    if (convertResult.context) {
-        convertResult.context.putImageData(newImageData, 0, 0);
-        return canvas.getBase64(convertResult.canvas);
-    }
-    return newImageData;
-};
-
-
