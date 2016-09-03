@@ -6,7 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const request = require('request');
 const winston = require('winston');
-const app = require('../src/index');
+const app = require('../src/adapter/adapter');
 
 const convert = (buffer, type, options) => {
     return new Promise(resolve => {

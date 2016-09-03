@@ -4,7 +4,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const app = require('./index');
+const app = require('./adapter');
 const winston = require('winston');
 
 const convert = (imagePath, type, options) => {
