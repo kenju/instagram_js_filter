@@ -1,0 +1,8 @@
+demo
+dist
+example
+.*
+bower.json
+*.sh
+LICENSE
+README.md
