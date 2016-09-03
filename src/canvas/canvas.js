@@ -1,11 +1,8 @@
 /**
  * canvas.js
  */
-const path = require('path');
-const fs = require('fs');
 const Canvas = require('canvas');
 const Image = Canvas.Image;
-const filter = require('../filter/filter');
 
 const getBase64 = (canvas) => {
     return canvas.toDataURL().split(',')[1];

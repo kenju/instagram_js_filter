@@ -5,6 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 const app = require('../src/index');
+const winston = require('winston');
 
 const convert = (imagePath, type, options) => {
     return new Promise((resolve, reject) => {
@@ -25,7 +26,7 @@ const saveFile = (outPath, buffer) => {
                 reject(error);
             }
             resolve(outPath);
-        })
+        });
     });
 };
 
@@ -37,8 +38,8 @@ convert(imagePath, 'horizontalflip', {})
         return saveFile(outPath, buffer);
     })
     .then(savedPath => {
-        console.log(savedPath);
+        winston.info(savedPath);
     })
     .catch(err => {
-        console.error(err);
+        winston.error(err);
     });

@@ -5,10 +5,11 @@
 const fs = require('fs');
 const path = require('path');
 const request = require('request');
+const winston = require('winston');
 const app = require('../src/index');
 
 const convert = (buffer, type, options) => {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
         const result = app.filter(buffer, type, options);
         resolve(result);
     });
@@ -21,7 +22,7 @@ const saveFile = (outPath, buffer) => {
                 reject(error);
             }
             resolve(outPath);
-        })
+        });
     });
 };
 
@@ -36,33 +37,33 @@ const readFile = (filePath) => {
     });
 };
 
-const download = (uri, path) => {
-    return new Promise((resolve, reject) => {
+const download = (uri, filePath) => {
+    return new Promise(resolve => {
         request.get(uri)
-            .pipe(fs.createWriteStream(path))
+            .pipe(fs.createWriteStream(filePath))
             .on('close', () => {
-                resolve(path)
-            })
-    })
+                resolve(filePath);
+            });
+    });
 };
 
 const uri = 'https://raw.githubusercontent.com/kenju/instagram_js_filter/master/demo/img/sample.jpg';
 const outPath = path.join(__dirname + '/../dist/img/sample-online-converted.jpg');
 download(uri, outPath)
     .then(downloadedFile => {
-        console.log(downloadedFile);
+        winston.info(downloadedFile);
         return readFile(downloadedFile);
     })
     .then(fileBuffer => {
-        return convert(fileBuffer, 'verticalflip', {})
+        return convert(fileBuffer, 'verticalflip', {});
     })
     .then(base64 => {
         const buffer = new Buffer(base64, 'base64');
         return saveFile(outPath, buffer);
     })
     .then(savedPath => {
-        console.log(savedPath);
+        winston.info(savedPath);
     })
     .catch(err => {
-        console.error(err);
+        winston.error(err);
     });
