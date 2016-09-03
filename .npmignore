@@ -6,3 +6,4 @@ bower.json
 *.sh
 LICENSE
 README.md
+package.json

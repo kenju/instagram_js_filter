@@ -3,108 +3,108 @@
  */
 
 const canvas = require('./canvas/canvas');
-const filter = require('./filter/filter');
+const effects = require('./effects/effects');
 
 const handleType = (type) => {
     switch (type.toLowerCase()) {
         case 'lark':
-            return filter.lark;
+            return effects.lark;
         case 'reyes':
-            return filter.reyes;
+            return effects.reyes;
         case 'juno':
-            return filter.juno;
+            return effects.juno;
         case 'slumber':
-            return filter.slumber;
+            return effects.slumber;
         case 'crema':
-            return filter.crema;
+            return effects.crema;
         case 'ludwig':
-            return filter.ludwig;
+            return effects.ludwig;
         case 'aden':
-            return filter.aden;
+            return effects.aden;
         case 'perpetua':
-            return filter.perpetua;
+            return effects.perpetua;
         case 'amaro':
-            return filter.amaro;
+            return effects.amaro;
         case 'mayfair':
-            return filter.mayfair;
+            return effects.mayfair;
         case 'rise':
-            return filter.rise;
+            return effects.rise;
         case 'hudson':
-            return filter.hudson;
+            return effects.hudson;
         case 'valencia':
-            return filter.valencia;
+            return effects.valencia;
         case 'xpro2':
-            return filter.xpro2;
+            return effects.xpro2;
         case 'sierra':
-            return filter.sierra;
+            return effects.sierra;
         case 'willow':
-            return filter.willow;
+            return effects.willow;
         case 'lofi':
-            return filter.lofi;
+            return effects.lofi;
         case 'earlybird':
-            return filter.earlybird;
+            return effects.earlybird;
         case 'brannan':
-            return filter.brannan;
+            return effects.brannan;
         case 'inkwell':
-            return filter.inkwell;
+            return effects.inkwell;
         case 'hefe':
-            return filter.hefe;
+            return effects.hefe;
         case 'nashville':
-            return filter.nashville;
+            return effects.nashville;
         case 'sutro':
-            return filter.sutro;
+            return effects.sutro;
         case 'toaster':
-            return filter.toaster;
+            return effects.toaster;
         case 'walden':
-            return filter.walden;
+            return effects.walden;
         case 'nineteenseventyseven':
         case '1977':
-            return filter.nineteenSeventySeven;
+            return effects.nineteenSeventySeven;
         case 'kelvin':
-            return filter.kelvin;
+            return effects.kelvin;
         case 'enhance':
-            return filter.enhance;
+            return effects.enhance;
         case 'grayscale':
-            return filter.grayscale;
+            return effects.grayscale;
         case 'sepia':
-            return filter.sepia;
+            return effects.sepia;
         case 'luminance':
-            return filter.luminance;
+            return effects.luminance;
         case 'opacity':
-            return filter.opacity;
+            return effects.opacity;
         case 'brighten':
-            return filter.brighten;
+            return effects.brighten;
         case 'darken':
-            return filter.darken;
+            return effects.darken;
         case 'threshold':
-            return filter.threshold;
+            return effects.threshold;
         case 'negaposi':
-            return filter.negaposi;
+            return effects.negaposi;
         case 'brightnesscontrast':
-            return filter.brightnessContrast;
+            return effects.brightnessContrast;
         case 'huerotate':
-            return filter.hueRotate;
+            return effects.hueRotate;
         case 'saturate':
-            return filter.saturate;
+            return effects.saturate;
         case 'horizontalflip':
-            return filter.horizontalFlip;
+            return effects.horizontalFlip;
         case 'verticalflip':
-            return filter.verticalFlip;
+            return effects.verticalFlip;
         case 'doubleflip':
-            return filter.doubleFlip;
+            return effects.doubleFlip;
         case 'horizontalmirror':
-            return filter.horizontalMirror;
+            return effects.horizontalMirror;
         case 'verticalmirror':
-            return filter.verticalMirror;
+            return effects.verticalMirror;
         case 'xymirror':
-            return filter.XYMirror;
+            return effects.XYMirror;
         default:
             throw new Error(type + 'is not supported');
     }
 };
 
 // TODO: implement logic when base64 is passed
-// TODO: implement optionsArgs for some filter which use options
+// TODO: implement optionsArgs for some effects which use options
 // TODO: increase supported options
 module.exports.filter = (input, type, optionArgs) => {
     const options = !optionArgs ? optionArgs : {};

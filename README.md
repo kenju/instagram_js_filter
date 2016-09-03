@@ -60,7 +60,7 @@ The following table describes the properties of the `options` object.
 
 | Property | Type       | Default       | Description |
 |:---------|:-----------|:--------------|:------------|
-| out      | String     | 'base64'      | An output of `filter()`.|
+| out      | String     | 'base64'      | An output of `effects()`.|
 
 ##### `out`
 
@@ -78,9 +78,9 @@ Supported values:
 
 What you need is these files in `js` directory in [the GitHub reposizoty](https://github.com/KENJU/instagram_js_filter/tree/master/demo/js).
 
-- `filter.js` - main script file
-- `filter.canvas.js` - e.g. creates canvas
-    - `worker.filter.js` - supplies all effects
+- `effects.js` - main script file
+- `effects.canvas.js` - e.g. creates canvas
+    - `worker.effects.js` - supplies all effects
     - `worker.js` - convert rgb values in background thread
     - `worker.util.js` - e.g. converts between rgb and hsl
     - `lagrange.js` - calculate rgb based on lagrange's interpolating function for achieving instagram filter effects
