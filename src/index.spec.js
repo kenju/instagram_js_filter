@@ -5,6 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 const app = require('./index');
+const winston = require('winston');
 
 const convert = (imagePath, type, options) => {
     return new Promise((resolve, reject) => {
@@ -21,8 +22,8 @@ const convert = (imagePath, type, options) => {
 const imagePath = path.join(__dirname + '/../demo/img/sample.jpg');
 convert(imagePath, 'horizontalflip', {})
     .then(result => {
-        console.log(result);
+        winston.info(result);
     })
     .catch(err => {
-        console.error(err);
+        winston.error(err);
     });

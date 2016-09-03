@@ -122,8 +122,7 @@ module.exports.filter = (input, type, optionArgs) => {
     if (convertResult.context) {
         convertResult.context.putImageData(newImageData, 0, 0);
         return canvas.getBase64(convertResult.canvas);
-    } else {
-        return newImageData;
     }
+    return newImageData;
 };
 

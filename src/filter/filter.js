@@ -24,7 +24,7 @@ module.exports.grayscale = (imageData) => {
         const red = pix[i];
         const green = pix[i + 1];
         const blue = pix[i + 2];
-        var grayscale = color.convertNTSC(red, green, blue);
+        const grayscale = color.convertNTSC(red, green, blue);
         pix[i] = grayscale;
         pix[i + 1] = grayscale;
         pix[i + 2] = grayscale;
@@ -38,8 +38,8 @@ module.exports.sepia = (imageData) => {
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
         pix[i] = pix[i] * 1.07;
-        pix[i + 1] = pix[i + 1] * .74;
-        pix[i + 2] = pix[i + 2] * .43;
+        pix[i + 1] = pix[i + 1] * 0.74;
+        pix[i + 2] = pix[i + 2] * 0.43;
     }
     newImageData.data = pix;
     return newImageData;
@@ -52,7 +52,7 @@ module.exports.luminance = (imageData) => {
         const red = pix[i];
         const green = pix[i + 1];
         const blue = pix[i + 2];
-        var luminance = color.convertLuminanceLinearRGB(red, green, blue);
+        const luminance = color.convertLuminanceLinearRGB(red, green, blue);
         pix[i] = luminance;
         pix[i + 1] = luminance;
         pix[i + 2] = luminance;
@@ -115,10 +115,10 @@ module.exports.threshold = (imageData) => {
         const green = pix[i + 1];
         const blue = pix[i + 2];
         const threshold = color.convertNTSC(red, green, blue);
-        const new_value = color.blackOrWhite(red, green, blue, threshold);
-        pix[i] = new_value;
-        pix[i + 1] = new_value;
-        pix[i + 2] = new_value;
+        const newValue = color.blackOrWhite(red, green, blue, threshold);
+        pix[i] = newValue;
+        pix[i + 1] = newValue;
+        pix[i + 2] = newValue;
     }
     newImageData.data = pix;
     return newImageData;
@@ -162,7 +162,11 @@ module.exports.brightnessContrast = (imageData, brightness, contrast) => {
     const len = lut.length;
     for (let i = 0; i < len; i++) {
         const c = i * contrast + adjust;
-        lut[i] = c < 0 ? 0 : (c > 255 ? 255 : c);
+        if (c < 0) {
+            lut[i] = 0;
+        } else {
+            lut[i] = (c > 255) ? 255 : c;
+        }
     }
     // FIXME: has side-effects
     newImageData.data = color.applyLUT(
@@ -181,15 +185,15 @@ module.exports.horizontalFlip = (imageData) => {
     const width = imageData.width;
     const height = imageData.height;
     const pix = imageData.data;
-    const pix_result = object.clone(pix);
+    const pixResult = object.clone(pix);
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
-            let off = (i * width + j) * 4;
-            let dstOff = (i * width + (width - j - 1)) * 4;
-            pix[dstOff] = pix_result[off];
-            pix[dstOff + 1] = pix_result[off + 1];
-            pix[dstOff + 2] = pix_result[off + 2];
-            pix[dstOff + 3] = pix_result[off + 3];
+            const off = (i * width + j) * 4;
+            const dstOff = (i * width + (width - j - 1)) * 4;
+            pix[dstOff] = pixResult[off];
+            pix[dstOff + 1] = pixResult[off + 1];
+            pix[dstOff + 2] = pixResult[off + 2];
+            pix[dstOff + 3] = pixResult[off + 3];
         }
     }
     newImageData.data = pix;
@@ -200,15 +204,15 @@ module.exports.verticalFlip = (imageData) => {
     const width = imageData.width;
     const height = imageData.height;
     const pix = imageData.data;
-    var pix_result = object.clone(pix);
+    const pixResult = object.clone(pix);
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
-            let off = (i * width + j) * 4;
-            let dstOff = ((height - i - 1) * width + j) * 4;
-            pix[dstOff] = pix_result[off];
-            pix[dstOff + 1] = pix_result[off + 1];
-            pix[dstOff + 2] = pix_result[off + 2];
-            pix[dstOff + 3] = pix_result[off + 3];
+            const off = (i * width + j) * 4;
+            const dstOff = ((height - i - 1) * width + j) * 4;
+            pix[dstOff] = pixResult[off];
+            pix[dstOff + 1] = pixResult[off + 1];
+            pix[dstOff + 2] = pixResult[off + 2];
+            pix[dstOff + 3] = pixResult[off + 3];
         }
     }
     newImageData.data = pix;
@@ -217,13 +221,13 @@ module.exports.verticalFlip = (imageData) => {
 module.exports.doubleFlip = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    var pix_result = object.clone(pix);
+    const pixResult = object.clone(pix);
     const len = pix.length;
     for (let i = 0; i < len; i += 4) {
-        pix[i] = pix_result[len - i];
-        pix[i + 1] = pix_result[len - i + 1];
-        pix[i + 2] = pix_result[len - i + 2];
-        pix[i + 3] = pix_result[len - i + 3];
+        pix[i] = pixResult[len - i];
+        pix[i + 1] = pixResult[len - i + 1];
+        pix[i + 2] = pixResult[len - i + 2];
+        pix[i + 3] = pixResult[len - i + 3];
     }
     newImageData.data = pix;
     return newImageData;
@@ -280,9 +284,9 @@ module.exports.XYMirror = (imageData) => {
 module.exports.lark = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 0],
         [1, 30, 25],
@@ -308,13 +312,13 @@ module.exports.lark = (imageData) => {
         [5, 240, 245],
         [6, 255, 245]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -322,9 +326,9 @@ module.exports.lark = (imageData) => {
 module.exports.reyes = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 0],
         [1, 30, 35],
@@ -350,13 +354,13 @@ module.exports.reyes = (imageData) => {
         [5, 240, 245],
         [6, 255, 245]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -364,9 +368,9 @@ module.exports.reyes = (imageData) => {
 module.exports.juno = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 0],
         [1, 30, 35],
@@ -392,13 +396,13 @@ module.exports.juno = (imageData) => {
         [5, 240, 245],
         [6, 255, 245]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -406,9 +410,9 @@ module.exports.juno = (imageData) => {
 module.exports.slumber = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 0],
         [1, 30, 25],
@@ -434,13 +438,13 @@ module.exports.slumber = (imageData) => {
         [5, 240, 245],
         [6, 255, 245]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -448,9 +452,9 @@ module.exports.slumber = (imageData) => {
 module.exports.crema = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 0],
         [1, 30, 35],
@@ -472,13 +476,13 @@ module.exports.crema = (imageData) => {
         [3, 181, 170],
         [4, 255, 250]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -486,9 +490,9 @@ module.exports.crema = (imageData) => {
 module.exports.ludwig = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 10],
         [1, 30, 45],
@@ -510,13 +514,13 @@ module.exports.ludwig = (imageData) => {
         [3, 181, 185],
         [4, 255, 250]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -524,9 +528,9 @@ module.exports.ludwig = (imageData) => {
 module.exports.aden = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 20],
         [1, 50, 65],
@@ -548,13 +552,13 @@ module.exports.aden = (imageData) => {
         [3, 180, 185],
         [4, 255, 235]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -562,9 +566,9 @@ module.exports.aden = (imageData) => {
 module.exports.perpetua = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 35],
         [1, 50, 65],
@@ -586,13 +590,13 @@ module.exports.perpetua = (imageData) => {
         [3, 180, 185],
         [4, 255, 255]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -600,9 +604,9 @@ module.exports.perpetua = (imageData) => {
 module.exports.amaro = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 19],
         [1, 30, 62],
@@ -628,13 +632,13 @@ module.exports.amaro = (imageData) => {
         [5, 240, 235],
         [6, 255, 245]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -642,9 +646,9 @@ module.exports.amaro = (imageData) => {
 module.exports.mayfair = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 30],
         [1, 85, 110],
@@ -669,13 +673,13 @@ module.exports.mayfair = (imageData) => {
         [5, 235, 230],
         [6, 255, 225]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -683,9 +687,9 @@ module.exports.mayfair = (imageData) => {
 module.exports.rise = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 25],
         [1, 30, 70],
@@ -712,13 +716,13 @@ module.exports.rise = (imageData) => {
         [5, 220, 214],
         [6, 255, 255]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -726,9 +730,9 @@ module.exports.rise = (imageData) => {
 module.exports.hudson = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 35],
         [1, 42, 68],
@@ -755,13 +759,13 @@ module.exports.hudson = (imageData) => {
         [5, 210, 235],
         [6, 255, 245]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -769,9 +773,9 @@ module.exports.hudson = (imageData) => {
 module.exports.valencia = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 20],
         [1, 50, 80],
@@ -798,13 +802,13 @@ module.exports.valencia = (imageData) => {
         [5, 220, 210],
         [6, 255, 230]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -812,9 +816,9 @@ module.exports.valencia = (imageData) => {
 module.exports.xpro2 = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 0],
         [1, 42, 28],
@@ -841,13 +845,13 @@ module.exports.xpro2 = (imageData) => {
         [5, 225, 210],
         [6, 255, 222]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -855,9 +859,9 @@ module.exports.xpro2 = (imageData) => {
 module.exports.sierra = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 10],
         [1, 48, 88],
@@ -885,13 +889,13 @@ module.exports.sierra = (imageData) => {
         [5, 210, 200],
         [6, 255, 218]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -899,9 +903,9 @@ module.exports.sierra = (imageData) => {
 module.exports.willow = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 30],
         [1, 68, 105],
@@ -923,13 +927,13 @@ module.exports.willow = (imageData) => {
         [3, 195, 215],
         [4, 255, 288]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -937,9 +941,9 @@ module.exports.willow = (imageData) => {
 module.exports.lofi = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 0],
         [1, 40, 20],
@@ -967,13 +971,13 @@ module.exports.lofi = (imageData) => {
         [5, 190, 220],
         [6, 255, 255]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -981,9 +985,9 @@ module.exports.lofi = (imageData) => {
 module.exports.earlybird = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 25],
         [1, 45, 80],
@@ -1010,13 +1014,13 @@ module.exports.earlybird = (imageData) => {
         [5, 212, 195],
         [6, 255, 210]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -1024,9 +1028,9 @@ module.exports.earlybird = (imageData) => {
 module.exports.brannan = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 35],
         [1, 40, 50],
@@ -1049,13 +1053,13 @@ module.exports.brannan = (imageData) => {
         [4, 225, 230],
         [5, 255, 232]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -1065,7 +1069,7 @@ module.exports.inkwell = (imageData) => {
     const pix = imageData.data;
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
-        const val = pix[i] * .33 + pix[i + 1] * .58 + pix[i + 2] * .22;
+        const val = pix[i] * 0.33 + pix[i + 1] * 0.58 + pix[i + 2] * 0.22;
         pix[i] = val;
         pix[i + 1] = val;
         pix[i + 2] = val;
@@ -1076,9 +1080,9 @@ module.exports.inkwell = (imageData) => {
 module.exports.hefe = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 0],
         [1, 60, 55],
@@ -1098,13 +1102,13 @@ module.exports.hefe = (imageData) => {
         [3, 170, 165],
         [4, 255, 240]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -1112,9 +1116,9 @@ module.exports.hefe = (imageData) => {
 module.exports.nashville = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 0],
         [1, 30, 5],
@@ -1139,13 +1143,13 @@ module.exports.nashville = (imageData) => {
         [3, 212, 185],
         [4, 255, 205]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -1153,9 +1157,9 @@ module.exports.nashville = (imageData) => {
 module.exports.sutro = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 0],
         [1, 40, 35],
@@ -1178,13 +1182,13 @@ module.exports.sutro = (imageData) => {
         [3, 128, 112],
         [4, 255, 220]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -1192,9 +1196,9 @@ module.exports.sutro = (imageData) => {
 module.exports.toaster = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 120],
         [1, 50, 160],
@@ -1217,13 +1221,13 @@ module.exports.toaster = (imageData) => {
         [4, 185, 185],
         [5, 255, 210]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -1231,9 +1235,9 @@ module.exports.toaster = (imageData) => {
 module.exports.walden = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 12],
         [1, 40, 44],
@@ -1257,13 +1261,13 @@ module.exports.walden = (imageData) => {
         [3, 165, 185],
         [4, 255, 220]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -1271,9 +1275,9 @@ module.exports.walden = (imageData) => {
 module.exports.nineteenSeventySeven = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 75],
         [1, 75, 125],
@@ -1297,13 +1301,13 @@ module.exports.nineteenSeventySeven = (imageData) => {
         [4, 210, 208],
         [5, 255, 208]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
@@ -1311,9 +1315,9 @@ module.exports.nineteenSeventySeven = (imageData) => {
 module.exports.kelvin = (imageData) => {
     const newImageData = imageData;
     const pix = imageData.data;
-    const lag_r = new Lagrange(0, 0, 1, 1);
-    const lag_g = new Lagrange(0, 0, 1, 1);
-    const lag_b = new Lagrange(0, 0, 1, 1);
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
     const r = [
         [0, 0, 0],
         [1, 60, 102],
@@ -1336,13 +1340,13 @@ module.exports.kelvin = (imageData) => {
         [3, 185, 212],
         [4, 255, 255]
     ];
-    lag_r.addMultiPoints(r);
-    lag_g.addMultiPoints(g);
-    lag_b.addMultiPoints(b);
+    lagrangeRed.addMultiPoints(r);
+    lagrangeGreen.addMultiPoints(g);
+    lagrangeBlue.addMultiPoints(b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lag_r.valueOf(pix[i]);
-        pix[i + 1] = lag_b.valueOf(pix[i + 1]);
-        pix[i + 2] = lag_g.valueOf(pix[i + 2]);
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
     newImageData.data = pix;
     return newImageData;
