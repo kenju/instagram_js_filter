@@ -5,7 +5,7 @@
 module.exports.clone = (obj) => {
     let copy;
 
-    if (null == obj || "object" != typeof obj) {
+    if (obj === null || obj !== typeof 'object') {
         return obj;
     }
 
@@ -25,12 +25,14 @@ module.exports.clone = (obj) => {
 
     if (obj instanceof Object) {
         copy = {};
-        for (const attr in obj) {
-            if (obj.hasOwnProperty(attr)) copy[attr] = this.clone(obj[attr]);
-        }
+        Object.keys(obj).forEach(attr => {
+            if (obj.hasOwnProperty(attr)) {
+                copy[attr] = this.clone(obj[attr]);
+            }
+        });
         return copy;
     }
 
-    throw new Error("Unable to copy obj! Its type isn't supported.");
+    throw new Error('Unable to copy obj! Its type isn\'t supported.');
 };
 
