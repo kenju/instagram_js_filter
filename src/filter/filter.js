@@ -2,6 +2,7 @@
  * filter.js
  */
 const Lagrange = require('../computation/lagrange');
+const LagrangePromise = require('lagrange-promise');
 const color = require('../util/color');
 const object = require('../util/object');
 module.exports.enhance = (imageData) => {
