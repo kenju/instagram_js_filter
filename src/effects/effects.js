@@ -236,9 +236,7 @@ module.exports.XYMirror = (pix) => {
     return pix;
 };
 module.exports.lark = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('lark', pix);
     const r = [
         [0, 0, 0],
         [1, 30, 25],
@@ -264,20 +262,9 @@ module.exports.lark = (pix) => {
         [5, 240, 245],
         [6, 255, 245]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.reyes = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('reyes', pix);
     const r = [
         [0, 0, 0],
         [1, 30, 35],
@@ -303,20 +290,9 @@ module.exports.reyes = (pix) => {
         [5, 240, 245],
         [6, 255, 245]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.juno = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('juno', pix);
     const r = [
         [0, 0, 0],
         [1, 30, 35],
@@ -342,20 +318,9 @@ module.exports.juno = (pix) => {
         [5, 240, 245],
         [6, 255, 245]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.slumber = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('slumber', pix);
     const r = [
         [0, 0, 0],
         [1, 30, 25],
@@ -381,20 +346,9 @@ module.exports.slumber = (pix) => {
         [5, 240, 245],
         [6, 255, 245]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.crema = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('crema', pix);
     const r = [
         [0, 0, 0],
         [1, 30, 35],
@@ -416,20 +370,9 @@ module.exports.crema = (pix) => {
         [3, 181, 170],
         [4, 255, 250]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.ludwig = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('ludwig', pix);
     const r = [
         [0, 0, 10],
         [1, 30, 45],
@@ -451,20 +394,9 @@ module.exports.ludwig = (pix) => {
         [3, 181, 185],
         [4, 255, 250]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.aden = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('aden', pix);
     const r = [
         [0, 0, 20],
         [1, 50, 65],
@@ -486,20 +418,9 @@ module.exports.aden = (pix) => {
         [3, 180, 185],
         [4, 255, 235]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.perpetua = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('perpetua', pix);
     const r = [
         [0, 0, 35],
         [1, 50, 65],
@@ -521,20 +442,9 @@ module.exports.perpetua = (pix) => {
         [3, 180, 185],
         [4, 255, 255]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.amaro = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('amaro', pix);
     const r = [
         [0, 0, 19],
         [1, 30, 62],
@@ -560,20 +470,9 @@ module.exports.amaro = (pix) => {
         [5, 240, 235],
         [6, 255, 245]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.mayfair = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('mayfair', pix);
     const r = [
         [0, 0, 30],
         [1, 85, 110],
@@ -598,20 +497,9 @@ module.exports.mayfair = (pix) => {
         [5, 235, 230],
         [6, 255, 225]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.rise = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('rise', pix);
     const r = [
         [0, 0, 25],
         [1, 30, 70],
@@ -638,22 +526,9 @@ module.exports.rise = (pix) => {
         [5, 220, 214],
         [6, 255, 255]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
-module.exports.hudson = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+module.exports.hudson = (pix) => {
+    return applyInstagramFilter('hudson', pix);
     const r = [
         [0, 0, 35],
         [1, 42, 68],
@@ -680,20 +555,9 @@ module.exports.hudson = (imageData) => {
         [5, 210, 235],
         [6, 255, 245]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.valencia = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('valencia', pix);
     const r = [
         [0, 0, 20],
         [1, 50, 80],
@@ -720,20 +584,9 @@ module.exports.valencia = (pix) => {
         [5, 220, 210],
         [6, 255, 230]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.xpro2 = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('xpro2', pix);
     const r = [
         [0, 0, 0],
         [1, 42, 28],
@@ -760,20 +613,9 @@ module.exports.xpro2 = (pix) => {
         [5, 225, 210],
         [6, 255, 222]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.sierra = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('sierra', pix);
     const r = [
         [0, 0, 10],
         [1, 48, 88],
@@ -801,20 +643,9 @@ module.exports.sierra = (pix) => {
         [5, 210, 200],
         [6, 255, 218]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.willow = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('willow', pix);
     const r = [
         [0, 0, 30],
         [1, 68, 105],
@@ -836,20 +667,9 @@ module.exports.willow = (pix) => {
         [3, 195, 215],
         [4, 255, 288]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.lofi = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('lofi', pix);
     const r = [
         [0, 0, 0],
         [1, 40, 20],
@@ -877,20 +697,9 @@ module.exports.lofi = (pix) => {
         [5, 190, 220],
         [6, 255, 255]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.earlybird = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('earlybird', pix);
     const r = [
         [0, 0, 25],
         [1, 45, 80],
@@ -917,20 +726,9 @@ module.exports.earlybird = (pix) => {
         [5, 212, 195],
         [6, 255, 210]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.brannan = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('brannan', pix);
     const r = [
         [0, 0, 35],
         [1, 40, 50],
@@ -953,15 +751,6 @@ module.exports.brannan = (pix) => {
         [4, 225, 230],
         [5, 255, 232]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.inkwell = (pix) => {
     const n = pix.length;
@@ -974,9 +763,7 @@ module.exports.inkwell = (pix) => {
     return pix;
 };
 module.exports.hefe = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('hefe', pix);
     const r = [
         [0, 0, 0],
         [1, 60, 55],
@@ -996,20 +783,9 @@ module.exports.hefe = (pix) => {
         [3, 170, 165],
         [4, 255, 240]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.nashville = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('nashville', pix);
     const r = [
         [0, 0, 0],
         [1, 30, 5],
@@ -1034,20 +810,9 @@ module.exports.nashville = (pix) => {
         [3, 212, 185],
         [4, 255, 205]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.sutro = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('sutro', pix);
     const r = [
         [0, 0, 0],
         [1, 40, 35],
@@ -1070,20 +835,9 @@ module.exports.sutro = (pix) => {
         [3, 128, 112],
         [4, 255, 220]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.toaster = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    return applyInstagramFilter('toaster', pix);
     const r = [
         [0, 0, 120],
         [1, 50, 160],
@@ -1106,89 +860,12 @@ module.exports.toaster = (pix) => {
         [4, 185, 185],
         [5, 255, 210]
     ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
 };
 module.exports.walden = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
-    const r = [
-        [0, 0, 12],
-        [1, 40, 44],
-        [2, 85, 125],
-        [3, 122, 180],
-        [4, 170, 220],
-        [5, 255, 250]
-    ];
-    const g = [
-        [0, 0, 35],
-        [1, 40, 78],
-        [2, 90, 140],
-        [3, 130, 188],
-        [4, 175, 215],
-        [5, 255, 245]
-    ];
-    const b = [
-        [0, 0, 85],
-        [1, 85, 150],
-        [2, 130, 170],
-        [3, 165, 185],
-        [4, 255, 220]
-    ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
+    return applyInstagramFilter('walden', pix);
 };
 module.exports.nineteenSeventySeven = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
-    const r = [
-        [0, 0, 75],
-        [1, 75, 125],
-        [2, 145, 200],
-        [3, 190, 220],
-        [4, 255, 230]
-    ];
-    const g = [
-        [0, 0, 52],
-        [1, 42, 54],
-        [2, 110, 120],
-        [3, 154, 168],
-        [4, 232, 235],
-        [5, 255, 242]
-    ];
-    const b = [
-        [0, 0, 62],
-        [1, 65, 82],
-        [2, 108, 132],
-        [3, 175, 210],
-        [4, 210, 208],
-        [5, 255, 208]
-    ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
+    return applyInstagramFilter('nineteenSeventySeven', pix);
 };
 module.exports.kelvin = (pix) => {
     return applyInstagramFilter('kelvin', pix);
