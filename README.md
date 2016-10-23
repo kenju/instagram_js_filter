@@ -1,27 +1,20 @@
-# About
-
-**Instagram JS Filter** is a JS libary for realising Instagram Filters on the web.
+# `instagram_js_filter` [![npm version](https://badge.fury.io/js/instagram_js_filter.svg)](https://badge.fury.io/js/instagram_js_filter) [![wercker status](https://app.wercker.com/status/e6caf22ff7d1672011a269462edcb19a/s/master "wercker status")](https://app.wercker.com/project/byKey/e6caf22ff7d1672011a269462edcb19a)
+[![NPM](https://nodei.co/npm/instagram_js_filter.png?compact=true)](https://npmjs.org/package/instagram_js_filter) 
 
 > Instagram-Like Image Processing Web API
+
+**Instagram JS Filter** is a JS libary for realising Instagram Filters on the web.
 
 * [Demo](https://kenju.github.io/instagram_js_filter)
 * [API Documentation](https://github.com/kenju/instagram_css_filter/blob/master/out)
 
-## Tech-background
-
-As for image-processing, `canvas` is used for generating filtered images. 
-RGB + alpha valus of each pixels of an image is converted for the targeted effects.
-
-Such image-processing requires high memory-usage and could block user-experience, 
-therefore `Web Worker API` is used for realising multi-thread processing in the client side.
-
-# Install
+## Install
 
 ```bash
 $ npm install instagram_js_filter
 ```
 
-# Example
+## Example
 
 ```javascript
 const filter = require('instagram_js_filter');
