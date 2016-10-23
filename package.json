@@ -9,7 +9,9 @@
     "test": "mocha -R spec **/*.spec.js",
     "doc": "aglio --theme-variables slate -i doc/api.md -o doc/index.html",
     "hotdeploy": "aglio --theme-variables slate -i doc/api.md -s",
-    "security-check": "nsp check --output checkstyle"
+    "security-check": "nsp check --output checkstyle",
+    "setup": "npm install && npm depude",
+    "deploy": "sh bin/deploy"
   },
   "repository": {
     "type": "git",
