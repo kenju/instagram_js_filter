@@ -2,7 +2,9 @@
  * index.js
  */
 
+/** @ignore */
 const canvas = require('./canvas/canvas');
+/** @ignore */
 const adapter = require('./adapter/adapter');
 
 /**

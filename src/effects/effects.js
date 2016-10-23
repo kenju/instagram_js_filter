@@ -23,19 +23,19 @@ const applyInstagramFilter = (filterType, pix) => {
 module.exports.enhance = (pix) => {
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
-        pix[i] = pix[i] * 1.24; // red
-        pix[i + 1] = pix[i + 1] * 1.33; // green
-        pix[i + 2] = pix[i + 2] * 1.21; // blue
+        pix[i] = pix[i] * 1.24;
+        pix[i + 1] = pix[i + 1] * 1.33;
+        pix[i + 2] = pix[i + 2] * 1.21;
     }
     return pix;
 };
 module.exports.grayscale = (pix) => {
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
-        const red = pix[i];
-        const green = pix[i + 1];
-        const blue = pix[i + 2];
-        const grayscale = color.convertNTSC(red, green, blue);
+        const r = pix[i];
+        const g = pix[i + 1];
+        const b = pix[i + 2];
+        const grayscale = color.convertNTSC(r, g, b);
         pix[i] = grayscale;
         pix[i + 1] = grayscale;
         pix[i + 2] = grayscale;
@@ -54,10 +54,10 @@ module.exports.sepia = (pix) => {
 module.exports.luminance = (pix) => {
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
-        const red = pix[i];
-        const green = pix[i + 1];
-        const blue = pix[i + 2];
-        const luminance = color.convertLuminanceLinearRGB(red, green, blue);
+        const r = pix[i];
+        const g = pix[i + 1];
+        const b = pix[i + 2];
+        const luminance = color.convertLuminanceLinearRGB(r, g, b);
         pix[i] = luminance;
         pix[i + 1] = luminance;
         pix[i + 2] = luminance;
@@ -101,14 +101,14 @@ module.exports.darken = (pix, value) => {
 module.exports.threshold = (pix) => {
     const len = pix.length;
     for (let i = 0; i < len; i += 4) {
-        const red = pix[i];
-        const green = pix[i + 1];
-        const blue = pix[i + 2];
-        const threshold = color.convertNTSC(red, green, blue);
-        const newValue = color.blackOrWhite(red, green, blue, threshold);
-        pix[i] = newValue;
-        pix[i + 1] = newValue;
-        pix[i + 2] = newValue;
+        const r = pix[i];
+        const g = pix[i + 1];
+        const b = pix[i + 2];
+        const threshold = color.convertNTSC(r, g, b);
+        const bw = color.blackOrWhite(r, g, b, threshold);
+        pix[i] = bw;
+        pix[i + 1] = bw;
+        pix[i + 2] = bw;
     }
     return pix;
 };
@@ -116,7 +116,7 @@ module.exports.hueRotate = (pix, deg) => {
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
         const hsv = color.rgb2hsv(pix[i], pix[i + 1], pix[i + 2]);
-        hsv[0] = hsv[0] * deg / 360; // hue is from 0 to 360
+        hsv[0] = hsv[0] * deg / 360;
         const rgb = color.hsv2rgb(hsv[0], hsv[1], hsv[2]);
         pix[i] = rgb[0];
         pix[i + 1] = rgb[1];
