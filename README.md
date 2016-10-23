@@ -6,7 +6,7 @@
 **Instagram JS Filter** is a JS libary for realising Instagram Filters on the web.
 
 * [Demo](https://kenju.github.io/instagram_js_filter)
-* [API Documentation](https://github.com/kenju/instagram_css_filter/blob/master/out)
+* [API Documentation](https://kenju.github.io/instagram_js_filter_doc/)
 
 ## Install
 
