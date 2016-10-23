@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "lint": "eslint .",
+    "lint": "eslint src",
     "test": "mocha -R spec spec/*.spec.js",
     "doc": "jsdoc src -c config/jsdoc.conf.json README.md",
     "security-check": "nsp check --output checkstyle",
