@@ -1,15 +1,16 @@
 {
   "name": "instagram_js_filter",
-  "version": "1.1.2",
+  "version": "1.1.7",
   "description": "Filter for realizing Instagram filter effects",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "lint": "eslint .",
-    "test": "mocha -R spec **/*.spec.js",
-    "doc": "aglio --theme-variables slate -i doc/api.md -o doc/index.html",
-    "hotdeploy": "aglio --theme-variables slate -i doc/api.md -s",
-    "security-check": "nsp check --output checkstyle"
+    "lint": "eslint src",
+    "test": "mocha -R spec spec/*.spec.js",
+    "doc": "jsdoc src -c config/jsdoc.conf.json README.md",
+    "security-check": "nsp check --output checkstyle",
+    "setup": "npm install && npm depude",
+    "deploy": "sh bin/deploy"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "eslint-plugin-import": "^1.10.0",
     "eslint-plugin-jsx-a11y": "^1.5.3",
     "eslint-plugin-react": "^5.2.2",
+    "jsdoc": "3.4.2",
     "mocha": "^2.5.3",
     "request": "2.74.0",
     "should": "^10.0.0",
@@ -40,9 +42,12 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "canvas": "^1.4.0",
+    "clone-promise": "0.0.2",
+    "colors-promise": "1.0.1",
     "corser": "^2.0.1",
     "express": "^4.14.0",
     "helmet": "^2.1.2",
+    "lagrange-promise": "1.1.2",
     "morgan": "^1.7.0",
     "winston": "^2.2.0"
   }

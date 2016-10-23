@@ -30,11 +30,11 @@ const saveFile = (outPath, buffer) => {
     });
 };
 
-const imagePath = path.join(__dirname + '/../demo/img/sample.jpg');
-convert(imagePath, 'horizontalflip', {})
+const imagePath = path.join(__dirname + '/img/sample.jpg');
+convert(imagePath, 'kelvin', {})
     .then(base64 => {
         const buffer = new Buffer(base64, 'base64');
-        const outPath = path.join(__dirname + '/../dist/img/sample-converted.jpg');
+        const outPath = path.join(__dirname + '/img/converted.jpg');
         return saveFile(outPath, buffer);
     })
     .then(savedPath => {

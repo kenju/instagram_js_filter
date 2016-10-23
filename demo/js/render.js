@@ -84,7 +84,7 @@ var HeaderTitle = React.createClass({
                 <h1 className="header-div-h1">
                     <span >Instagram</span>
                     <br/>JS
-                    <br/>Filter
+                    <br/>adapter
                 </h1>
             </div>
         );
