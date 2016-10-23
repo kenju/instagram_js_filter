@@ -6,9 +6,8 @@
   "scripts": {
     "start": "node src/index.js",
     "lint": "eslint .",
-    "test": "mocha -R spec **/*.spec.js",
-    "doc": "aglio --theme-variables slate -i doc/api.md -o doc/index.html",
-    "hotdeploy": "aglio --theme-variables slate -i doc/api.md -s",
+    "test": "mocha -R spec spec/*.spec.js",
+    "doc": "jsdoc src -c config/jsdoc.conf.json README.md",
     "security-check": "nsp check --output checkstyle",
     "setup": "npm install && npm depude",
     "deploy": "sh bin/deploy"
@@ -34,6 +33,7 @@
     "eslint-plugin-import": "^1.10.0",
     "eslint-plugin-jsx-a11y": "^1.5.3",
     "eslint-plugin-react": "^5.2.2",
+    "jsdoc": "3.4.2",
     "mocha": "^2.5.3",
     "request": "2.74.0",
     "should": "^10.0.0",
