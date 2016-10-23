@@ -31,7 +31,7 @@ const saveFile = (outPath, buffer) => {
 };
 
 const imagePath = path.join(__dirname + '/img/sample.jpg');
-convert(imagePath, 'grayscale', {})
+convert(imagePath, 'kelvin', {})
     .then(base64 => {
         const buffer = new Buffer(base64, 'base64');
         const outPath = path.join(__dirname + '/img/converted.jpg');

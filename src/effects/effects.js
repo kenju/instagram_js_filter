@@ -2,6 +2,24 @@ const Lagrange = require('../computation/lagrange');
 const color = require('../util/color');
 const object = require('../util/object');
 
+const filterRgbMap = require('./rgbMap');
+
+const applyInstagramFilter = (filterType, pix) => {
+    const rgbMap = filterRgbMap[filterType];
+    const lagrangeRed = new Lagrange(0, 0, 1, 1);
+    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
+    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
+    lagrangeRed.addMultiPoints(rgbMap.r);
+    lagrangeGreen.addMultiPoints(rgbMap.g);
+    lagrangeBlue.addMultiPoints(rgbMap.b);
+    for (let i = 0, n = pix.length; i < n; i += 4) {
+        pix[i] = lagrangeRed.valueOf(pix[i]);
+        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
+    }
+    return pix;
+};
+
 module.exports.enhance = (pix) => {
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
@@ -1173,39 +1191,6 @@ module.exports.nineteenSeventySeven = (pix) => {
     return pix;
 };
 module.exports.kelvin = (pix) => {
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
-    const r = [
-        [0, 0, 0],
-        [1, 60, 102],
-        [2, 110, 185],
-        [3, 150, 220],
-        [4, 235, 245],
-        [5, 255, 245]
-    ];
-    const g = [
-        [0, 0, 0],
-        [1, 68, 68],
-        [2, 105, 120],
-        [3, 190, 220],
-        [4, 255, 255]
-    ];
-    const b = [
-        [0, 0, 0],
-        [1, 88, 12],
-        [2, 145, 140],
-        [3, 185, 212],
-        [4, 255, 255]
-    ];
-    lagrangeRed.addMultiPoints(r);
-    lagrangeGreen.addMultiPoints(g);
-    lagrangeBlue.addMultiPoints(b);
-    for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
-    }
-    return pix;
+    return applyInstagramFilter('kelvin', pix);
 };
 
