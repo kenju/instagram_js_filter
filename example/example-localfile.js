@@ -4,7 +4,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const app = require('../src/adapter/adapter');
+const app = require('../src/index');
 const winston = require('winston');
 
 const convert = (imagePath, type, options) => {
@@ -30,11 +30,11 @@ const saveFile = (outPath, buffer) => {
     });
 };
 
-const imagePath = path.join(__dirname + '/../demo/img/sample.jpg');
-convert(imagePath, 'horizontalflip', {})
+const imagePath = path.join(__dirname + '/img/sample.jpg');
+convert(imagePath, 'grayscale', {})
     .then(base64 => {
         const buffer = new Buffer(base64, 'base64');
-        const outPath = path.join(__dirname + '/../dist/img/sample-converted.jpg');
+        const outPath = path.join(__dirname + '/img/converted.jpg');
         return saveFile(outPath, buffer);
     })
     .then(savedPath => {
