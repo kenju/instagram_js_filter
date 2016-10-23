@@ -1,3 +1,6 @@
-/**
- * Created by kenju on 10/23/16.
- */
+const assert = require('assert');
+
+const failTest = () => {
+    throw new Error("Expected promise to be rejected but it was fulfilled");
+};
+

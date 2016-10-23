@@ -1,24 +1,17 @@
-/**
- * filter.js
- */
 const Lagrange = require('../computation/lagrange');
 const color = require('../util/color');
 const object = require('../util/object');
-module.exports.enhance = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+
+module.exports.enhance = (pix) => {
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
         pix[i] = pix[i] * 1.24; // red
         pix[i + 1] = pix[i + 1] * 1.33; // green
         pix[i + 2] = pix[i + 2] * 1.21; // blue
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.grayscale = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.grayscale = (pix) => {
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
         const red = pix[i];
@@ -29,24 +22,18 @@ module.exports.grayscale = (imageData) => {
         pix[i + 1] = grayscale;
         pix[i + 2] = grayscale;
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.sepia = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.sepia = (pix) => {
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
         pix[i] = pix[i] * 1.07;
         pix[i + 1] = pix[i + 1] * 0.74;
         pix[i + 2] = pix[i + 2] * 0.43;
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.luminance = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.luminance = (pix) => {
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
         const red = pix[i];
@@ -57,58 +44,43 @@ module.exports.luminance = (imageData) => {
         pix[i + 1] = luminance;
         pix[i + 2] = luminance;
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.negaposi = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.negaposi = (pix) => {
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
         pix[i] = 255 - pix[i];
         pix[i + 1] = 255 - pix[i + 1];
         pix[i + 2] = 255 - pix[i + 2];
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.opacity = (imageData, value) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.opacity = (pix, value) => {
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
         pix[i + 3] = pix[i + 3] * value;
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.brighten = (imageData, value) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.brighten = (pix, value) => {
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
         pix[i] += value;
         pix[i + 1] += value;
         pix[i + 2] += value;
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.darken = (imageData, value) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.darken = (pix, value) => {
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
         pix[i] -= value;
         pix[i + 1] -= value;
         pix[i + 2] -= value;
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.threshold = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.threshold = (pix) => {
     const len = pix.length;
     for (let i = 0; i < len; i += 4) {
         const red = pix[i];
@@ -120,12 +92,9 @@ module.exports.threshold = (imageData) => {
         pix[i + 1] = newValue;
         pix[i + 2] = newValue;
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.hueRotate = (imageData, deg) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.hueRotate = (pix, deg) => {
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
         const hsv = color.rgb2hsv(pix[i], pix[i + 1], pix[i + 2]);
@@ -135,12 +104,9 @@ module.exports.hueRotate = (imageData, deg) => {
         pix[i + 1] = rgb[1];
         pix[i + 2] = rgb[2];
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.saturate = (imageData, num) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.saturate = (pix, num) => {
     for (let i = 0, n = pix.length; i < n; i += 4) {
         const hsv = color.rgb2hsv(pix[i], pix[i + 1], pix[i + 2]);
         hsv[1] = hsv[1] * num / 100;
@@ -149,12 +115,9 @@ module.exports.saturate = (imageData, num) => {
         pix[i + 1] = rgb[1];
         pix[i + 2] = rgb[2];
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.brightnessContrast = (imageData, brightness, contrast) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.brightnessContrast = (pix, brightness, contrast) => {
     const contrastAdjust = -128 * contrast + 128;
     const brightnessAdjust = 255 * brightness;
     const adjust = contrastAdjust + brightnessAdjust;
@@ -168,8 +131,7 @@ module.exports.brightnessContrast = (imageData, brightness, contrast) => {
             lut[i] = (c > 255) ? 255 : c;
         }
     }
-    // FIXME: has side-effects
-    newImageData.data = color.applyLUT(
+    pix = color.applyLUT(
         pix,
         {
             red: lut,
@@ -178,13 +140,9 @@ module.exports.brightnessContrast = (imageData, brightness, contrast) => {
             alpha: color.identityLUT()
         }
     );
-    return newImageData;
+    return pix;
 };
-module.exports.horizontalFlip = (imageData) => {
-    const newImageData = imageData;
-    const width = imageData.width;
-    const height = imageData.height;
-    const pix = imageData.data;
+module.exports.horizontalFlip = (pix, width, height) => {
     const pixResult = object.clone(pix);
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
@@ -196,14 +154,9 @@ module.exports.horizontalFlip = (imageData) => {
             pix[dstOff + 3] = pixResult[off + 3];
         }
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.verticalFlip = (imageData) => {
-    const newImageData = imageData;
-    const width = imageData.width;
-    const height = imageData.height;
-    const pix = imageData.data;
+module.exports.verticalFlip = (pix, width, height) => {
     const pixResult = object.clone(pix);
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
@@ -215,12 +168,9 @@ module.exports.verticalFlip = (imageData) => {
             pix[dstOff + 3] = pixResult[off + 3];
         }
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.doubleFlip = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.doubleFlip = (pix) => {
     const pixResult = object.clone(pix);
     const len = pix.length;
     for (let i = 0; i < len; i += 4) {
@@ -229,14 +179,9 @@ module.exports.doubleFlip = (imageData) => {
         pix[i + 2] = pixResult[len - i + 2];
         pix[i + 3] = pixResult[len - i + 3];
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.horizontalMirror = (imageData) => {
-    const newImageData = imageData;
-    const width = imageData.width;
-    const height = imageData.height;
-    const pix = imageData.data;
+module.exports.horizontalMirror = (pix, width, height) => {
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             const off = (i * width + j) * 4;
@@ -247,14 +192,9 @@ module.exports.horizontalMirror = (imageData) => {
             pix[dstOff + 3] = pix[off + 3];
         }
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.verticalMirror = (imageData) => {
-    const newImageData = imageData;
-    const width = imageData.width;
-    const height = imageData.height;
-    const pix = imageData.data;
+module.exports.verticalMirror = (pix, width, height) => {
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             const off = (i * width + j) * 4;
@@ -265,12 +205,9 @@ module.exports.verticalMirror = (imageData) => {
             pix[dstOff + 3] = pix[off + 3];
         }
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.XYMirror = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.XYMirror = (pix) => {
     const len = pix.length;
     for (let i = 0; i < len; i += 4) {
         pix[i] = pix[len - i];
@@ -278,12 +215,9 @@ module.exports.XYMirror = (imageData) => {
         pix[i + 2] = pix[len - i + 2];
         pix[i + 3] = pix[len - i + 3];
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.lark = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.lark = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -320,12 +254,9 @@ module.exports.lark = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.reyes = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.reyes = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -362,12 +293,9 @@ module.exports.reyes = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.juno = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.juno = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -404,12 +332,9 @@ module.exports.juno = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.slumber = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.slumber = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -446,12 +371,9 @@ module.exports.slumber = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.crema = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.crema = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -484,12 +406,9 @@ module.exports.crema = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.ludwig = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.ludwig = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -522,12 +441,9 @@ module.exports.ludwig = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.aden = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.aden = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -560,12 +476,9 @@ module.exports.aden = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.perpetua = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.perpetua = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -598,12 +511,9 @@ module.exports.perpetua = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.amaro = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.amaro = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -640,12 +550,9 @@ module.exports.amaro = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.mayfair = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.mayfair = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -681,12 +588,9 @@ module.exports.mayfair = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.rise = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.rise = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -724,8 +628,7 @@ module.exports.rise = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
 module.exports.hudson = (imageData) => {
     const newImageData = imageData;
@@ -767,12 +670,9 @@ module.exports.hudson = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.valencia = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.valencia = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -810,12 +710,9 @@ module.exports.valencia = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.xpro2 = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.xpro2 = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -853,12 +750,9 @@ module.exports.xpro2 = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.sierra = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.sierra = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -897,12 +791,9 @@ module.exports.sierra = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.willow = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.willow = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -935,12 +826,9 @@ module.exports.willow = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.lofi = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.lofi = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -979,12 +867,9 @@ module.exports.lofi = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.earlybird = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.earlybird = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -1022,12 +907,9 @@ module.exports.earlybird = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.brannan = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.brannan = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -1061,12 +943,9 @@ module.exports.brannan = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.inkwell = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.inkwell = (pix) => {
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
         const val = pix[i] * 0.33 + pix[i + 1] * 0.58 + pix[i + 2] * 0.22;
@@ -1074,12 +953,9 @@ module.exports.inkwell = (imageData) => {
         pix[i + 1] = val;
         pix[i + 2] = val;
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.hefe = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.hefe = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -1110,12 +986,9 @@ module.exports.hefe = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.nashville = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.nashville = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -1151,12 +1024,9 @@ module.exports.nashville = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.sutro = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.sutro = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -1190,12 +1060,9 @@ module.exports.sutro = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.toaster = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.toaster = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -1229,12 +1096,9 @@ module.exports.toaster = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.walden = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.walden = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -1269,12 +1133,9 @@ module.exports.walden = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.nineteenSeventySeven = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.nineteenSeventySeven = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -1309,12 +1170,9 @@ module.exports.nineteenSeventySeven = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
-module.exports.kelvin = (imageData) => {
-    const newImageData = imageData;
-    const pix = imageData.data;
+module.exports.kelvin = (pix) => {
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
@@ -1348,6 +1206,6 @@ module.exports.kelvin = (imageData) => {
         pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
         pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
     }
-    newImageData.data = pix;
-    return newImageData;
+    return pix;
 };
+
