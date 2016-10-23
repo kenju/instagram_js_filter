@@ -42,9 +42,12 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "canvas": "^1.4.0",
+    "clone-promise": "0.0.2",
+    "colors-promise": "1.0.1",
     "corser": "^2.0.1",
     "express": "^4.14.0",
     "helmet": "^2.1.2",
+    "lagrange-promise": "1.1.2",
     "morgan": "^1.7.0",
     "winston": "^2.2.0"
   }
