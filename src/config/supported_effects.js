@@ -1,6 +1,0 @@
-/**
- * config.js
- */
-
-module.exports = {
-};
