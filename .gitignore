@@ -28,4 +28,4 @@ dist/
 .idea
 
 # example
-example/img/converted.jpg
+**/*.out.jpg

@@ -1,11 +1,3 @@
-/**
- * color.js
- *
- * TODO: can be npm published
- */
-
-const object = require('./object');
-
 module.exports.getUnit8Array = (len) => {
     return new Uint8Array(len);
 };
@@ -32,7 +24,7 @@ module.exports.identityLUT = () => {
 };
 
 module.exports.applyLUT = (pix, lut) => {
-    const pixResult = object.clone(pix);
+    const pixResult = Object.assign({}, pix);
     const red = lut.red;
     const green = lut.green;
     const blue = lut.blue;

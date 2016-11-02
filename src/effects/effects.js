@@ -1,6 +1,5 @@
 const Lagrange = require('../computation/lagrange');
 const color = require('../util/color');
-const object = require('../util/object');
 
 const filterRgbMap = require('./rgbMap');
 
@@ -161,7 +160,7 @@ module.exports.brightnessContrast = (pix, brightness, contrast) => {
     return pix;
 };
 module.exports.horizontalFlip = (pix, width, height) => {
-    const pixResult = object.clone(pix);
+    const pixResult = Object.assign({}, pix);
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             const off = (i * width + j) * 4;
@@ -175,7 +174,7 @@ module.exports.horizontalFlip = (pix, width, height) => {
     return pix;
 };
 module.exports.verticalFlip = (pix, width, height) => {
-    const pixResult = object.clone(pix);
+    const pixResult = Object.assign({}, pix);
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             const off = (i * width + j) * 4;
@@ -189,7 +188,7 @@ module.exports.verticalFlip = (pix, width, height) => {
     return pix;
 };
 module.exports.doubleFlip = (pix) => {
-    const pixResult = object.clone(pix);
+    const pixResult = Object.assign({}, pix);
     const len = pix.length;
     for (let i = 0; i < len; i += 4) {
         pix[i] = pixResult[len - i];
