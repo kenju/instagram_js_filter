@@ -4,8 +4,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const app = require('../src/index');
-const winston = require('winston');
+const app = require('instagram_js_filter');
 
 const convert = (imagePath, type, options) => {
     return new Promise((resolve, reject) => {
@@ -30,16 +29,17 @@ const saveFile = (outPath, buffer) => {
     });
 };
 
-const imagePath = path.join(__dirname + '/img/sample.jpg');
-convert(imagePath, 'kelvin', {})
+const imagePath = path.join(__dirname + '/../image/sample.jpg');
+const type = 'kelvin';
+convert(imagePath, type, {})
     .then(base64 => {
         const buffer = new Buffer(base64, 'base64');
-        const outPath = path.join(__dirname + '/img/converted.jpg');
+        const outPath = path.join(__dirname + '/../out/' + type + '.out.jpg');
         return saveFile(outPath, buffer);
     })
     .then(savedPath => {
-        winston.info(savedPath);
+        console.log(savedPath);
     })
     .catch(err => {
-        winston.error(err);
+        console.log(err);
     });

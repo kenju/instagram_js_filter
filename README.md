@@ -19,7 +19,7 @@ $ npm install instagram_js_filter
 ```javascript
 const filter = require('instagram_js_filter');
 
-const imagePath = path.join(__dirname + '/../demo/img/sample.jpg');
+const imagePath = path.join(__dirname + image);
 fs.readFile(imagePath, (err, imageBuffer) => {
     if (err) {
         reject(err);

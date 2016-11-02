@@ -47,8 +47,8 @@ const download = (uri, filePath) => {
     });
 };
 
-const uri = 'https://raw.githubusercontent.com/kenju/instagram_js_filter/master/demo/img/sample.jpg';
-const outPath = path.join(__dirname + '/../dist/img/sample-online-converted.jpg');
+const uri = 'https://raw.githubusercontent.com/kenju/instagram_js_filter/master/demo/image/sample.jpg';
+const outPath = path.join(__dirname + '/../dist/image/sample-online-converted.jpg');
 download(uri, outPath)
     .then(downloadedFile => {
         winston.info(downloadedFile);
