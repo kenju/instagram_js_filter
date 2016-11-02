@@ -1,6 +1,3 @@
-/**
- * canvas.js
- */
 const Canvas = require('canvas');
 const Image = Canvas.Image;
 

@@ -1,10 +1,10 @@
 const Lagrange = require('../computation/lagrange');
 const color = require('../util/color');
 
-const filterRgbMap = require('./rgbMap');
+const lagrangeRgbMap = require('./rgb_map');
 
 const applyInstagramFilter = (filterType, pix) => {
-    const rgbMap = filterRgbMap[filterType];
+    const rgbMap = lagrangeRgbMap[filterType];
     const lagrangeRed = new Lagrange(0, 0, 1, 1);
     const lagrangeGreen = new Lagrange(0, 0, 1, 1);
     const lagrangeBlue = new Lagrange(0, 0, 1, 1);
