@@ -3,9 +3,10 @@
 
 > Instagram-Like Image Processing Web API
 
-**Instagram JS Filter** is a JS libary for realising Instagram Filters on the web.
+**Instagram JS Filter** is a Node.js library for image-processing library.
 
 * [Demo](https://kenju.github.io/instagram_js_filter)
+* [Example](https://github.com/kenju/instagram_js_filter/tree/master/example)
 * [API Documentation](https://kenju.github.io/instagram_js_filter_doc/)
 
 ## Install
@@ -19,15 +20,32 @@ $ npm install instagram_js_filter
 ```javascript
 const filter = require('instagram_js_filter');
 
+const saveFile = (outPath, buffer) => {
+    return new Promise((resolve, reject) => {
+        fs.writeFile(outPath, buffer, error => {
+            if (error) {
+                reject(error);
+            }
+            resolve(outPath);
+        });
+    });
+};
+
 const imagePath = path.join(__dirname + image);
-fs.readFile(imagePath, (err, imageBuffer) => {
-    if (err) {
-        reject(err);
-    }
-    const options = {};
-    const base64 = app.filter(imageBuffer, 'horizontalflip', options);
-    console.log(base64);
-});
+const type = 'hudson';
+
+convert(imagePath, type, {})
+    .then(base64 => {
+        const buffer = new Buffer(base64, 'base64');
+        const outPath = path.join(__dirname + '/../out/' + type + '.out.jpg');
+        return saveFile(outPath, buffer);
+    })
+    .then(savedPath => {
+        console.log(savedPath);
+    })
+    .catch(err => {
+        console.log(err);
+    });
 ```
 
 ## Supported Effects
