@@ -30,7 +30,7 @@ const saveFile = (outPath, buffer) => {
 };
 
 const imagePath = path.join(__dirname + '/../image/sample.jpg');
-const type = 'kelvin';
+const type = 'verticalFlip';
 convert(imagePath, type, {})
     .then(base64 => {
         const buffer = new Buffer(base64, 'base64');
