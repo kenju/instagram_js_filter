@@ -1,7 +1,7 @@
 /** @ignore */
 const canvas = require('./canvas/canvas');
 /** @ignore */
-const adapter = require('./adapter/adapter');
+const effects = require('./effects/effects');
 
 /**
  * Filter root class.
@@ -10,52 +10,53 @@ const adapter = require('./adapter/adapter');
  */
 module.exports = class Filter {
     constructor() {
-        this.effects = [
-            'lark',
-            'reyes',
-            'juno',
-            'slumber',
-            'crema',
-            'ludwig',
-            'aden',
-            'perpetua',
-            'amaro',
-            'mayfair',
-            'rise',
-            'hudson',
-            'valencia',
-            'xPro2',
-            'sierra',
-            'willow',
-            'lofi',
-            'earlybird',
-            'brannan',
-            'inkwell',
-            'hefe',
-            'nashville',
-            'sutro',
-            'toaster',
-            'walden',
-            '1977',
-            'kelvin',
-            'grayscale',
-            'sepia',
-            'luminance',
-            'opacity',
-            'brighten',
-            'darken',
-            'threshold',
-            'negaposi',
-            'brightnesscontrast',
-            'huerotate',
-            'saturate',
-            'horizontalflip',
-            'verticalflip',
-            'doubleflip',
-            'horizontalmirror',
-            'verticalmirror',
-            'xymirror'
-        ];
+        this.effectMap = {
+            lark: effects.lark,
+            reyes: effects.reyes,
+            juno: effects.juno,
+            slumber: effects.slumber,
+            crema: effects.crema,
+            ludwig: effects.ludwig,
+            aden: effects.aden,
+            perpetua: effects.perpetua,
+            amaro: effects.amaro,
+            mayfair: effects.mayfair,
+            rise: effects.rise,
+            hudson: effects.hudson,
+            valencia: effects.valencia,
+            xpro2: effects.xpro2,
+            sierra: effects.sierra,
+            willow: effects.willow,
+            lofi: effects.lofi,
+            earlybird: effects.earlybird,
+            brannan: effects.brannan,
+            inkwell: effects.inkwell,
+            hefe: effects.hefe,
+            nashville: effects.nashville,
+            sutro: effects.sutro,
+            toaster: effects.toaster,
+            walden: effects.walden,
+            nineteenseventyseven: effects.nineteenSeventySeven,
+            kelvin: effects.kelvin,
+            enhance: effects.enhance,
+            grayscale: effects.grayscale,
+            sepia: effects.sepia,
+            luminance: effects.luminance,
+            opacity: effects.opacity,
+            brighten: effects.brighten,
+            darken: effects.darken,
+            threshold: effects.threshold,
+            negaposi: effects.negaposi,
+            brightnesscontrast: effects.brightnessContrast,
+            huerotate: effects.hueRotate,
+            saturate: effects.saturate,
+            horizontalflip: effects.horizontalFlip,
+            verticalflip: effects.verticalFlip,
+            doubleflip: effects.doubleFlip,
+            horizontalmirror: effects.horizontalMirror,
+            verticalmirror: effects.verticalMirror,
+            xymirror: effects.XYMirror,
+        };
     }
 
     /**
@@ -64,7 +65,7 @@ module.exports = class Filter {
      * @returns {Array|string[]} - supported effect types
      */
     getSupportedEffects() {
-        return this.effects;
+        return Object.keys(this.effectMap);
     };
 
     /**
@@ -85,10 +86,12 @@ module.exports = class Filter {
             imageData = convertResult.imageData;
         }
 
-        const func = adapter.effectFunc(effect);
-        const convertedPixels = func.apply(this, [imageData.data, options]);
-        imageData.data = convertedPixels;
+        const func = this.effectMap[effect.toLowerCase()];
+        if(func === undefined) {
+            throw new Error(effect + ' is not supported.');
+        }
 
+        imageData.data = func.apply(this, [imageData.data, options]);
         if (convertResult.context) {
             convertResult.context.putImageData(imageData, 0, 0);
             return canvas.getBase64(convertResult.canvas);
