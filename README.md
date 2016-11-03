@@ -15,39 +15,6 @@
 $ npm install instagram_js_filter
 ```
 
-## Example
-
-```javascript
-const filter = require('instagram_js_filter');
-
-const saveFile = (outPath, buffer) => {
-    return new Promise((resolve, reject) => {
-        fs.writeFile(outPath, buffer, error => {
-            if (error) {
-                reject(error);
-            }
-            resolve(outPath);
-        });
-    });
-};
-
-const imagePath = path.join(__dirname + image);
-const type = 'hudson';
-
-convert(imagePath, type, {})
-    .then(base64 => {
-        const buffer = new Buffer(base64, 'base64');
-        const outPath = path.join(__dirname + '/../out/' + type + '.out.jpg');
-        return saveFile(outPath, buffer);
-    })
-    .then(savedPath => {
-        console.log(savedPath);
-    })
-    .catch(err => {
-        console.log(err);
-    });
-```
-
 ## Supported Effects
 
 - Instagram filters

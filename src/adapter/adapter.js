@@ -1,10 +1,6 @@
-/**
- * adapter.js
- */
-
 const effects = require('./../effects/effects');
 
-module.exports.handleType = (type) => {
+module.exports.effectFunc = (type) => {
     switch (type.toLowerCase()) {
         case 'lark':
             return effects.lark;

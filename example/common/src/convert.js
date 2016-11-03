@@ -1,10 +1,7 @@
-/**
- * index.spec.js
- */
-
 const fs = require('fs');
 const path = require('path');
-const app = require('instagram_js_filter');
+const Filter = require('../../../src/index');
+const filter = new Filter();
 
 const convert = (imagePath, type, options) => {
     return new Promise((resolve, reject) => {
@@ -12,7 +9,7 @@ const convert = (imagePath, type, options) => {
             if (err) {
                 reject(err);
             }
-            const result = app.filter(imageBuffer, type, options);
+            const result = filter.apply(imageBuffer, type, options);
             resolve(result);
         });
     });
@@ -30,7 +27,7 @@ const saveFile = (outPath, buffer) => {
 };
 
 const imagePath = path.join(__dirname + '/../image/sample.jpg');
-const type = 'verticalFlip';
+const type = 'kelvin';
 convert(imagePath, type, {})
     .then(base64 => {
         const buffer = new Buffer(base64, 'base64');

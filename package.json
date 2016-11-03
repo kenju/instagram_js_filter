@@ -1,6 +1,6 @@
 {
   "name": "instagram_js_filter",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Filter for realizing Instagram filter effects",
   "main": "src/index.js",
   "scripts": {
@@ -28,10 +28,13 @@
     "image-processing"
   ],
   "dependencies": {
-    "canvas": "^1.4.0",
+    "canvas": "1.6.2",
     "colors-promise": "1.0.1",
+    "eslint": "3.9.1",
+    "eslint-plugin-import": "1.16.0",
     "lagrange-promise": "1.1.2",
-    "winston": "^2.2.0"
+    "supertest": "2.0.1",
+    "winston": "2.3.0"
   },
   "devDependencies": {
     "eslint": "^3.0.0",
