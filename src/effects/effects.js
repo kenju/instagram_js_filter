@@ -64,8 +64,7 @@ module.exports.luminance = (pix) => {
     return pix;
 };
 module.exports.negaposi = (pix) => {
-    const n = pix.length;
-    for (let i = 0; i < n; i += 4) {
+    for (let i = 0, n = pix.length; i < n; i += 4) {
         pix[i] = 255 - pix[i];
         pix[i + 1] = 255 - pix[i + 1];
         pix[i + 2] = 255 - pix[i + 2];
@@ -81,20 +80,19 @@ module.exports.opacity = (pix, options) => {
 };
 module.exports.brighten = (pix, options) => {
     const val = options.value ? options.value : 50;
-    const n = pix.length;
-    for (let i = 0; i < n; i += 4) {
+    for (let i = 0, n = pix.length; i < n; i += 4) {
         pix[i] += val;
         pix[i + 1] += val;
         pix[i + 2] += val;
     }
     return pix;
 };
-module.exports.darken = (pix, value = 50) => {
-    const n = pix.length;
-    for (let i = 0; i < n; i += 4) {
-        pix[i] -= value;
-        pix[i + 1] -= value;
-        pix[i + 2] -= value;
+module.exports.darken = (pix, options) => {
+    const val = options.value ? options.value : 50;
+    for (let i = 0, n = pix.length; i < n; i += 4) {
+        pix[i] -= val;
+        pix[i + 1] -= val;
+        pix[i + 2] -= val;
     }
     return pix;
 };
