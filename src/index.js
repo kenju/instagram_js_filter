@@ -91,7 +91,7 @@ module.exports = class Filter {
             throw new Error(effect + ' is not supported.');
         }
 
-        imageData.data = func.apply(this, [imageData.data, options]);
+        imageData.data = func.apply(this, [imageData, options]);
         if (convertResult.context) {
             convertResult.context.putImageData(imageData, 0, 0);
             return canvas.getBase64(convertResult.canvas);
