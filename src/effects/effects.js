@@ -134,7 +134,9 @@ module.exports.saturate = (pix, options) => {
     }
     return pix;
 };
-module.exports.brightnessContrast = (pix, brightness = -0.08, contrast = 1.5) => {
+module.exports.brightnessContrast = (pix, options) => {
+    const brightness = options.brightness ? options.brightness : -0.08;
+    const contrast = options.contrast ? options.contrast : 1.5;
     const contrastAdjust = -128 * contrast + 128;
     const brightnessAdjust = 255 * brightness;
     const adjust = contrastAdjust + brightnessAdjust;
