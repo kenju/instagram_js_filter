@@ -110,9 +110,9 @@ module.exports.threshold = (pix) => {
     }
     return pix;
 };
-module.exports.hueRotate = (pix, deg = 45) => {
-    const n = pix.length;
-    for (let i = 0; i < n; i += 4) {
+module.exports.hueRotate = (pix, options) => {
+    const deg = options.degree ? options.degree : 45;
+    for (let i = 0, n = pix.length; i < n; i += 4) {
         const hsv = color.rgb2hsv(pix[i], pix[i + 1], pix[i + 2]);
         hsv[0] = hsv[0] * deg / 360;
         const rgb = color.hsv2rgb(hsv[0], hsv[1], hsv[2]);
@@ -122,10 +122,11 @@ module.exports.hueRotate = (pix, deg = 45) => {
     }
     return pix;
 };
-module.exports.saturate = (pix, num = 20) => {
+module.exports.saturate = (pix, options) => {
+    const val = options.value ? options.value : 20;
     for (let i = 0, n = pix.length; i < n; i += 4) {
         const hsv = color.rgb2hsv(pix[i], pix[i + 1], pix[i + 2]);
-        hsv[1] = hsv[1] * num / 100;
+        hsv[1] = hsv[1] * val / 100;
         const rgb = color.hsv2rgb(hsv[0], hsv[1], hsv[2]);
         pix[i] = rgb[0];
         pix[i + 1] = rgb[1];
