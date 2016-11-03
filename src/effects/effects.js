@@ -79,12 +79,13 @@ module.exports.opacity = (pix, options) => {
     }
     return pix;
 };
-module.exports.brighten = (pix, value = 50) => {
+module.exports.brighten = (pix, options) => {
+    const val = options.value ? options.value : 50;
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
-        pix[i] += value;
-        pix[i + 1] += value;
-        pix[i + 2] += value;
+        pix[i] += val;
+        pix[i + 1] += val;
+        pix[i + 2] += val;
     }
     return pix;
 };
