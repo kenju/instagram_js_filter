@@ -5,35 +5,33 @@ const lagrangeRgbMap = require('./rgb_map');
 
 const applyInstagramFilter = (filterType, pix) => {
     const rgbMap = lagrangeRgbMap[filterType];
-    const lagrangeRed = new Lagrange(0, 0, 1, 1);
-    const lagrangeGreen = new Lagrange(0, 0, 1, 1);
-    const lagrangeBlue = new Lagrange(0, 0, 1, 1);
-    lagrangeRed.addMultiPoints(rgbMap.r);
-    lagrangeGreen.addMultiPoints(rgbMap.g);
-    lagrangeBlue.addMultiPoints(rgbMap.b);
+    const lagrangeR = new Lagrange(0, 0, 1, 1);
+    const lagrangeG = new Lagrange(0, 0, 1, 1);
+    const lagrangeB = new Lagrange(0, 0, 1, 1);
+    lagrangeR.addMultiPoints(rgbMap.r);
+    lagrangeG.addMultiPoints(rgbMap.g);
+    lagrangeB.addMultiPoints(rgbMap.b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeRed.valueOf(pix[i]);
-        pix[i + 1] = lagrangeBlue.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeGreen.valueOf(pix[i + 2]);
+        pix[i] = lagrangeR.valueOf(pix[i]);
+        pix[i + 1] = lagrangeB.valueOf(pix[i + 1]);
+        pix[i + 2] = lagrangeG.valueOf(pix[i + 2]);
     }
     return pix;
 };
 
-module.exports.enhance = (pix) => {
-    const n = pix.length;
-    for (let i = 0; i < n; i += 4) {
+module.exports.enhance = (imageData) => {
+    const pix = imageData.data;
+    for (let i = 0, n = pix.length; i < n; i += 4) {
         pix[i] = pix[i] * 1.24;
         pix[i + 1] = pix[i + 1] * 1.33;
         pix[i + 2] = pix[i + 2] * 1.21;
     }
     return pix;
 };
-module.exports.grayscale = (pix) => {
-    const n = pix.length;
-    for (let i = 0; i < n; i += 4) {
-        const r = pix[i];
-        const g = pix[i + 1];
-        const b = pix[i + 2];
+module.exports.grayscale = (imageData) => {
+    const pix = imageData.data;
+    for (let i = 0, n = pix.length; i < n; i += 4) {
+        const {r, g, b}  = {r: pix[i], g: pix[i + 1], b: pix[i + 1]};
         const grayscale = color.convertNTSC(r, g, b);
         pix[i] = grayscale;
         pix[i + 1] = grayscale;
@@ -41,21 +39,19 @@ module.exports.grayscale = (pix) => {
     }
     return pix;
 };
-module.exports.sepia = (pix) => {
-    const n = pix.length;
-    for (let i = 0; i < n; i += 4) {
+module.exports.sepia = (imageData) => {
+    const pix = imageData.data;
+    for (let i = 0, n = pix.length; i < n; i += 4) {
         pix[i] = pix[i] * 1.07;
         pix[i + 1] = pix[i + 1] * 0.74;
         pix[i + 2] = pix[i + 2] * 0.43;
     }
     return pix;
 };
-module.exports.luminance = (pix) => {
-    const n = pix.length;
-    for (let i = 0; i < n; i += 4) {
-        const r = pix[i];
-        const g = pix[i + 1];
-        const b = pix[i + 2];
+module.exports.luminance = (imageData) => {
+    const pix = imageData.data;
+    for (let i = 0, n = pix.length; i < n; i += 4) {
+        const {r, g, b}  = {r: pix[i], g: pix[i + 1], b: pix[i + 1]};
         const luminance = color.convertLuminanceLinearRGB(r, g, b);
         pix[i] = luminance;
         pix[i + 1] = luminance;
@@ -63,46 +59,48 @@ module.exports.luminance = (pix) => {
     }
     return pix;
 };
-module.exports.negaposi = (pix) => {
-    const n = pix.length;
-    for (let i = 0; i < n; i += 4) {
+module.exports.negaposi = (imageData) => {
+    const pix = imageData.data;
+    for (let i = 0, n = pix.length; i < n; i += 4) {
         pix[i] = 255 - pix[i];
         pix[i + 1] = 255 - pix[i + 1];
         pix[i + 2] = 255 - pix[i + 2];
     }
     return pix;
 };
-module.exports.opacity = (pix, value) => {
-    const n = pix.length;
-    for (let i = 0; i < n; i += 4) {
-        pix[i + 3] = pix[i + 3] * value;
+module.exports.opacity = (imageData, options) => {
+    const pix = imageData.data;
+    const val = options.value ? options.value : 0.5;
+    for (let i = 0, n = pix.length; i < n; i += 4) {
+        pix[i + 3] = pix[i + 3] * val;
     }
     return pix;
 };
-module.exports.brighten = (pix, value) => {
-    const n = pix.length;
-    for (let i = 0; i < n; i += 4) {
-        pix[i] += value;
-        pix[i + 1] += value;
-        pix[i + 2] += value;
+module.exports.brighten = (imageData, options) => {
+    const pix = imageData.data;
+    const val = options.value ? options.value : 50;
+    for (let i = 0, n = pix.length; i < n; i += 4) {
+        pix[i] += val;
+        pix[i + 1] += val;
+        pix[i + 2] += val;
     }
     return pix;
 };
-module.exports.darken = (pix, value) => {
-    const n = pix.length;
-    for (let i = 0; i < n; i += 4) {
-        pix[i] -= value;
-        pix[i + 1] -= value;
-        pix[i + 2] -= value;
+module.exports.darken = (imageData, options) => {
+    const pix = imageData.data;
+    const val = options.value ? options.value : 50;
+    for (let i = 0, n = pix.length; i < n; i += 4) {
+        pix[i] -= val;
+        pix[i + 1] -= val;
+        pix[i + 2] -= val;
     }
     return pix;
 };
-module.exports.threshold = (pix) => {
+module.exports.threshold = (imageData) => {
+    const pix = imageData.data;
     const len = pix.length;
     for (let i = 0; i < len; i += 4) {
-        const r = pix[i];
-        const g = pix[i + 1];
-        const b = pix[i + 2];
+        const {r, g, b}  = {r: pix[i], g: pix[i + 1], b: pix[i + 1]};
         const threshold = color.convertNTSC(r, g, b);
         const bw = color.blackOrWhite(r, g, b, threshold);
         pix[i] = bw;
@@ -111,9 +109,10 @@ module.exports.threshold = (pix) => {
     }
     return pix;
 };
-module.exports.hueRotate = (pix, deg) => {
-    const n = pix.length;
-    for (let i = 0; i < n; i += 4) {
+module.exports.hueRotate = (imageData, options) => {
+    const pix = imageData.data;
+    const deg = options.degree ? options.degree : 45;
+    for (let i = 0, n = pix.length; i < n; i += 4) {
         const hsv = color.rgb2hsv(pix[i], pix[i + 1], pix[i + 2]);
         hsv[0] = hsv[0] * deg / 360;
         const rgb = color.hsv2rgb(hsv[0], hsv[1], hsv[2]);
@@ -123,10 +122,12 @@ module.exports.hueRotate = (pix, deg) => {
     }
     return pix;
 };
-module.exports.saturate = (pix, num) => {
+module.exports.saturate = (imageData, options) => {
+    const pix = imageData.data;
+    const val = options.value ? options.value : 20;
     for (let i = 0, n = pix.length; i < n; i += 4) {
         const hsv = color.rgb2hsv(pix[i], pix[i + 1], pix[i + 2]);
-        hsv[1] = hsv[1] * num / 100;
+        hsv[1] = hsv[1] * val / 100;
         const rgb = color.hsv2rgb(hsv[0], hsv[1], hsv[2]);
         pix[i] = rgb[0];
         pix[i + 1] = rgb[1];
@@ -134,7 +135,10 @@ module.exports.saturate = (pix, num) => {
     }
     return pix;
 };
-module.exports.brightnessContrast = (pix, brightness, contrast) => {
+module.exports.brightnessContrast = (imageData, options) => {
+    const pix = imageData.data;
+    const brightness = options.brightness ? options.brightness : -0.08;
+    const contrast = options.contrast ? options.contrast : 1.5;
     const contrastAdjust = -128 * contrast + 128;
     const brightnessAdjust = 255 * brightness;
     const adjust = contrastAdjust + brightnessAdjust;
@@ -148,7 +152,7 @@ module.exports.brightnessContrast = (pix, brightness, contrast) => {
             lut[i] = (c > 255) ? 255 : c;
         }
     }
-    pix = color.applyLUT(
+    return color.applyLUT(
         pix,
         {
             red: lut,
@@ -157,48 +161,56 @@ module.exports.brightnessContrast = (pix, brightness, contrast) => {
             alpha: color.identityLUT()
         }
     );
-    return pix;
 };
-module.exports.horizontalFlip = (pix, width, height) => {
-    const pixResult = Object.assign({}, pix);
+module.exports.horizontalFlip = (imageData) => {
+    const pix = imageData.data;
+    const width = imageData.width;
+    const height = imageData.height;
+    const _pix = Object.assign([], pix);
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             const off = (i * width + j) * 4;
             const dstOff = (i * width + (width - j - 1)) * 4;
-            pix[dstOff] = pixResult[off];
-            pix[dstOff + 1] = pixResult[off + 1];
-            pix[dstOff + 2] = pixResult[off + 2];
-            pix[dstOff + 3] = pixResult[off + 3];
+            pix[dstOff] = _pix[off];
+            pix[dstOff + 1] = _pix[off + 1];
+            pix[dstOff + 2] = _pix[off + 2];
+            pix[dstOff + 3] = _pix[off + 3];
         }
     }
     return pix;
 };
-module.exports.verticalFlip = (pix, width, height) => {
-    const pixResult = Object.assign({}, pix);
+module.exports.verticalFlip = (imageData) => {
+    const pix = imageData.data;
+    const width = imageData.width;
+    const height = imageData.height;
+    const _pix = Object.assign([], pix);
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             const off = (i * width + j) * 4;
             const dstOff = ((height - i - 1) * width + j) * 4;
-            pix[dstOff] = pixResult[off];
-            pix[dstOff + 1] = pixResult[off + 1];
-            pix[dstOff + 2] = pixResult[off + 2];
-            pix[dstOff + 3] = pixResult[off + 3];
+            pix[dstOff] = _pix[off];
+            pix[dstOff + 1] = _pix[off + 1];
+            pix[dstOff + 2] = _pix[off + 2];
+            pix[dstOff + 3] = _pix[off + 3];
         }
     }
     return pix;
 };
-module.exports.doubleFlip = (pix) => {
-    const pixResult = Object.assign({}, pix);
-    const len = pix.length;
-    for (let i = 0; i < len; i += 4) {
-        pix[i] = pixResult[len - i];
-        pix[i + 1] = pixResult[len - i + 1];
-        pix[i + 2] = pixResult[len - i + 2];
-        pix[i + 3] = pixResult[len - i + 3];
+module.exports.doubleFlip = (imageData) => {
+    const pix = imageData.data;
+    const _pix = Object.assign([], pix);
+    for (let i = 0, n = pix.length; i < n; i += 4) {
+        pix[i] = _pix[n - i];
+        pix[i + 1] = _pix[n - i + 1];
+        pix[i + 2] = _pix[n - i + 2];
+        pix[i + 3] = _pix[n - i + 3];
     }
     return pix;
 };
-module.exports.horizontalMirror = (pix, width, height) => {
+module.exports.horizontalMirror = (imageData) => {
+    const pix = imageData.data;
+    const width = imageData.width;
+    const height = imageData.height;
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             const off = (i * width + j) * 4;
@@ -211,7 +223,10 @@ module.exports.horizontalMirror = (pix, width, height) => {
     }
     return pix;
 };
-module.exports.verticalMirror = (pix, width, height) => {
+module.exports.verticalMirror = (imageData) => {
+    const pix = imageData.data;
+    const width = imageData.width;
+    const height = imageData.height;
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             const off = (i * width + j) * 4;
@@ -224,76 +239,76 @@ module.exports.verticalMirror = (pix, width, height) => {
     }
     return pix;
 };
-module.exports.XYMirror = (pix) => {
-    const len = pix.length;
-    for (let i = 0; i < len; i += 4) {
-        pix[i] = pix[len - i];
-        pix[i + 1] = pix[len - i + 1];
-        pix[i + 2] = pix[len - i + 2];
-        pix[i + 3] = pix[len - i + 3];
+module.exports.XYMirror = (imageData) => {
+    const pix = imageData.data;
+    for (let i = 0, n = pix.length; i < n; i += 4) {
+        pix[i] = pix[n - i];
+        pix[i + 1] = pix[n - i + 1];
+        pix[i + 2] = pix[n - i + 2];
+        pix[i + 3] = pix[n - i + 3];
     }
     return pix;
 };
-module.exports.lark = (pix) => {
-    return applyInstagramFilter('lark', pix);
+module.exports.lark = (imageData) => {
+    return applyInstagramFilter('lark', imageData.data);
 };
-module.exports.reyes = (pix) => {
-    return applyInstagramFilter('reyes', pix);
+module.exports.reyes = (imageData) => {
+    return applyInstagramFilter('reyes', imageData.data);
 };
-module.exports.juno = (pix) => {
-    return applyInstagramFilter('juno', pix);
+module.exports.juno = (imageData) => {
+    return applyInstagramFilter('juno', imageData.data);
 };
-module.exports.slumber = (pix) => {
-    return applyInstagramFilter('slumber', pix);
+module.exports.slumber = (imageData) => {
+    return applyInstagramFilter('slumber', imageData.data);
 };
-module.exports.crema = (pix) => {
-    return applyInstagramFilter('crema', pix);
+module.exports.crema = (imageData) => {
+    return applyInstagramFilter('crema', imageData.data);
 };
-module.exports.ludwig = (pix) => {
-    return applyInstagramFilter('ludwig', pix);
+module.exports.ludwig = (imageData) => {
+    return applyInstagramFilter('ludwig', imageData.data);
 };
-module.exports.aden = (pix) => {
-    return applyInstagramFilter('aden', pix);
+module.exports.aden = (imageData) => {
+    return applyInstagramFilter('aden', imageData.data);
 };
-module.exports.perpetua = (pix) => {
-    return applyInstagramFilter('perpetua', pix);
+module.exports.perpetua = (imageData) => {
+    return applyInstagramFilter('perpetua', imageData.data);
 };
-module.exports.amaro = (pix) => {
-    return applyInstagramFilter('amaro', pix);
+module.exports.amaro = (imageData) => {
+    return applyInstagramFilter('amaro', imageData.data);
 };
-module.exports.mayfair = (pix) => {
-    return applyInstagramFilter('mayfair', pix);
+module.exports.mayfair = (imageData) => {
+    return applyInstagramFilter('mayfair', imageData.data);
 };
-module.exports.rise = (pix) => {
-    return applyInstagramFilter('rise', pix);
+module.exports.rise = (imageData) => {
+    return applyInstagramFilter('rise', imageData.data);
 };
-module.exports.hudson = (pix) => {
-    return applyInstagramFilter('hudson', pix);
+module.exports.hudson = (imageData) => {
+    return applyInstagramFilter('hudson', imageData.data);
 };
-module.exports.valencia = (pix) => {
-    return applyInstagramFilter('valencia', pix);
+module.exports.valencia = (imageData) => {
+    return applyInstagramFilter('valencia', imageData.data);
 };
-module.exports.xpro2 = (pix) => {
-    return applyInstagramFilter('xpro2', pix);
+module.exports.xpro2 = (imageData) => {
+    return applyInstagramFilter('xpro2', imageData.data);
 };
-module.exports.sierra = (pix) => {
-    return applyInstagramFilter('sierra', pix);
+module.exports.sierra = (imageData) => {
+    return applyInstagramFilter('sierra', imageData.data);
 };
-module.exports.willow = (pix) => {
-    return applyInstagramFilter('willow', pix);
+module.exports.willow = (imageData) => {
+    return applyInstagramFilter('willow', imageData.data);
 };
-module.exports.lofi = (pix) => {
-    return applyInstagramFilter('lofi', pix);
+module.exports.lofi = (imageData) => {
+    return applyInstagramFilter('lofi', imageData.data);
 };
-module.exports.earlybird = (pix) => {
-    return applyInstagramFilter('earlybird', pix);
+module.exports.earlybird = (imageData) => {
+    return applyInstagramFilter('earlybird', imageData.data);
 };
-module.exports.brannan = (pix) => {
-    return applyInstagramFilter('brannan', pix);
+module.exports.brannan = (imageData) => {
+    return applyInstagramFilter('brannan', imageData.data);
 };
-module.exports.inkwell = (pix) => {
-    const n = pix.length;
-    for (let i = 0; i < n; i += 4) {
+module.exports.inkwell = (imageData) => {
+    const pix = imageData.data;
+    for (let i = 0, n = pix.length; i < n; i += 4) {
         const val = pix[i] * 0.33 + pix[i + 1] * 0.58 + pix[i + 2] * 0.22;
         pix[i] = val;
         pix[i + 1] = val;
@@ -301,25 +316,25 @@ module.exports.inkwell = (pix) => {
     }
     return pix;
 };
-module.exports.hefe = (pix) => {
-    return applyInstagramFilter('hefe', pix);
+module.exports.hefe = (imageData) => {
+    return applyInstagramFilter('hefe', imageData.data);
 };
-module.exports.nashville = (pix) => {
-    return applyInstagramFilter('nashville', pix);
+module.exports.nashville = (imageData) => {
+    return applyInstagramFilter('nashville', imageData.data);
 };
-module.exports.sutro = (pix) => {
-    return applyInstagramFilter('sutro', pix);
+module.exports.sutro = (imageData) => {
+    return applyInstagramFilter('sutro', imageData.data);
 };
-module.exports.toaster = (pix) => {
-    return applyInstagramFilter('toaster', pix);
+module.exports.toaster = (imageData) => {
+    return applyInstagramFilter('toaster', imageData.data);
 };
-module.exports.walden = (pix) => {
-    return applyInstagramFilter('walden', pix);
+module.exports.walden = (imageData) => {
+    return applyInstagramFilter('walden', imageData.data);
 };
-module.exports.nineteenSeventySeven = (pix) => {
-    return applyInstagramFilter('nineteenSeventySeven', pix);
+module.exports.nineteenSeventySeven = (imageData) => {
+    return applyInstagramFilter('nineteenSeventySeven', imageData.data);
 };
-module.exports.kelvin = (pix) => {
-    return applyInstagramFilter('kelvin', pix);
+module.exports.kelvin = (imageData) => {
+    return applyInstagramFilter('kelvin', imageData.data);
 };
 
