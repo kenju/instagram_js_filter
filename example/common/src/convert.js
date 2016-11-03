@@ -3,13 +3,13 @@ const path = require('path');
 const Filter = require('../../../src/index');
 const filter = new Filter();
 
-const convert = (imagePath, type, options) => {
+const convert = (imagePath, effect, options) => {
     return new Promise((resolve, reject) => {
         fs.readFile(imagePath, (err, imageBuffer) => {
             if (err) {
                 reject(err);
             }
-            const result = filter.apply(imageBuffer, type, options);
+            const result = filter.apply(imageBuffer, effect, options);
             resolve(result);
         });
     });

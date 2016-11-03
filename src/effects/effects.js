@@ -72,14 +72,14 @@ module.exports.negaposi = (pix) => {
     }
     return pix;
 };
-module.exports.opacity = (pix, value) => {
-    const n = pix.length;
-    for (let i = 0; i < n; i += 4) {
-        pix[i + 3] = pix[i + 3] * value;
+module.exports.opacity = (pix, options) => {
+    const val = options.value ? options.value : 0.5;
+    for (let i = 0, n = pix.length; i < n; i += 4) {
+        pix[i + 3] = pix[i + 3] * val;
     }
     return pix;
 };
-module.exports.brighten = (pix, value) => {
+module.exports.brighten = (pix, value = 50) => {
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
         pix[i] += value;
@@ -88,7 +88,7 @@ module.exports.brighten = (pix, value) => {
     }
     return pix;
 };
-module.exports.darken = (pix, value) => {
+module.exports.darken = (pix, value = 50) => {
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
         pix[i] -= value;
@@ -111,7 +111,7 @@ module.exports.threshold = (pix) => {
     }
     return pix;
 };
-module.exports.hueRotate = (pix, deg) => {
+module.exports.hueRotate = (pix, deg = 45) => {
     const n = pix.length;
     for (let i = 0; i < n; i += 4) {
         const hsv = color.rgb2hsv(pix[i], pix[i + 1], pix[i + 2]);
@@ -123,7 +123,7 @@ module.exports.hueRotate = (pix, deg) => {
     }
     return pix;
 };
-module.exports.saturate = (pix, num) => {
+module.exports.saturate = (pix, num = 20) => {
     for (let i = 0, n = pix.length; i < n; i += 4) {
         const hsv = color.rgb2hsv(pix[i], pix[i + 1], pix[i + 2]);
         hsv[1] = hsv[1] * num / 100;
@@ -134,7 +134,7 @@ module.exports.saturate = (pix, num) => {
     }
     return pix;
 };
-module.exports.brightnessContrast = (pix, brightness, contrast) => {
+module.exports.brightnessContrast = (pix, brightness = -0.08, contrast = 1.5) => {
     const contrastAdjust = -128 * contrast + 128;
     const brightnessAdjust = 255 * brightness;
     const adjust = contrastAdjust + brightnessAdjust;
@@ -160,7 +160,7 @@ module.exports.brightnessContrast = (pix, brightness, contrast) => {
     return pix;
 };
 module.exports.horizontalFlip = (pix, width, height) => {
-    const pixResult = Object.assign({}, pix);
+    const pixResult = Object.assign([], pix);
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             const off = (i * width + j) * 4;
@@ -174,7 +174,7 @@ module.exports.horizontalFlip = (pix, width, height) => {
     return pix;
 };
 module.exports.verticalFlip = (pix, width, height) => {
-    const pixResult = Object.assign({}, pix);
+    const pixResult = Object.assign([], pix);
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             const off = (i * width + j) * 4;
@@ -188,7 +188,7 @@ module.exports.verticalFlip = (pix, width, height) => {
     return pix;
 };
 module.exports.doubleFlip = (pix) => {
-    const pixResult = Object.assign({}, pix);
+    const pixResult = Object.assign([], pix);
     const len = pix.length;
     for (let i = 0; i < len; i += 4) {
         pix[i] = pixResult[len - i];
