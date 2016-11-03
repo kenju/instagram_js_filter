@@ -94,6 +94,6 @@ module.exports.effectFunc = (type) => {
         case 'xymirror':
             return effects.XYMirror;
         default:
-            throw new Error(type + 'is not supported');
+            throw new Error(type + ' is not supported');
     }
 };

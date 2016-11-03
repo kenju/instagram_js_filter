@@ -26,17 +26,26 @@ const saveFile = (outPath, buffer) => {
     });
 };
 
+let args = [];
+process.argv.forEach((val, index) => {
+    if(index > 1) {
+        args.push(val);
+    }
+});
+
 const imagePath = path.join(__dirname + '/../image/sample.jpg');
-const type = 'kelvin';
-convert(imagePath, type, {})
-    .then(base64 => {
-        const buffer = new Buffer(base64, 'base64');
-        const outPath = path.join(__dirname + '/../out/' + type + '.out.jpg');
-        return saveFile(outPath, buffer);
-    })
-    .then(savedPath => {
-        console.log(savedPath);
-    })
-    .catch(err => {
-        console.log(err);
-    });
+const effects = args.length > 0 ? args : filter.getSupportedEffects();
+effects.forEach(effect => {
+    convert(imagePath, effect, {})
+        .then(base64 => {
+            const buffer = new Buffer(base64, 'base64');
+            const outPath = path.join(__dirname + '/../out/' + effect + '.out.jpg');
+            return saveFile(outPath, buffer);
+        })
+        .then(savedPath => {
+            console.log(savedPath);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
