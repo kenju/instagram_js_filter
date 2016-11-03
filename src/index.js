@@ -8,7 +8,7 @@ const effects = require('./effects/effects');
  *
  * @type {Filter}
  */
-module.exports = class Filter {
+class Filter {
     constructor() {
         this.effectMap = {
             lark: effects.lark,
@@ -87,7 +87,7 @@ module.exports = class Filter {
         }
 
         const func = this.effectMap[effect.toLowerCase()];
-        if(func === undefined) {
+        if (func === undefined) {
             throw new Error(effect + ' is not supported.');
         }
 
@@ -98,4 +98,6 @@ module.exports = class Filter {
         }
         return imageData;
     };
-};
+}
+
+module.exports = Filter;
