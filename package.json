@@ -7,7 +7,7 @@
     "start": "node src/index.js",
     "build": "babel src --out-dir lib --source-maps",
     "lint": "eslint src spec",
-    "lint:fix": "eslint --fix src spec",
+    "lint:fix": "eslint --fix src spec example/**/*.js",
     "test": "mocha -R spec spec/*.spec.js",
     "doc": "jsdoc src -c config/jsdoc.conf.json README.md",
     "deploy": "sh bin/deploy"
