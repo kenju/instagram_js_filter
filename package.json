@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "lint": "eslint src",
-    "lint:fix": "eslint --fix src",
+    "lint": "eslint src spec",
+    "lint:fix": "eslint --fix src spec",
     "test": "mocha -R spec spec/*.spec.js",
     "doc": "jsdoc src -c config/jsdoc.conf.json README.md",
     "deploy": "sh bin/deploy"
@@ -33,7 +33,6 @@
     "eslint": "^3.0.0",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-plugin-import": "^1.10.0",
-    "eslint-plugin-mocha": "^4.8.0",
     "jsdoc": "3.4.2",
     "mocha": "^2.5.3",
     "should": "^10.0.0",

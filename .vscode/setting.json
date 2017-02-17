@@ -6,7 +6,9 @@
   "files.autoSave": "onWindowChange",
   "files.exclude": {
     "**/*.map": true,
-    "build": true
+    "build": true,
+    "demo": true,
+    "out": true
   },
   "eslint.autoFixOnSave": true
 }

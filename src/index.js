@@ -59,23 +59,23 @@ class Filter {
     };
   }
 
-    /**
-     * Get all supported effect types
-     *
-     * @returns {Array|string[]} - supported effect types
-     */
+  /**
+   * Get all supported effect types
+   *
+   * @returns {Array|string[]} - supported effect types
+   */
   getSupportedEffects() {
     return Object.keys(this.effectMap);
   }
 
-    /**
-     * Apply filter.
-     *
-     * @param {Buffer} imageBuffer - a image buffer to apply filter
-     * @param {String} effect - filter effect
-     * @param {Object} optionArgs - options
-     * @returns {*} - filter-applied image
-     */
+  /**
+   * Apply filter.
+   *
+   * @param {Buffer} imageBuffer - a image buffer to apply filter
+   * @param {String} effect - filter effect
+   * @param {Object} optionArgs - options
+   * @returns {*} - filter-applied image
+   */
   apply(imageBuffer, effect, optionArgs) {
     const options = !optionArgs ? optionArgs : {};
 
