@@ -5,13 +5,8 @@
   "files.trimTrailingWhitespace": true,
   "files.autoSave": "onWindowChange",
   "files.exclude": {
-    "**/*.js": {
-      "when": "$(basename).ts"
-    },
     "**/*.map": true,
     "build": true
   },
-  "eslint.autoFixOnSave": true,
-  "tslint.autoFixOnSave": true,
-  "typescript.tsdk": "./node_modules/typescript/lib"
+  "eslint.autoFixOnSave": true
 }

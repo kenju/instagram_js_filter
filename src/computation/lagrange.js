@@ -14,10 +14,10 @@
  * @see http://jsfiddle.net/maccesch/jgU3Y/
  */
 const Lagrange = function Lagrange(x1, y1, x2, y2) {
-    this.xs = [x1, x2];
-    this.ys = [y1, y2];
-    this.ws = [];
-    this.updateWeights();
+  this.xs = [x1, x2];
+  this.ys = [y1, y2];
+  this.ws = [];
+  this.updateWeights();
 };
 
 /**
@@ -25,56 +25,56 @@ const Lagrange = function Lagrange(x1, y1, x2, y2) {
  * @return {Number} The index of the added point. Used for changing the point. See changePoint.
  */
 Lagrange.prototype.addPoint = function addPoint(x, y) {
-    this.xs.push(x);
-    this.ys.push(y);
-    this.updateWeights();
-    return this.xs.length - 1;
+  this.xs.push(x);
+  this.ys.push(y);
+  this.updateWeights();
+  return this.xs.length - 1;
 };
 
 /**
  * Recalculate barycentric weights.
  */
 Lagrange.prototype.updateWeights = function updateWeights() {
-    const len = this.xs.length;
-    let weight;
-    for (let j = 0; j < len; ++j) {
-        weight = 1;
-        for (let i = 0; i < len; ++i) {
-            if (i !== j) {
-                weight *= this.xs[j] - this.xs[i];
-            }
-        }
-        this.ws[j] = 1 / weight;
+  const len = this.xs.length;
+  let weight;
+  for (let j = 0; j < len; ++j) {
+    weight = 1;
+    for (let i = 0; i < len; ++i) {
+      if (i !== j) {
+        weight *= this.xs[j] - this.xs[i];
+      }
     }
+    this.ws[j] = 1 / weight;
+  }
 };
 
 /**
  * Calculate L(x)
  */
 Lagrange.prototype.valueOf = function valueOf(x) {
-    let a = 0;
-    let b = 0;
-    let c = 0;
-    const len = this.xs.length;
-    for (let j = 0; j < len; ++j) {
-        if (x !== this.xs[j]) {
-            a = this.ws[j] / (x - this.xs[j]);
-            b += a * this.ys[j];
-            c += a;
-        } else {
-            return this.ys[j];
-        }
+  let a = 0;
+  let b = 0;
+  let c = 0;
+  const len = this.xs.length;
+  for (let j = 0; j < len; ++j) {
+    if (x !== this.xs[j]) {
+      a = this.ws[j] / (x - this.xs[j]);
+      b += a * this.ys[j];
+      c += a;
+    } else {
+      return this.ys[j];
     }
-    return b / c;
+  }
+  return b / c;
 };
 
 Lagrange.prototype.addMultiPoints = function addMultiPoints(arr) {
-    const len = arr.length;
-    for (let i = 0; i < len; i++) {
-        if (arr[i][0] !== 0 && arr[i][0] !== 1) {
-            this.addPoint(arr[i][1], arr[i][2]);
-        }
+  const len = arr.length;
+  for (let i = 0; i < len; i++) {
+    if (arr[i][0] !== 0 && arr[i][0] !== 1) {
+      this.addPoint(arr[i][1], arr[i][2]);
     }
+  }
 };
 
 module.exports = Lagrange;

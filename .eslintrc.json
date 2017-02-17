@@ -1,13 +1,5 @@
 {
   "extends": "airbnb-base",
-  "rules": {
-    "indent": "off",
-    "arrow-body-style": [
-      "error",
-      "always"
-    ],
-    "prefer-template": "off"
-  },
   "plugins": [
     "mocha"
   ]
