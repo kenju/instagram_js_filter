@@ -4,6 +4,7 @@ const color = require('../util/color');
 const lagrangeRgbMap = require('./rgb_map');
 
 const applyInstagramFilter = (filterType, pix) => {
+    const newPix = pix.slice();
     const rgbMap = lagrangeRgbMap[filterType];
     const lagrangeR = new Lagrange(0, 0, 1, 1);
     const lagrangeG = new Lagrange(0, 0, 1, 1);
@@ -12,11 +13,11 @@ const applyInstagramFilter = (filterType, pix) => {
     lagrangeG.addMultiPoints(rgbMap.g);
     lagrangeB.addMultiPoints(rgbMap.b);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = lagrangeR.valueOf(pix[i]);
-        pix[i + 1] = lagrangeB.valueOf(pix[i + 1]);
-        pix[i + 2] = lagrangeG.valueOf(pix[i + 2]);
+        newPix[i] = lagrangeR.valueOf(pix[i]);
+        newPix[i + 1] = lagrangeB.valueOf(pix[i + 1]);
+        newPix[i + 2] = lagrangeG.valueOf(pix[i + 2]);
     }
-    return pix;
+    return newPix;
 };
 
 module.exports.enhance = (imageData) => {
@@ -166,15 +167,15 @@ module.exports.horizontalFlip = (imageData) => {
     const pix = imageData.data;
     const width = imageData.width;
     const height = imageData.height;
-    const _pix = Object.assign([], pix);
+    const newPix = Object.assign([], pix);
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             const off = (i * width + j) * 4;
             const dstOff = (i * width + (width - j - 1)) * 4;
-            pix[dstOff] = _pix[off];
-            pix[dstOff + 1] = _pix[off + 1];
-            pix[dstOff + 2] = _pix[off + 2];
-            pix[dstOff + 3] = _pix[off + 3];
+            pix[dstOff] = newPix[off];
+            pix[dstOff + 1] = newPix[off + 1];
+            pix[dstOff + 2] = newPix[off + 2];
+            pix[dstOff + 3] = newPix[off + 3];
         }
     }
     return pix;
@@ -183,27 +184,27 @@ module.exports.verticalFlip = (imageData) => {
     const pix = imageData.data;
     const width = imageData.width;
     const height = imageData.height;
-    const _pix = Object.assign([], pix);
+    const newPix = Object.assign([], pix);
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             const off = (i * width + j) * 4;
             const dstOff = ((height - i - 1) * width + j) * 4;
-            pix[dstOff] = _pix[off];
-            pix[dstOff + 1] = _pix[off + 1];
-            pix[dstOff + 2] = _pix[off + 2];
-            pix[dstOff + 3] = _pix[off + 3];
+            pix[dstOff] = newPix[off];
+            pix[dstOff + 1] = newPix[off + 1];
+            pix[dstOff + 2] = newPix[off + 2];
+            pix[dstOff + 3] = newPix[off + 3];
         }
     }
     return pix;
 };
 module.exports.doubleFlip = (imageData) => {
     const pix = imageData.data;
-    const _pix = Object.assign([], pix);
+    const newPix = Object.assign([], pix);
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        pix[i] = _pix[n - i];
-        pix[i + 1] = _pix[n - i + 1];
-        pix[i + 2] = _pix[n - i + 2];
-        pix[i + 3] = _pix[n - i + 3];
+        pix[i] = newPix[n - i];
+        pix[i + 1] = newPix[n - i + 1];
+        pix[i + 2] = newPix[n - i + 2];
+        pix[i + 3] = newPix[n - i + 3];
     }
     return pix;
 };

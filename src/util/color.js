@@ -100,17 +100,17 @@ module.exports.hsl2rgb = (h, s, l) => {
 module.exports.hue2rgb = (p, q, t) => {
     let threshold = t;
     switch (threshold) {
-        case threshold < 0 :
+        case threshold < 0:
             threshold += 1;
             break;
-        case threshold > 1 :
+        case threshold > 1:
             threshold -= 1;
             break;
-        case threshold < 1 / 6 :
+        case threshold < 1 / 6:
             return p + (q - p) * 6 * threshold;
-        case threshold < 1 / 2 :
+        case threshold < 1 / 2:
             return q;
-        case threshold < 2 / 3 :
+        case threshold < 2 / 3:
             return p + (q - p) * (2 / 3 - threshold) * 6;
         default:
             return p;
