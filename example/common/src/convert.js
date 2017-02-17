@@ -26,9 +26,9 @@ const saveFile = (outPath, buffer) => {
     });
 };
 
-let args = [];
+const args = [];
 process.argv.forEach((val, index) => {
-    if(index > 1) {
+    if (index > 1) {
         args.push(val);
     }
 });

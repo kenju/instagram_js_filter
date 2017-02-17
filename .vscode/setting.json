@@ -1,0 +1,17 @@
+{
+  "editor.renderWhitespace": "all",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "files.trimTrailingWhitespace": true,
+  "files.autoSave": "onWindowChange",
+  "files.exclude": {
+    "**/*.js": {
+      "when": "$(basename).ts"
+    },
+    "**/*.map": true,
+    "build": true
+  },
+  "eslint.autoFixOnSave": true,
+  "tslint.autoFixOnSave": true,
+  "typescript.tsdk": "./node_modules/typescript/lib"
+}

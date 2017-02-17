@@ -17,11 +17,11 @@ const convert = (buffer) => {
     return {
         canvas,
         context,
-        imageData
+        imageData,
     };
 };
 
 module.exports = {
     getBase64,
-    convert
+    convert,
 };

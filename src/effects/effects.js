@@ -31,7 +31,7 @@ module.exports.enhance = (imageData) => {
 module.exports.grayscale = (imageData) => {
     const pix = imageData.data;
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        const {r, g, b}  = {r: pix[i], g: pix[i + 1], b: pix[i + 1]};
+        const { r, g, b } = { r: pix[i], g: pix[i + 1], b: pix[i + 1] };
         const grayscale = color.convertNTSC(r, g, b);
         pix[i] = grayscale;
         pix[i + 1] = grayscale;
@@ -51,7 +51,7 @@ module.exports.sepia = (imageData) => {
 module.exports.luminance = (imageData) => {
     const pix = imageData.data;
     for (let i = 0, n = pix.length; i < n; i += 4) {
-        const {r, g, b}  = {r: pix[i], g: pix[i + 1], b: pix[i + 1]};
+        const { r, g, b } = { r: pix[i], g: pix[i + 1], b: pix[i + 1] };
         const luminance = color.convertLuminanceLinearRGB(r, g, b);
         pix[i] = luminance;
         pix[i + 1] = luminance;
@@ -100,7 +100,7 @@ module.exports.threshold = (imageData) => {
     const pix = imageData.data;
     const len = pix.length;
     for (let i = 0; i < len; i += 4) {
-        const {r, g, b}  = {r: pix[i], g: pix[i + 1], b: pix[i + 1]};
+        const { r, g, b } = { r: pix[i], g: pix[i + 1], b: pix[i + 1] };
         const threshold = color.convertNTSC(r, g, b);
         const bw = color.blackOrWhite(r, g, b, threshold);
         pix[i] = bw;
@@ -158,7 +158,7 @@ module.exports.brightnessContrast = (imageData, options) => {
             red: lut,
             green: lut,
             blue: lut,
-            alpha: color.identityLUT()
+            alpha: color.identityLUT(),
         }
     );
 };

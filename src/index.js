@@ -66,7 +66,7 @@ class Filter {
      */
     getSupportedEffects() {
         return Object.keys(this.effectMap);
-    };
+    }
 
     /**
      * Apply filter.
@@ -97,7 +97,7 @@ class Filter {
             return canvas.getBase64(convertResult.canvas);
         }
         return imageData;
-    };
+    }
 }
 
 module.exports = Filter;

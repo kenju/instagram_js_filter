@@ -6,10 +6,9 @@
   "scripts": {
     "start": "node src/index.js",
     "lint": "eslint src",
+    "lint:fix": "eslint --fix src",
     "test": "mocha -R spec spec/*.spec.js",
     "doc": "jsdoc src -c config/jsdoc.conf.json README.md",
-    "security-check": "nsp check --output checkstyle",
-    "setup": "npm install && npm depude",
     "deploy": "sh bin/deploy"
   },
   "repository": {
@@ -23,25 +22,17 @@
   },
   "homepage": "https://github.com/KENJU/instagram_js_filter",
   "keywords": [
-    "JavaScript",
-    "Instagram",
     "image-processing"
   ],
   "dependencies": {
     "canvas": "1.6.2",
     "colors-promise": "1.0.1",
-    "eslint": "3.9.1",
-    "eslint-plugin-import": "1.16.0",
-    "lagrange-promise": "1.1.2",
-    "supertest": "2.0.1",
-    "winston": "2.3.0"
+    "lagrange-promise": "1.1.2"
   },
   "devDependencies": {
     "eslint": "^3.0.0",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-plugin-import": "^1.10.0",
-    "eslint-plugin-jsx-a11y": "^1.5.3",
-    "eslint-plugin-react": "^5.2.2",
     "jsdoc": "3.4.2",
     "mocha": "^2.5.3",
     "request": "2.74.0",
