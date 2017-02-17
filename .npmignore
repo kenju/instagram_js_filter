@@ -1,8 +1,9 @@
+.*
+bin
 demo
 dist
 example
-.*
-bower.json
-*.sh
-LICENSE
-README.md
+spec
+out
+src
+wercker.yml
