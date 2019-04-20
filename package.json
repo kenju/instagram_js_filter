@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "build": "babel src --out-dir lib --source-maps",
-    "deploy": "sh bin/deploy"
+    "deploy-demo": "git subtree push --prefix demo origin gh-pages"
   },
   "repository": {
     "type": "git",
