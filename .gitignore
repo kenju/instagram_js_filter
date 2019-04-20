@@ -33,3 +33,4 @@ lib
 
 yarn-error.log
 out
+.vscode
