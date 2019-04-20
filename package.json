@@ -4,7 +4,6 @@
   "description": "Filter for realizing Instagram filter effects",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
     "build": "babel src --out-dir lib --source-maps",
     "deploy": "sh bin/deploy"
   },
