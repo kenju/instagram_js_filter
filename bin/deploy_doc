@@ -1,7 +1,0 @@
-#!/bin/bash -xe
-
-npm run doc
-git add out
-git commit -am "npm run doc"
-git push origin head
-git push doc `git subtree split --prefix out master`:master --force

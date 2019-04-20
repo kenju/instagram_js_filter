@@ -6,10 +6,6 @@
   "scripts": {
     "start": "node src/index.js",
     "build": "babel src --out-dir lib --source-maps",
-    "lint": "eslint src spec",
-    "lint:fix": "eslint --fix src spec example/**/*.js",
-    "test": "mocha -R spec spec/*.spec.js",
-    "doc": "jsdoc src -c config/jsdoc.conf.json README.md",
     "deploy": "sh bin/deploy"
   },
   "repository": {
@@ -26,19 +22,12 @@
     "image-processing"
   ],
   "dependencies": {
-    "canvas": "1.6.2",
-    "colors-promise": "1.0.1",
-    "lagrange-promise": "1.1.2"
+    "canvas": "^2.4.1",
+    "colors-promise": "^1.0.1",
+    "lagrange-promise": "^1.1.2"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
-    "babel-preset-env": "^1.1.8",
-    "eslint": "^3.0.0",
-    "eslint-config-airbnb": "^9.0.1",
-    "eslint-plugin-import": "^1.10.0",
-    "jsdoc": "3.4.2",
-    "mocha": "^2.5.3",
-    "should": "^10.0.0",
-    "supertest": "^2.0.0"
+    "babel-preset-env": "^1.1.8"
   }
 }

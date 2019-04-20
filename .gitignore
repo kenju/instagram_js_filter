@@ -30,3 +30,6 @@ dist/
 # example
 **/*.out.jpg
 lib
+
+yarn-error.log
+out
