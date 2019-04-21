@@ -1,6 +1,13 @@
 # `instagram_js_filter` [![npm version](https://badge.fury.io/js/instagram_js_filter.svg)](https://badge.fury.io/js/instagram_js_filter) [![wercker status](https://app.wercker.com/status/e6caf22ff7d1672011a269462edcb19a/s/master "wercker status")](https://app.wercker.com/project/byKey/e6caf22ff7d1672011a269462edcb19a)
 [![NPM](https://nodei.co/npm/instagram_js_filter.png?compact=true)](https://npmjs.org/package/instagram_js_filter)
 
+> NOTE: **@deprecated**
+> This project is not actively maintained currently.
+> Please follow below repository for the further development.
+> https://github.com/kenju/pixel-filter
+
+---
+
 > Instagram-Like Image Processing Web API
 
 **Instagram JS Filter** is a Node.js library for image-processing library.
